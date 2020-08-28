@@ -1,0 +1,32 @@
+
+.jumbotron {
+    background: url('https://d2vvqscadf4c1f.cloudfront.net/rGIBmJUAT46UuLPwXo3K_Fedora_Core_Ultimate2.jpg') no-repeat center center;
+    height: 350px;
+    color: white;
+    text-shadow: #444 0 1px 1px;
+}
+
+body {
+    color: #2b3636;
+    font-family: "Proxima";
+}
+
+body {
+    color: #333;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+*::before, *::after {
+    box-sizing: border-box;
+}
+
+*::before, *::after {
+    box-sizing: border-box;
+}

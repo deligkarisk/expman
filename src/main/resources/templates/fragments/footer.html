@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="../../static/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/libs.bootstrap/css/bootstrap.min.css}"/>
+
+    <script src="../../static/libs/bootstrap/js/bootstrap.min.js"
+            th:href="@{/libs.bootstrap/js/bootstrap.min.js}"></script>
+
+    <link th:href="@{/css/expman.css}" rel="stylesheet" media="screen">
+</head>
+
+
+<body>
+
+
+<footer class="footer" th:fragment="footer">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-lg-12" th:text="#{copyright.text}"> © 2020 Arilab - Designed by Kosmas Deligkaris </div>
+        </div>
+    </div>
+</footer>
+
+
+
+</body>
+</html>
+
+
