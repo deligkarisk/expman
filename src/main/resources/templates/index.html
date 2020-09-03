@@ -15,10 +15,10 @@
 
 
 </head>
-
-
 <body>
-<div class="jumbotron" th:replace="fragments/jumbotron::jumbotron"></div>
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div class="jumbotron" th:replace="layouts/main_layout::jumbotron"></div>
+
 
 
 <div class="container">
@@ -40,7 +40,7 @@
 </div>
 
 
-<div class="container" th:replace="fragments/footer :: footer">
+<div class="container" th:replace="layouts/main_layout :: footer">
     <p>footer</p>
 </div>
 </body>
