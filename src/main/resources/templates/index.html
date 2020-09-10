@@ -14,9 +14,11 @@
     <link th:href="@{/css/expman.css}" rel="stylesheet" media="screen">
 
 
+
 </head>
 <body>
 <nav th:replace="layouts/main_layout::navigation"></nav>
+
 <div class="jumbotron" th:replace="layouts/main_layout::jumbotron"></div>
 
 
@@ -30,10 +32,7 @@
             <h2 th:text="#{index.page.subtitle}"> This software help you manage the experimental metadata </h2>
         </div>
         <div class="row">
-            <button class="btn-primary" th:text="#{index.page.button.newdata}"> Submit new data </button>
-        </div>
-        <div class="row">
-            <button class="btn-primary" th:text="#{index.page.button.explore}"> Explore the database </button>
+            <h6 th:text="#{index.page.usermessage}"> Use the menu above to select the appropriate service   </h6>
         </div>
     </div>
 
