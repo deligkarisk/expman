@@ -1,27 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title> This is the index page </title>
-
-    <!-- // The html href and the th:href are not the same. The html one starts from the current folder, while the thymeleaf starts from the root content folder (in this case, /static). -->
-    <link href="../static/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"
-          th:href="@{/libs/bootstrap/css/bootstrap.min.css}"/>
-
-    <script src="../static/libs/bootstrap/js/bootstrap.min.js"
-            th:src="@{/libs/bootstrap/js/bootstrap.min.js}"></script>
-
-    <link th:href="@{/css/expman.css}" rel="stylesheet" media="screen">
-
-
-
+<head th:replace="~{layouts/main_layout :: head('Expman')}">
 </head>
+
+
 <body>
 <nav th:replace="layouts/main_layout::navigation"></nav>
-
-<div class="jumbotron" th:replace="layouts/main_layout::jumbotron"></div>
-
-
+<div th:replace="layouts/main_layout::jumbotron"></div>
 
 <div class="container">
     <div class="col-md-12">
