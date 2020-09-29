@@ -57,7 +57,7 @@ public class User  implements UserDetails {
     @NonNull
     @NotEmpty(message = "Please enter an alias")
     @Column(nullable = false, unique = true)
-    private String alias;
+    private String username;
 
     @NotEmpty(message = "Please enter the confirmation password")
     @Transient

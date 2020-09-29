@@ -7,13 +7,114 @@
 <nav th:replace="layouts/main_layout::navigation"></nav>
 <div th:replace="layouts/main_layout::jumbotron"></div>
 
+
+<div class="row" th:if="${success}">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 alert alert-success" role="alert" >
+        You have successfully registered with us. Please check your email to activate your account.
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<!-- User Registration Form -->
 <div class="container">
-    Your content here
+    <div class="form-group row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h2>Register new user today!</h2>
+            <hr>
+        </div>
+    </div>
+    <form method="post" th:action="@{register}" th:object="${user}" th:if="!${success}">
+        <div class="form-group row" th:if="${validationErrors}">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+            <span class="text-danger align-middle">
+                <ul th:each="error : ${validationErrors}">
+                    <li th:text="${error.getDefaultMessage()}"></li>
+                </ul>
+            </span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="first-name" class="col-md-3 col-form-label text-right">First Name</label>
+            <div class="col-md-6">
+                <input type="text"
+                       name="first-name"
+                       class="form-control"
+                       id="first-name"
+                       placeholder="First Name"
+                       th:field="*{firstName}"
+                       required autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="last-name" class="col-md-3 col-form-label text-right">Last Name</label>
+            <div class="col-md-6">
+                <input type="text"
+                       name="last-name"
+                       class="form-control"
+                       id="last-name"
+                       placeholder="Last Name"
+                       th:field="*{lastName}"
+                       required autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="username" class="col-md-3 col-form-label text-right">Username</label>
+            <div class="col-md-6">
+                <input type="text"
+                       name="username"
+                       class="form-control"
+                       id="username"
+                       placeholder="Username"
+                       th:field="*{username}"
+                       required autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-md-3 col-form-label text-right">Email</label>
+            <div class="col-md-6">
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       id="email"
+                       placeholder="Email"
+                       th:field="*{email}"
+                       required autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-md-3 col-form-label text-right">Password</label>
+            <div class="col-md-6">
+                <input type="password"
+                       name="password"
+                       class="form-control"
+                       id="password"
+                       placeholder="Password"
+                       th:field="*{password}"
+                       required autofocus>
+            </div>
+        </div>
+<div class="form-group row">
+    <label for="confirmPassword" class="col-md-3 col-form-label text-right">Confirm Password</label>
+    <div class="col-md-6">
+        <input type="password"
+               name="confirmPassword"
+               class="form-control"
+               id="confirmPassword"
+               placeholder="Confirm Password"
+               th:field="*{confirmPassword}"
+               required autofocus>
+    </div>
 </div>
 
 
-<div class="container" th:replace="layouts/main_layout :: footer">
-    <p>footer</p>
+
+
+    </form>
 </div>
+
+
 </body>
 </html>

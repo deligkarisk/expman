@@ -39,18 +39,27 @@ public class DatabaseLoader  implements CommandLineRunner {
     private void addUsersAndRoles() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String secret = "{bcrypt}" + encoder.encode("password");
+        String secret2 = "{bcrypt}" + encoder.encode("otherpassword");
+
 
         Role userRole = new Role("ROLE_USER");
         roleRepository.save(userRole);
         Role adminRole = new Role("ROLE_ADMIN");
         roleRepository.save(adminRole);
 
-        User admin = new User("admin@gmail.com",secret,true,"AdminFirstName","AdminLastName","masteradmin");
-        admin.setAlias("admin");
+        User admin = new User("admin@gmail.com",secret,true,"AdminFirstName","AdminLastName","admin");
         admin.addRole(adminRole);
         admin.setConfirmPassword(secret);
         userRepository.save(admin);
         users.put("admin@gmail.com",admin);
+
+        User user = new User("user@gmail22.com",secret2,true,"UserFirstName","UserLastName","user");
+        user.addRole(userRole);
+        user.setConfirmPassword(secret2);
+        userRepository.save(user);
+
+
+
 
 
 
