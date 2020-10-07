@@ -32,7 +32,7 @@ public class DatabaseLoader  implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        addUsersAndRoles();
+       addUsersAndRoles();
 
     }
 

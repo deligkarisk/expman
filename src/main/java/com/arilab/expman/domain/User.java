@@ -1,10 +1,12 @@
 package com.arilab.expman.domain;
 
 import com.arilab.expman.domain.validator.PasswordsMatch;
+import com.arilab.expman.domain.validator.UniqueEmail;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,12 +27,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @RequiredArgsConstructor
+@PasswordsMatch
 public class User  implements UserDetails {
 
     @Id
     @GeneratedValue
     private Long id;
 
+    @UniqueEmail
     @NonNull
     @Size(min = 6, max = 25)
     @Column(nullable = false, unique = true)
