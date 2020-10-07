@@ -10,22 +10,24 @@
 
 <div class="row" th:if="${success}">
     <div class="col-md-3"></div>
-    <div class="col-md-6 alert alert-success" role="alert" >
-        You have successfully registered with us. Please check your email to activate your account.
+    <div class="col-md-6 alert alert-success" role="alert">
+        You have successfully registered with us. Please check your email to
+        activate your account.
     </div>
     <div class="col-md-3"></div>
 </div>
 
 <!-- User Registration Form -->
 <div class="container">
-    <div class="form-group row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <h2>Register new user today!</h2>
-            <hr>
+    <form method="post" th:action="@{register}" th:object="${user}"
+          th:if="!${success}">
+        <div class="form-group row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2>Register new user today!</h2>
+                <hr>
+            </div>
         </div>
-    </div>
-    <form method="post" th:action="@{register}" th:object="${user}" th:if="!${success}">
         <div class="form-group row" th:if="${validationErrors}">
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -37,7 +39,8 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="first-name" class="col-md-3 col-form-label text-right">First Name</label>
+            <label for="first-name" class="col-md-3 col-form-label text-right">First
+                Name</label>
             <div class="col-md-6">
                 <input type="text"
                        name="first-name"
@@ -49,7 +52,8 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="last-name" class="col-md-3 col-form-label text-right">Last Name</label>
+            <label for="last-name" class="col-md-3 col-form-label text-right">Last
+                Name</label>
             <div class="col-md-6">
                 <input type="text"
                        name="last-name"
@@ -73,7 +77,8 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="email" class="col-md-3 col-form-label text-right">Email</label>
+            <label for="email"
+                   class="col-md-3 col-form-label text-right">Email</label>
             <div class="col-md-6">
                 <input type="email"
                        name="email"
@@ -96,20 +101,29 @@
                        required autofocus>
             </div>
         </div>
-<div class="form-group row">
-    <label for="confirmPassword" class="col-md-3 col-form-label text-right">Confirm Password</label>
-    <div class="col-md-6">
-        <input type="password"
-               name="confirmPassword"
-               class="form-control"
-               id="confirmPassword"
-               placeholder="Confirm Password"
-               th:field="*{confirmPassword}"
-               required autofocus>
-    </div>
-</div>
-
-
+        <div class="form-group row">
+            <label for="confirmPassword"
+                   class="col-md-3 col-form-label text-right">Confirm
+                Password</label>
+            <div class="col-md-6">
+                <input type="password"
+                       name="confirmPassword"
+                       class="form-control"
+                       id="confirmPassword"
+                       placeholder="Confirm Password"
+                       th:field="*{confirmPassword}"
+                       required autofocus>
+            </div>
+        </div>
+        <div class="form-group row" style="padding-top: 1rem">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success"><i
+                        class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
 
 
     </form>
