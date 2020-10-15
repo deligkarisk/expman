@@ -1,18 +1,21 @@
 package com.arilab.expman.controllers;
 
 import com.arilab.expman.domain.User;
+import com.arilab.expman.domain.validator.OnInsert;
 import com.arilab.expman.service.app.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import javax.validation.groups.Default;
 import java.util.Optional;
 
 @Controller
@@ -44,7 +47,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@Valid User user, BindingResult bindingResult, Model model,
+    public String registerNewUser(@Validated({OnInsert.class}) User user, BindingResult bindingResult, Model model,
                                   RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             logger.info("Validation found errors while registering a new user");
