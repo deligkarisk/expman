@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueEmail {
 
-    String message() default "Email not unique. Perhaps you have already registered with this email.";
+    String message() default "{validation.email.unique}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

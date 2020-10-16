@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueUserName {
 
-    String message() default "Username already in use.";
+    String message() default "{validation.username.unique}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
