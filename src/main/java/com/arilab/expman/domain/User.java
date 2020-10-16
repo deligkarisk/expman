@@ -3,6 +3,7 @@ package com.arilab.expman.domain;
 import com.arilab.expman.domain.validator.OnInsert;
 import com.arilab.expman.domain.validator.PasswordsMatch;
 import com.arilab.expman.domain.validator.UniqueEmail;
+import com.arilab.expman.domain.validator.UniqueUserName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -39,6 +40,11 @@ public class User  implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @UniqueUserName(groups = OnInsert.class)
+    @NonNull
+    @NotEmpty(message = "Please enter an alias")
+    @Column(nullable = false, unique = true)
+    private String username;
 
     @Column(length = 100)
     @NonNull
@@ -57,10 +63,7 @@ public class User  implements UserDetails {
     private String lastName;
 
 
-    @NonNull
-    @NotEmpty(message = "Please enter an alias")
-    @Column(nullable = false, unique = true)
-    private String username;
+
 
     @NotEmpty(message = "Please enter the confirmation password")
     @Transient
