@@ -3,6 +3,7 @@ package com.arilab.expman.service.app;
 import com.arilab.expman.domain.Role;
 import com.arilab.expman.repository.RoleRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RoleService {

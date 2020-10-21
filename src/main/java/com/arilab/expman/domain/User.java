@@ -28,6 +28,7 @@ import javax.persistence.*;
 @Data
 @RequiredArgsConstructor
 @PasswordsMatch
+@Table(name="users")
 public class User  implements UserDetails {
 
     @Id
@@ -61,8 +62,6 @@ public class User  implements UserDetails {
     @NonNull
     @NotEmpty(message = "You must enter Last Name.")
     private String lastName;
-
-
 
 
     @NotEmpty(message = "Please enter the confirmation password")

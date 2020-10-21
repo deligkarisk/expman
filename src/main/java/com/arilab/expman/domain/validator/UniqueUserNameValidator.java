@@ -10,9 +10,9 @@ import javax.validation.ConstraintValidatorContext;
 @Component("beforeSaveUniqueUserNameValidator")
 public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserName, String> {
 
-
     @Autowired
-    private UserService userService;
+    private  UserService userService;
+
 
     @Override
     public void initialize(UniqueUserName constraintAnnotation) {
@@ -21,6 +21,8 @@ public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserNa
 
     @Override
     public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
-        return userService.findByUsername(username).isEmpty();
+        System.out.println("Running Username validator");
+       return userService.findByUsername(username).isEmpty();
+
     }
 }
