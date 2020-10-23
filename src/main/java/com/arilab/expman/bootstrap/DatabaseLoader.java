@@ -27,7 +27,7 @@ public class DatabaseLoader  implements CommandLineRunner {
     public DatabaseLoader(RoleRepository roleRepository, UserRepository userRepository) {
 
         this.roleRepository = roleRepository;
-        this. userRepository = userRepository;
+        this.userRepository = userRepository;
 
     }
 
