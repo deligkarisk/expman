@@ -1,31 +1,20 @@
 package com.arilab.expman.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import javax.validation.ValidatorFactory;
-import java.util.Map;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 
 @Component
-public class HibernateValidatorCustomizer implements HibernatePropertiesCustomizer {
+public class HibernateValidatorCustomizer {
 
-    @Autowired
-    private ValidatorFactory validatorFactory;
 
-    public void customize(Map<String, Object> hibernateProperties) {
-        if (validatorFactory != null) {
-            hibernateProperties.put("javax.persistence.validation.factory", validatorFactory);
-        }
+    @Bean
+    public javax.validation.Validator localValidatorFactoryBean() {
+        return new LocalValidatorFactoryBean();
     }
+
 }
-
-
-
-
-
-
 
 

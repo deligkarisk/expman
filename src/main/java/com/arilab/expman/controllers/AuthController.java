@@ -6,6 +6,7 @@ import com.arilab.expman.service.app.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -70,6 +71,7 @@ public class AuthController {
     }
 
     @GetMapping("/activate/{email}/{activationCode}")
+    @Transactional
     public String activate(@PathVariable String email, @PathVariable String activationCode) {
         Optional<User> user = userService.findByEmailAndActivationCode(email, activationCode);
         if (user.isPresent()) {

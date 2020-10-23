@@ -2,18 +2,13 @@ package com.arilab.expman.bootstrap;
 
 import com.arilab.expman.domain.Role;
 import com.arilab.expman.domain.User;
-import com.arilab.expman.domain.validator.UniqueUserName;
-import com.arilab.expman.domain.validator.UniqueUserNameValidator;
 import com.arilab.expman.repository.RoleRepository;
 import com.arilab.expman.repository.UserRepository;
-import com.arilab.expman.service.app.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 @Component
@@ -28,7 +23,6 @@ public class DatabaseLoader  implements CommandLineRunner {
 
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
-
     }
 
 
@@ -36,7 +30,7 @@ public class DatabaseLoader  implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-     addUsersAndRoles();
+    addUsersAndRoles();
 
     }
 
@@ -57,7 +51,7 @@ public class DatabaseLoader  implements CommandLineRunner {
         userRepository.save(admin);
         users.put("admin@gmail.com",admin);
 
-        User user = new User("user@gmail22.com","user", secret2,true,"UserFirstName","UserLastName");
+        User user = new User("useremail22@gmail.com","user", secret2,true,"UserFirstName","UserLastName");
         user.addRole(userRole);
         user.setConfirmPassword(secret2);
         userRepository.save(user);

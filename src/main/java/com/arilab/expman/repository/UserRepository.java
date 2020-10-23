@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
+@Transactional
 public interface UserRepository extends JpaRepository<User,Long> {
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
