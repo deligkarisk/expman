@@ -23,7 +23,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Data
-// Excluding the roles is needed to avoide Stack overflow exceptions with lombock.
+// Excluding the roles is needed to avoid Stack overflow exceptions with lombock.
 @ToString(exclude = {"roles"})
 @RequiredArgsConstructor
 @PasswordsMatch
