@@ -4,10 +4,7 @@ import com.arilab.expman.domain.validator.OnInsert;
 import com.arilab.expman.domain.validator.PasswordsMatch;
 import com.arilab.expman.domain.validator.UniqueEmail;
 import com.arilab.expman.domain.validator.UniqueUserName;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +23,8 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Data
+// Excluding the roles is needed to avoide Stack overflow exceptions with lombock.
+@ToString(exclude = {"roles"})
 @RequiredArgsConstructor
 @PasswordsMatch
 @Table(name="users")
