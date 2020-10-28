@@ -27,8 +27,6 @@ import java.util.Properties;
 public class AppDataSourceConfiguration {
 
 
-    @Qualifier("localValidatorFactoryBean")
-
     private final Validator validator;
 
     public AppDataSourceConfiguration(@Qualifier("localValidatorFactoryBean") Validator validator) {
@@ -59,10 +57,10 @@ public class AppDataSourceConfiguration {
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
-        jpaProperties.put("hibernate.hbm2ddl.auto", "create");
+        jpaProperties.put("hibernate.hbm2ddl.auto", "validate");
         jpaProperties.put("hibernate.show-sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
-        jpaProperties.put("hibernate.generate_statistics","true");
+        jpaProperties.put("hibernate.generate_statistics","false");
         jpaProperties.put("javax.persistence.validation.group.pre-persist", "com.arilab.expman.domain.validator.OnInsert");
         jpaProperties.put("javax.persistence.validation.factory", validator);
         factory.setJpaProperties(jpaProperties);
