@@ -1,12 +1,9 @@
 package com.arilab.expman.domain;
 
 import com.arilab.expman.domain.validator.OnInsert;
-import com.arilab.expman.domain.validator.PasswordsMatchValidator;
-import com.arilab.expman.repository.UserRepository;
 import com.arilab.expman.service.app.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.postgresql.gss.GSSOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,11 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -34,9 +29,9 @@ public class UserValidationsTest {
 
 
     @Test
-    public void paswordsDoNotMatchTest() {
-        User user = new User("testemail", "testusername", "pass", true, "fname", "lname");
-        user.setConfirmPassword("confirmpass");
+    public void passwordsDoNotMatchTest() {
+        User user = new User("test_email", "test_username", "pass", true, "firstname", "lastname");
+        user.setConfirmPassword("confirm_pass");
         Set<ConstraintViolation<User>> constrainsViolations = validator.validate(user);
         assertEquals(1, constrainsViolations.size());
         assertEquals(constrainsViolations.iterator().next().getMessageTemplate(), "{validation.passwords.donotmatch}");
@@ -44,7 +39,7 @@ public class UserValidationsTest {
 
     @Test
     public void passwordsMatchTest() {
-        User user = new User("testemail", "testusername", "pass", true, "fname", "lname");
+        User user = new User("test_email", "test_username", "pass", true, "firstname", "lastname");
         user.setConfirmPassword("pass");
         Set<ConstraintViolation<User>> constrainsViolations = validator.validate(user);
         assertEquals(0, constrainsViolations.size());
@@ -57,7 +52,7 @@ public class UserValidationsTest {
     @Transactional
     public void userNameNotUnique() {
         User existingUser = userService.findAll().iterator().next();
-        User user = new User("testemail1", existingUser.getUsername(), "pass", true, "fname", "lname");
+        User user = new User("test_email1", existingUser.getUsername(), "pass", true, "firstname", "lastname");
         user.setConfirmPassword("pass");
         Set<ConstraintViolation<User>> constraintViolations = validator.validate(user, OnInsert.class);
         assertEquals(1, constraintViolations.size());
@@ -68,7 +63,7 @@ public class UserValidationsTest {
     @Transactional
     public void EmailNotUnique() {
         User existingUser = userService.findAll().iterator().next();
-        User user = new User(existingUser.getEmail(), "randomusername", "pass", true, "fname", "lname");
+        User user = new User(existingUser.getEmail(), "random_username", "pass", true, "firstname", "lastname");
         user.setConfirmPassword("pass");
         Set<ConstraintViolation<User>> constraintViolations = validator.validate(user, OnInsert.class);
         assertEquals(1, constraintViolations.size());
