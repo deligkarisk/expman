@@ -2,7 +2,6 @@ package com.arilab.expman.service.app;
 
 
 import com.arilab.expman.domain.User;
-import com.arilab.expman.repository.RoleRepository;
 import com.arilab.expman.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public class UserService {
         String secret = "{bcrypt}" + encoder.encode(user.getPassword());
         user.setPassword(secret);
         user.setConfirmPassword(secret);
-        user.addRole(roleService.findByName("ROLE_USER"));
+        //user.addRole(roleService.findByName("ROLE_USER"));
         user.setActivationCode(UUID.randomUUID().toString());
         user.setEnabled(false);
         save(user);
@@ -45,6 +45,7 @@ public class UserService {
     }
 
 
+    @Transactional
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -69,5 +70,16 @@ public class UserService {
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+
+    public Optional<User> findByEmailAndUsername(String email, String username) {
+        return userRepository.findByEmailAndUsername(email, username);
+
+    }
+
+    @Transactional
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }
