@@ -29,8 +29,8 @@ public class UserValidationsTest {
 
 
     @Test
-    public void passwordsDoNotMatchTest() {
-        User user = new User("test_email", "test_username", "pass", true, "firstname", "lastname");
+    public void passwordsDoNotMatch() {
+        User user = new User("test_email", "testUsername", "pass", true, "firstName", "lastName");
         user.setConfirmPassword("confirm_pass");
         Set<ConstraintViolation<User>> constrainsViolations = validator.validate(user);
         assertEquals(1, constrainsViolations.size());
@@ -38,8 +38,8 @@ public class UserValidationsTest {
     }
 
     @Test
-    public void passwordsMatchTest() {
-        User user = new User("test_email", "test_username", "pass", true, "firstname", "lastname");
+    public void passwordsMatch() {
+        User user = new User("test_email", "testUsername", "pass", true, "firstName", "lastName");
         user.setConfirmPassword("pass");
         Set<ConstraintViolation<User>> constrainsViolations = validator.validate(user);
         assertEquals(0, constrainsViolations.size());
@@ -52,7 +52,7 @@ public class UserValidationsTest {
     @Transactional
     public void userNameNotUnique() {
         User existingUser = userService.findAll().iterator().next();
-        User user = new User("test_email1", existingUser.getUsername(), "pass", true, "firstname", "lastname");
+        User user = new User("test_email1", existingUser.getUsername(), "pass", true, "firstName", "lastName");
         user.setConfirmPassword("pass");
         Set<ConstraintViolation<User>> constraintViolations = validator.validate(user, OnInsert.class);
         assertEquals(1, constraintViolations.size());
@@ -63,11 +63,17 @@ public class UserValidationsTest {
     @Transactional
     public void EmailNotUnique() {
         User existingUser = userService.findAll().iterator().next();
-        User user = new User(existingUser.getEmail(), "random_username", "pass", true, "firstname", "lastname");
+        User user = new User(existingUser.getEmail(), "randomUsername", "pass", true, "firstName", "lastName");
         user.setConfirmPassword("pass");
         Set<ConstraintViolation<User>> constraintViolations = validator.validate(user, OnInsert.class);
         assertEquals(1, constraintViolations.size());
         assertEquals(constraintViolations.iterator().next().getMessageTemplate(), "{validation.email.unique}");
+    }
+
+    @Test
+    public void nullEmail() {
+        User user = new User(null,"randomUsername","randomPass",true,"firstName","lastName");
+        
     }
 
 }
