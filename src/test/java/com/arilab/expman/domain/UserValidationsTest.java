@@ -70,10 +70,5 @@ public class UserValidationsTest {
         assertEquals(constraintViolations.iterator().next().getMessageTemplate(), "{validation.email.unique}");
     }
 
-    @Test
-    public void nullEmail() {
-        User user = new User(null,"randomUsername","randomPass",true,"firstName","lastName");
-        
-    }
 
 }
