@@ -1,9 +1,9 @@
 package com.arilab.expman.bootstrap;
 
-import com.arilab.expman.domain.Role;
-import com.arilab.expman.domain.User;
-import com.arilab.expman.repository.RoleRepository;
-import com.arilab.expman.repository.UserRepository;
+import com.arilab.expman.domain.app.Role;
+import com.arilab.expman.domain.app.User;
+import com.arilab.expman.repository.app.RoleRepository;
+import com.arilab.expman.repository.app.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

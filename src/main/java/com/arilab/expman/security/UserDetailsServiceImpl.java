@@ -1,8 +1,8 @@
 package com.arilab.expman.security;
 
 
-import com.arilab.expman.domain.User;
-import com.arilab.expman.repository.UserRepository;
+import com.arilab.expman.domain.app.User;
+import com.arilab.expman.repository.app.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

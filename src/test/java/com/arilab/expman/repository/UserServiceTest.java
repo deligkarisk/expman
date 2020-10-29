@@ -1,6 +1,6 @@
 package com.arilab.expman.repository;
 
-import com.arilab.expman.domain.User;
+import com.arilab.expman.domain.app.User;
 import com.arilab.expman.service.app.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

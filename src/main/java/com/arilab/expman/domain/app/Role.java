@@ -1,4 +1,4 @@
-package com.arilab.expman.domain;
+package com.arilab.expman.domain.app;
 
 
 import lombok.*;

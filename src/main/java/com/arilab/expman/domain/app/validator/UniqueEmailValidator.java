@@ -1,6 +1,5 @@
-package com.arilab.expman.domain.validator;
+package com.arilab.expman.domain.app.validator;
 
-import com.arilab.expman.domain.User;
 import com.arilab.expman.service.app.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

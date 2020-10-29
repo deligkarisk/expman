@@ -1,9 +1,9 @@
-package com.arilab.expman.domain;
+package com.arilab.expman.domain.app;
 
-import com.arilab.expman.domain.validator.OnInsert;
-import com.arilab.expman.domain.validator.PasswordsMatch;
-import com.arilab.expman.domain.validator.UniqueEmail;
-import com.arilab.expman.domain.validator.UniqueUserName;
+import com.arilab.expman.domain.app.validator.OnInsert;
+import com.arilab.expman.domain.app.validator.PasswordsMatch;
+import com.arilab.expman.domain.app.validator.UniqueEmail;
+import com.arilab.expman.domain.app.validator.UniqueUserName;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

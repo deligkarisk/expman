@@ -1,6 +1,6 @@
-package com.arilab.expman.domain.validator;
+package com.arilab.expman.domain.app.validator;
 
-import com.arilab.expman.domain.User;
+import com.arilab.expman.domain.app.User;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

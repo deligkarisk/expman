@@ -1,8 +1,8 @@
 package com.arilab.expman.service.app;
 
 
-import com.arilab.expman.domain.User;
-import com.arilab.expman.repository.UserRepository;
+import com.arilab.expman.domain.app.User;
+import com.arilab.expman.repository.app.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,7 +45,7 @@ public class UserService {
     }
 
 
-    @Transactional
+    @Transactional(transactionManager = "expmanTransactionManager")
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -78,7 +78,7 @@ public class UserService {
 
     }
 
-    @Transactional
+    @Transactional(transactionManager = "expmanTransactionManager")
     public List<User> findAll() {
         return userRepository.findAll();
     }

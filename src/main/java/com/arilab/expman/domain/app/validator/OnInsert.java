@@ -1,4 +1,4 @@
-package com.arilab.expman.domain.validator;
+package com.arilab.expman.domain.app.validator;
 
 import javax.validation.groups.Default;
 

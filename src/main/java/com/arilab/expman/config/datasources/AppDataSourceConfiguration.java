@@ -21,7 +21,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.arilab.expman.repository",
+@EnableJpaRepositories(basePackages = "com.arilab.expman.repository.app",
         entityManagerFactoryRef = "expmanEntityManagerFactory",
         transactionManagerRef = "expmanTransactionManager")
 public class AppDataSourceConfiguration {
@@ -36,14 +36,14 @@ public class AppDataSourceConfiguration {
 
     @Bean
     @Primary
-    @ConfigurationProperties("expman.datasource")
+    @ConfigurationProperties("expman.datasource.app")
     public DataSourceProperties expmanDataSourceProperties() {
         return new DataSourceProperties();
     }
 
 
     @Bean
-    @ConfigurationProperties("expman.datasource.configuration")
+    @ConfigurationProperties("expman.datasource.app.configuration")
     public HikariDataSource expmanDataSource() {
         return expmanDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
@@ -53,7 +53,7 @@ public class AppDataSourceConfiguration {
     public LocalContainerEntityManagerFactoryBean expmanEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(expmanDataSource());
-        factory.setPackagesToScan("com.arilab.expman.domain");
+        factory.setPackagesToScan("com.arilab.expman.domain.app");
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
@@ -61,7 +61,7 @@ public class AppDataSourceConfiguration {
         jpaProperties.put("hibernate.show-sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.generate_statistics","false");
-        jpaProperties.put("javax.persistence.validation.group.pre-persist", "com.arilab.expman.domain.validator.OnInsert");
+        jpaProperties.put("javax.persistence.validation.group.pre-persist", "com.arilab.expman.domain.app.validator.OnInsert");
         jpaProperties.put("javax.persistence.validation.factory", validator);
         factory.setJpaProperties(jpaProperties);
         return factory;
@@ -69,7 +69,7 @@ public class AppDataSourceConfiguration {
 
 
     @Bean
-    public TransactionManager expmanTransactionManager(EntityManagerFactory entityManagerFactory){
+    public TransactionManager expmanTransactionManager(@Qualifier("expmanEntityManagerFactory") EntityManagerFactory entityManagerFactory){
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setDataSource(expmanDataSource());
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);

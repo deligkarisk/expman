@@ -1,6 +1,7 @@
 package com.arilab.expman.domain;
 
-import com.arilab.expman.domain.validator.OnInsert;
+import com.arilab.expman.domain.app.User;
+import com.arilab.expman.domain.app.validator.OnInsert;
 import com.arilab.expman.service.app.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +50,7 @@ public class UserValidationsTest {
     // For the below validator we get the first user, and copy its username to a new entity, which gets subsequently
     // validated.
     @Test
-    @Transactional
+    @Transactional(transactionManager = "expmanTransactionManager")
     public void userNameNotUnique() {
         User existingUser = userService.findAll().iterator().next();
         User user = new User("test_email1", existingUser.getUsername(), "pass", true, "firstName", "lastName");
@@ -60,7 +61,7 @@ public class UserValidationsTest {
     }
 
     @Test
-    @Transactional
+    @Transactional(transactionManager = "expmanTransactionManager")
     public void EmailNotUnique() {
         User existingUser = userService.findAll().iterator().next();
         User user = new User(existingUser.getEmail(), "randomUsername", "pass", true, "firstName", "lastName");

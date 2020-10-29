@@ -1,6 +1,6 @@
-package com.arilab.expman.repository;
+package com.arilab.expman.repository.app;
 
-import com.arilab.expman.domain.User;
+import com.arilab.expman.domain.app.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;

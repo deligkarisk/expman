@@ -1,6 +1,7 @@
 package com.arilab.expman.repository;
 
-import com.arilab.expman.domain.User;
+import com.arilab.expman.domain.app.User;
+import com.arilab.expman.repository.app.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
