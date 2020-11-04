@@ -1,4 +1,4 @@
-package com.arilab.expman.repository;
+package com.arilab.expman.repository.app;
 
 import com.arilab.expman.domain.app.User;
 import com.arilab.expman.repository.app.UserRepository;

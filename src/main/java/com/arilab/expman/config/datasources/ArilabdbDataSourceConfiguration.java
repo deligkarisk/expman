@@ -4,7 +4,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -21,7 +20,7 @@ import java.util.Properties;
 
     @Configuration
     @EnableTransactionManagement
-    @EnableJpaRepositories(basePackages = "com.arilab.expman.repository.arilabdb",
+    @EnableJpaRepositories(basePackages = "com.arilab.expman.repository.database",
             entityManagerFactoryRef = "arilabdbEntityManagerFactory",
             transactionManagerRef = "arilabdbTransactionManager")
     public class ArilabdbDataSourceConfiguration {
@@ -53,7 +52,7 @@ import java.util.Properties;
         public LocalContainerEntityManagerFactoryBean arilabdbEntityManagerFactory() {
             LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
             factory.setDataSource(arilabdbataSource());
-            factory.setPackagesToScan("com.arilab.expman.domain.arilabdb");
+            factory.setPackagesToScan("com.arilab.expman.domain.database");
             factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
             Properties jpaProperties = new Properties();
