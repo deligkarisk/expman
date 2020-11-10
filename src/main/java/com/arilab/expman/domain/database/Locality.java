@@ -1,24 +1,38 @@
 package com.arilab.expman.domain.database;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Data
-public class Locality {
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class Locality implements Serializable {
 
     @Id
     @Column(name = "locality_id")
     private Integer localityId;
 
     @Column(name = "locality_code")
+    @NotEmpty
+    @NotNull
+    @NonNull
     private String localityCode;
 
     @Column(name = "country")
+    @NotEmpty
+    @NotNull
+    @NonNull
     private String country;
 
     @Column(name = "adm1")

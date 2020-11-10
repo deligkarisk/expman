@@ -6,24 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "specimen")
-public class Specimen {
+public class Specimen implements Serializable {
 
     @Id
     @Column(unique = true, nullable = false, name = "specimen_id")
     private Integer specimenId;
 
     @NonNull
+    @NotNull
     @NotEmpty(message = "Please enter a specimen code.")
     @Column(name = "specimen_code", unique = true)
     private String specimenCode;
@@ -31,8 +31,9 @@ public class Specimen {
     @Column(name = "sample_code")
     private String sampleCode;
 
-    @Column(name = "collection_event_code")
-    private String collectionEventCode;
+    @ManyToOne
+    @JoinColumn(name = "collection_event_code", referencedColumnName = "collection_event_code")
+    private CollectionEvent collectionEvent;
 
     @Column(name = "basis_of_record")
     private String basisOfRecord;
@@ -50,6 +51,7 @@ public class Specimen {
     private String medium;
 
     @NonNull
+    @NotNull
     @NotEmpty(message = "Please enter the type status of the specimen.")
     @Column(name = "type_status")
     private String typeStatus;
@@ -59,6 +61,9 @@ public class Specimen {
 
     @Column(name = "determined_by")
     private String determinedBy;
+
+    @Column(name = "date_identified")
+    private String dateIdentified;
 
     @Column(name = "fba_code")
     private String fbaCode;
