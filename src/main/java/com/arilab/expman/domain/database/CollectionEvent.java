@@ -5,17 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "collection_event")
-public class CollectionEvent {
+public class CollectionEvent implements Serializable {
 
     @Id
     @Column(name = "collection_event_id")
@@ -25,11 +23,15 @@ public class CollectionEvent {
     @NotEmpty
     @Column(name = "collection_event_code", unique = true)
     private String collectionEventCode;
-
+/*
     @NotNull
     @NotEmpty
     @Column(name = "locality_code")
-    private String localityCode;
+    private String localityCode;*/
+
+    @ManyToOne
+    @JoinColumn(name = "locality_code", referencedColumnName = "locality_code")
+    private Locality locality;
 
     @Column(name = "collected_by")
     private String collectedBy;

@@ -2,10 +2,7 @@ package com.arilab.expman.domain.database;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -18,11 +15,10 @@ public class CtScan {
     @Column(name = "ct_scan_id", unique = true)
     private Long scanId;
 
-    @NotNull
-    @NotEmpty
-    @Column(name = "specimen_code", unique = true)
-    private String specimenCode;
 
+    @ManyToOne
+    @JoinColumn(name = "specimen_code", referencedColumnName = "specimen_code")
+    private Specimen specimen;
 
     @Column(name = "ct_scan_note")
     private String ctScanNote;
