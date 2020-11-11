@@ -3,6 +3,7 @@ package com.arilab.expman.domain.database;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -13,6 +14,8 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "collection_event")
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class CollectionEvent implements Serializable {
 
     @Id
@@ -20,16 +23,13 @@ public class CollectionEvent implements Serializable {
     private Integer collectionEventId;
 
     @NotNull
+    @NonNull
     @NotEmpty
     @Column(name = "collection_event_code", unique = true)
     private String collectionEventCode;
-/*
-    @NotNull
-    @NotEmpty
-    @Column(name = "locality_code")
-    private String localityCode;*/
 
-    @ManyToOne
+    @NonNull
+    @ManyToOne(optional = false)
     @JoinColumn(name = "locality_code", referencedColumnName = "locality_code")
     private Locality locality;
 

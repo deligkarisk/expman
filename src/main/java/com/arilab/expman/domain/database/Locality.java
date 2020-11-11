@@ -1,13 +1,13 @@
 package com.arilab.expman.domain.database;
 
+import com.arilab.expman.domain.database.supplementary.BiogeographicRegion;
+import com.arilab.expman.domain.database.supplementary.Country;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -29,11 +29,10 @@ public class Locality implements Serializable {
     @NonNull
     private String localityCode;
 
-    @Column(name = "country")
-    @NotEmpty
-    @NotNull
     @NonNull
-    private String country;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "country", referencedColumnName = "country_name")
+    private Country country;
 
     @Column(name = "adm1")
     private String adm1;
@@ -65,8 +64,9 @@ public class Locality implements Serializable {
     @Column(name = "elevation_error")
     private BigDecimal elevationError;
 
-    @Column(name = "biogeographic_region")
-    private String biogeographicRegion;
+    @ManyToOne()
+    @JoinColumn(name = "biogeographic_region", referencedColumnName = "region")
+    private BiogeographicRegion biogeographicRegion;
 
     @Column(name = "ems_site")
     private String emsSite;

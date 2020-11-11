@@ -1,6 +1,7 @@
 package com.arilab.expman.domain.database;
 
 
+import com.arilab.expman.domain.database.supplementary.TypeStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -51,10 +52,9 @@ public class Specimen implements Serializable {
     private String medium;
 
     @NonNull
-    @NotNull
-    @NotEmpty(message = "Please enter the type status of the specimen.")
-    @Column(name = "type_status")
-    private String typeStatus;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "type_status", referencedColumnName = "type_status")
+    private TypeStatus typeStatus;
 
     @Column(name = "taxon_code")
     private String taxonCode;

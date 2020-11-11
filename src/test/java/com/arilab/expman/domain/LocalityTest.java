@@ -1,9 +1,12 @@
 package com.arilab.expman.domain;
 
 import com.arilab.expman.domain.database.Locality;
+import com.arilab.expman.domain.database.supplementary.BiogeographicRegion;
+import com.arilab.expman.domain.database.supplementary.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
@@ -14,13 +17,17 @@ public class LocalityTest {
 
     private Locality locality;
 
+    @MockBean
+    private Country country;
+
+    @MockBean
+    private BiogeographicRegion biogeographicRegion;
+
 
     @Test
     public void requiredArgsConstructorTest() {
-
-        locality = new Locality("LocalityCode", "Argentina");
+        locality = new Locality("LocalityCode", country);
         assert (locality.getLocalityCode().equals("LocalityCode"));
-        assert (locality.getCountry().equals("Argentina"));
         assert (locality.getAccuracy() == null);
     }
 
@@ -28,8 +35,8 @@ public class LocalityTest {
     public void noArgsConstructorTest() {
 
         locality = new Locality();
+        locality.setBiogeographicRegion(biogeographicRegion);
         locality.setLocalityCode("LocalityCode2");
-        locality.setCountry("Argentina");
         locality.setAdm1("Adm1");
         locality.setAdm2("Adm2");
         locality.setIsland("TestIsland");
@@ -40,7 +47,6 @@ public class LocalityTest {
         locality.setLatlongError((float) 0.011);
         locality.setElevation(new BigDecimal(1500));
         locality.setElevationError(new BigDecimal(200));
-        locality.setBiogeographicRegion("Palearctic");
         locality.setEmsSite("TestEmsSite");
         locality.setFjSite("TestFJSite");
         locality.setEcologicalCommunityOriginal("TestEcologicalCommunity");
@@ -49,7 +55,6 @@ public class LocalityTest {
         locality.setAccuracy((short) 2);
         locality.setOtherSite("TestOtherSite");
 
-        assert (locality.getCountry().equals("Argentina"));
         assert (locality.getIsland().equals("TestIsland"));
 
         // The latitude and longitude values are compared using the String version of the constructor here, versus the
