@@ -1,6 +1,7 @@
 package com.arilab.expman.domain.database;
 
 
+import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
 import com.arilab.expman.domain.database.supplementary.TypeStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,8 +37,10 @@ public class Specimen implements Serializable {
     @JoinColumn(name = "collection_event_code", referencedColumnName = "collection_event_code")
     private CollectionEvent collectionEvent;
 
-    @Column(name = "basis_of_record")
-    private String basisOfRecord;
+
+    @ManyToOne()
+    @JoinColumn(name = "basis_of_record", referencedColumnName = "basis_of_record")
+    private BasisOfRecord basisOfRecord;
 
     @Column(name = "located_at")
     private String locatedAt;

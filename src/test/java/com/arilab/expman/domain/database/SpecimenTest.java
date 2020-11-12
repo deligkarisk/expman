@@ -1,9 +1,11 @@
-package com.arilab.expman.domain;
+package com.arilab.expman.domain.database;
 
 import com.arilab.expman.domain.database.Specimen;
+import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
 import com.arilab.expman.domain.database.supplementary.TypeStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +19,9 @@ public class SpecimenTest {
     @MockBean
     private TypeStatus typeStatus;
 
+    @MockBean
+    private BasisOfRecord basisOfRecord;
+
     @Test
     public void requiredArgConstructorTest() {
         specimen = new Specimen("TestSpecimenCode",typeStatus);
@@ -29,7 +34,7 @@ public class SpecimenTest {
     public void noArgsConstructorTest() {
         specimen = new Specimen();
         specimen.setAntwebManage((short) 1);
-        specimen.setBasisOfRecord("Preserved specimen");
+        specimen.setBasisOfRecord(basisOfRecord);
         specimen.setLocatedAt("TestLocatedAt");
         specimen.setOwnedBy("TestOwnedBy");
         specimen.setLifestageSex("Worker");

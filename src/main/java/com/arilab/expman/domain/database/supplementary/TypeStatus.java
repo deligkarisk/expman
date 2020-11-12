@@ -17,7 +17,7 @@ public class TypeStatus {
     @Column(name = "type_status_id")
     private Integer typeStatusId;
 
-    @Column(name = "type_status")
+    @Column(name = "type_status", unique = true)
     private String typeStatus;
 
 
