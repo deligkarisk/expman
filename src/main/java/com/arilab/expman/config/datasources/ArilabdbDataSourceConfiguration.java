@@ -43,7 +43,7 @@ import java.util.Properties;
 
         @Bean
         @ConfigurationProperties("expman.datasource.arilabdb.configuration")
-        public HikariDataSource arilabdbataSource() {
+        public HikariDataSource arilabdbdataSource() {
             return arilabdbDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
         }
 
@@ -51,16 +51,16 @@ import java.util.Properties;
         @Bean
         public LocalContainerEntityManagerFactoryBean arilabdbEntityManagerFactory() {
             LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-            factory.setDataSource(arilabdbataSource());
+            factory.setDataSource(arilabdbdataSource());
             factory.setPackagesToScan("com.arilab.expman.domain.database");
             factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
             Properties jpaProperties = new Properties();
             jpaProperties.put("hibernate.hbm2ddl.auto", "validate");
-            jpaProperties.put("hibernate.show-sql", "true");
-            jpaProperties.put("hibernate.format_sql", "true");
-            jpaProperties.put("hibernate.generate_statistics","false");
-            jpaProperties.put("javax.persistence.validation.group.pre-persist", "");
+            jpaProperties.put("hibernate.show-sql", "false"); // we use the logging framework instead.
+            jpaProperties.put("hibernate.format_sql", "false");
+            jpaProperties.put("hibernate.generate_statistics","true");
+            //jpaProperties.put("javax.persistence.validation.group.pre-persist", "");
             jpaProperties.put("javax.persistence.validation.factory", validator);
             factory.setJpaProperties(jpaProperties);
             return factory;
@@ -71,7 +71,7 @@ import java.util.Properties;
         public TransactionManager arilabdbTransactionManager(
                 @Qualifier("arilabdbEntityManagerFactory") EntityManagerFactory entityManagerFactory){
             JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-            jpaTransactionManager.setDataSource(arilabdbataSource());
+            jpaTransactionManager.setDataSource(arilabdbdataSource());
             jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
             return jpaTransactionManager;
         }

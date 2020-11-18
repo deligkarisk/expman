@@ -11,13 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "country",schema = "admin")
-public class Country {
+public class Country implements Serializable {
 
     @Id
     @Column(name = "country_id")
@@ -27,13 +28,13 @@ public class Country {
     @NotNull
     @NonNull
     @NotEmpty
-    @Column(name = "country_code")
+    @Column(name = "country_code",unique = true)
     private String countryCode;
 
     @NotNull
     @NonNull
     @NotEmpty
-    @Column(name = "country_name")
+    @Column(name = "country_name", unique = true)
     private String countryName;
 
     @NotNull

@@ -11,13 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "specimen_basis_of_record", schema = "supplementary")
-public class BasisOfRecord {
+public class BasisOfRecord implements Serializable {
 
     @Id
     @Column(name = "basis_of_record")

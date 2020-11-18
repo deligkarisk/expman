@@ -7,11 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "specimen_status_types", schema = "admin")
-public class TypeStatus {
+public class TypeStatus implements Serializable {
 
     @Id
     @Column(name = "type_status_id")
