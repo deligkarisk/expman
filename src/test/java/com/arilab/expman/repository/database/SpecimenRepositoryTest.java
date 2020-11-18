@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -24,8 +24,10 @@ public class SpecimenRepositoryTest {
 
     @Test
     public void repositoryWorks() {
+        Optional<Specimen> specimen = specimenRepository.findBySpecimenId(4405);
+        logger.info("Entry loaded");
         List<Specimen> specimens = specimenRepository.findAll();
-        logger.info(String.format("Found %d specimens", specimens.size()));
+        logger.info("Entries loaded");
     }
 
 }

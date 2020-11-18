@@ -3,10 +3,7 @@ package com.arilab.expman.domain.database;
 
 import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
 import com.arilab.expman.domain.database.supplementary.TypeStatus;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -17,11 +14,16 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@NamedEntityGraph(name = "Specimen.FetchAll",
+        attributeNodes = { @NamedAttributeNode("typeStatus"),
+        @NamedAttributeNode("collectionEvent"),
+        @NamedAttributeNode("basisOfRecord")})
 @Table(name = "specimen")
 public class Specimen implements Serializable {
 
     @Id
     @Column(unique = true, nullable = false, name = "specimen_id")
+    @ToString.Include
     private Integer specimenId;
 
     @NonNull
@@ -33,12 +35,12 @@ public class Specimen implements Serializable {
     @Column(name = "sample_code")
     private String sampleCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "collection_event_code", referencedColumnName = "collection_event_code")
     private CollectionEvent collectionEvent;
 
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "basis_of_record", referencedColumnName = "basis_of_record")
     private BasisOfRecord basisOfRecord;
 
@@ -55,7 +57,8 @@ public class Specimen implements Serializable {
     private String medium;
 
     @NonNull
-    @ManyToOne(optional = false)
+    @NotNull
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "type_status", referencedColumnName = "type_status")
     private TypeStatus typeStatus;
 
