@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.ConstraintViolationException;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class CtScanRepositoryTest {
@@ -24,4 +26,17 @@ public class CtScanRepositoryTest {
          Integer numberOfScans = ctScanRepository.findAll().size();
          logger.info(String.format("Found %d CT scans", numberOfScans));
     }
+
+
+    // Failed conditions
+
+    @Test(expected = ConstraintViolationException.class)
+    public void noEthanolConcInCTScans() {}
+
+    @Test(expected = ConstraintViolationException.class)
+    public void noScanUserInCTScans() {}
+
+    @Test(expected = ConstraintViolationException.class)
+    public void noAntScanInCTScans() {}
+
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,5 +30,10 @@ public class SpecimenRepositoryTest {
         List<Specimen> specimens = specimenRepository.findAll();
         logger.info("Entries loaded");
     }
+
+    // Failed conditions
+    @Test(expected = ConstraintViolationException.class)
+    public void noTypeStatusInSpecimen() {}
+
 
 }
