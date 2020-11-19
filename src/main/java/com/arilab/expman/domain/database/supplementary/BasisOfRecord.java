@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class BasisOfRecord implements Serializable {
 
     @Id
-    @Column(name = "basis_of_record")
+    @Column(name = "basis_of_record", nullable = false)
     @NonNull
     @NotNull
     @NotEmpty

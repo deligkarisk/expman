@@ -14,12 +14,12 @@ import java.io.Serializable;
 @Table(name = "specimen_status_types", schema = "admin")
 public class TypeStatus implements Serializable {
 
-    @Id
+
     @Column(name = "type_status_id")
     private Integer typeStatusId;
 
+    @Id
     @Column(name = "type_status", unique = true)
     private String typeStatus;
-
 
 }

@@ -1,10 +1,6 @@
 package com.arilab.expman.domain.database;
 
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -18,18 +14,17 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 public class CollectionEvent implements Serializable {
 
-    @Id
-    @Column(name = "collection_event_id")
-    private Integer collectionEventId;
 
+    @Id
     @NotNull
     @NonNull
     @NotEmpty
-    @Column(name = "collection_event_code", unique = true)
+    @Column(name = "collection_event_code", unique = true, nullable = false)
     private String collectionEventCode;
 
     @NonNull
-    @ManyToOne(optional = false)
+    @NotNull
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "locality_code", referencedColumnName = "locality_code")
     private Locality locality;
 
@@ -65,14 +60,5 @@ public class CollectionEvent implements Serializable {
 
     @Column(name = "jira_user")
     private String jiraUser;
-
-
-
-
-
-
-
-
-
 
 }

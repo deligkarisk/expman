@@ -17,9 +17,6 @@ import java.io.Serializable;
 public class BiogeographicRegion implements Serializable {
 
     @Id
-    @Column(name = "region_id")
-    private Integer regionId;
-
     @Column(name = "region", unique = true)
     private String region;
 

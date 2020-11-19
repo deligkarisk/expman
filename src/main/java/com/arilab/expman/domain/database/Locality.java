@@ -20,17 +20,14 @@ import java.math.BigDecimal;
 public class Locality implements Serializable {
 
     @Id
-    @Column(name = "locality_id")
-    private Integer localityId;
-
-    @Column(name = "locality_code")
     @NotEmpty
-    @NotNull
     @NonNull
+    @Column(name = "locality_code")
     private String localityCode;
 
     @NonNull
-    @ManyToOne(optional = false)
+    @NotNull
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "country", referencedColumnName = "country_name")
     private Country country;
 
@@ -64,7 +61,7 @@ public class Locality implements Serializable {
     @Column(name = "elevation_error")
     private BigDecimal elevationError;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "biogeographic_region", referencedColumnName = "region")
     private BiogeographicRegion biogeographicRegion;
 

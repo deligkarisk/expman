@@ -20,24 +20,17 @@ import java.io.Serializable;
 @Table(name = "country",schema = "admin")
 public class Country implements Serializable {
 
-    @Id
-    @Column(name = "country_id")
-    private Integer countryId;
-
-
-    @NotNull
     @NonNull
     @NotEmpty
     @Column(name = "country_code",unique = true)
     private String countryCode;
 
-    @NotNull
+    @Id
     @NonNull
     @NotEmpty
     @Column(name = "country_name", unique = true)
     private String countryName;
 
-    @NotNull
     @NonNull
     @NotEmpty
     @Column(name = "iso3_code")

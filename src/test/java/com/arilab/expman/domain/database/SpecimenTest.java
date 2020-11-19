@@ -1,3 +1,4 @@
+
 package com.arilab.expman.domain.database;
 
 import com.arilab.expman.domain.database.Specimen;
@@ -24,7 +25,7 @@ public class SpecimenTest {
 
     @Test
     public void requiredArgConstructorTest() {
-        specimen = new Specimen("TestSpecimenCode",typeStatus);
+        specimen = new Specimen(); //("TestSpecimenCode",typeStatus);
         assert specimen.getAntwebManage() == null;
         assert specimen.getBasisOfRecord() == null;
         assert specimen.getSpecimenCode().equals("TestSpecimenCode");
@@ -51,3 +52,4 @@ public class SpecimenTest {
     }
 
 }
+

@@ -1,35 +1,39 @@
 package com.arilab.expman.domain.database;
 
-
 import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
 import com.arilab.expman.domain.database.supplementary.TypeStatus;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @NamedEntityGraph(name = "Specimen.FetchAll",
-        attributeNodes = { @NamedAttributeNode("typeStatus"),
-        @NamedAttributeNode("collectionEvent"),
-        @NamedAttributeNode("basisOfRecord")})
+                  attributeNodes = {@NamedAttributeNode("typeStatus"),
+                                    @NamedAttributeNode(value = "collectionEvent",
+                                                        subgraph = "subgraph.collectionEvent"),
+                                    @NamedAttributeNode("basisOfRecord")},
+                  subgraphs = {@NamedSubgraph(name = "subgraph.collectionEvent",
+                                              attributeNodes = {@NamedAttributeNode(value = "locality",
+                                                                                    subgraph = "subgraph.locality")}),
+                               @NamedSubgraph(name = "subgraph.locality",
+                                              attributeNodes = {@NamedAttributeNode(value = "country"),
+                                                                @NamedAttributeNode(value = "biogeographicRegion")})})
 @Table(name = "specimen")
-public class Specimen implements Serializable {
+public class Specimen {
 
     @Id
-    @Column(unique = true, nullable = false, name = "specimen_id")
-    @ToString.Include
-    private Integer specimenId;
-
     @NonNull
     @NotNull
     @NotEmpty(message = "Please enter a specimen code.")
-    @Column(name = "specimen_code", unique = true)
+    @Column(name = "specimen_code", unique = true, nullable = false)
     private String specimenCode;
 
     @Column(name = "sample_code")
@@ -94,4 +98,5 @@ public class Specimen implements Serializable {
 
     @Column(name = "antweb_manage")
     private Short antwebManage;
+
 }

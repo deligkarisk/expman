@@ -1,13 +1,17 @@
 package com.arilab.expman.domain.database;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "ctscans")
 public class CtScan {
 
@@ -23,8 +27,8 @@ public class CtScan {
     @Column(name = "ct_scan_note")
     private String ctScanNote;
 
-    @NotNull
     @NotEmpty
+    @NonNull
     @Column(name = "ethanol_conc")
     private String ethanolConcentration;
 
@@ -40,15 +44,16 @@ public class CtScan {
     @Column(name = "folder_location")
     private String folderLocation;
 
-    @NotNull
+
     @NotEmpty
+    @NonNull
     @Column(name = "scan_user")
     private String scanUser;
 
     @Column(name = "staining")
     private String staining;
 
-    @NotNull
+    @NonNull
     @NotEmpty
     @Column(name = "antscan")
     private String antscan;
@@ -67,6 +72,5 @@ public class CtScan {
 
     @Column(name = "prep_note")
     private String prepNote;
-
 
 }
