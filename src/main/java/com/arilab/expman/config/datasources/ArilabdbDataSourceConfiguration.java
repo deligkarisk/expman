@@ -60,7 +60,7 @@ import java.util.Properties;
             jpaProperties.put("hibernate.show-sql", "false"); // we use the logging framework instead.
             jpaProperties.put("hibernate.format_sql", "false");
             jpaProperties.put("hibernate.generate_statistics","true");
-            //jpaProperties.put("javax.persistence.validation.group.pre-persist", "");
+            jpaProperties.put("javax.persistence.validation.group.pre-persist", "javax.validation.groups.Default");
             jpaProperties.put("javax.persistence.validation.factory", validator);
             factory.setJpaProperties(jpaProperties);
             return factory;

@@ -26,6 +26,11 @@ import javax.validation.constraints.NotNull;
                                @NamedSubgraph(name = "subgraph.locality",
                                               attributeNodes = {@NamedAttributeNode(value = "country"),
                                                                 @NamedAttributeNode(value = "biogeographicRegion")})})
+@NamedEntityGraph(name = "Specimen.FetchBasic",
+                  attributeNodes = {@NamedAttributeNode(value = "collectionEvent",
+                                                        subgraph = "subgraph.collectionEvent")},
+                  subgraphs = {@NamedSubgraph(name = "subgraph.collectionEvent",
+                                              attributeNodes = {@NamedAttributeNode(value = "locality")})})
 @Table(name = "specimen")
 public class Specimen {
 
@@ -39,7 +44,7 @@ public class Specimen {
     @Column(name = "sample_code")
     private String sampleCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(name = "collection_event_code", referencedColumnName = "collection_event_code")
     private CollectionEvent collectionEvent;
 

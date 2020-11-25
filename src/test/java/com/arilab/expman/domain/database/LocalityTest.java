@@ -26,7 +26,7 @@ public class LocalityTest {
 
     @Test
     public void requiredArgsConstructorTest() {
-        locality = new Locality("LocalityCode", country);
+        locality = new Locality(); // ("LocalityCode", country);
         assert (locality.getLocalityCode().equals("LocalityCode"));
         assert (locality.getAccuracy() == null);
     }
@@ -75,4 +75,6 @@ public class LocalityTest {
         assert (locality.getLatlongError().equals((float) 0.011));
 
     }
+
+
 }

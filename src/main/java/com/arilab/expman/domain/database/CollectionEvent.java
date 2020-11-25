@@ -24,7 +24,7 @@ public class CollectionEvent implements Serializable {
 
     @NonNull
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "locality_code", referencedColumnName = "locality_code")
     private Locality locality;
 

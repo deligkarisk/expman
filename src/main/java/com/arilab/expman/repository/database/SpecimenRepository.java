@@ -13,9 +13,10 @@ import java.util.Optional;
 @Repository
 public interface SpecimenRepository extends JpaRepository<Specimen,Integer> {
 
-
+    @EntityGraph(value = "Specimen.FetchBasic", type= EntityGraph.EntityGraphType.FETCH)
     Optional<Specimen> findBySpecimenCode(String specimenCode);
 
+    @EntityGraph(value = "Specimen.FetchBasic", type= EntityGraph.EntityGraphType.FETCH)
     List<Specimen> findAll();
 
 
