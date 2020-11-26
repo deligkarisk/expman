@@ -7,7 +7,21 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+
+@NamedEntityGraph(name = "CtScan.Basic", attributeNodes = {
+        @NamedAttributeNode(value = "specimen", subgraph = "subgraph.specimen")},
+                  subgraphs = {
+                          @NamedSubgraph(name = "subgraph.specimen", attributeNodes = {
+                                  @NamedAttributeNode(value = "collectionEvent",
+                                                      subgraph = "subgraph.collectionEvent")
+                          }),
+                          @NamedSubgraph(name = "subgraph.collectionEvent", attributeNodes = {
+                                  @NamedAttributeNode(value = "locality")
+                          })
+                  }
+)
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,10 +30,13 @@ import javax.validation.constraints.NotEmpty;
 public class CtScan {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ct_scan_id", unique = true)
     private Long scanId;
 
 
+    @NonNull
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "specimen_code", referencedColumnName = "specimen_code")
     private Specimen specimen;
