@@ -44,7 +44,7 @@ public class Specimen {
     @Column(name = "sample_code")
     private String sampleCode;
 
-    @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "collection_event_code", referencedColumnName = "collection_event_code")
     private CollectionEvent collectionEvent;
 
@@ -65,8 +65,8 @@ public class Specimen {
     @Column(name = "medium")
     private String medium;
 
-    @NonNull
     @NotNull
+    @NonNull
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "type_status", referencedColumnName = "type_status")
     private TypeStatus typeStatus;

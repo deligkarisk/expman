@@ -7,6 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+
+@NamedEntityGraph(name = "CollectionEvent.Basic", attributeNodes = {
+        @NamedAttributeNode("locality")})
 @Entity
 @Data
 @Table(name = "collection_event")

@@ -26,6 +26,7 @@ public class Locality implements Serializable {
     private String localityCode;
 
     @NotNull
+    @NonNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country", referencedColumnName = "country_name", nullable = false)
     private Country country;
