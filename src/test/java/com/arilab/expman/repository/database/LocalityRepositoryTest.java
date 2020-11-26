@@ -33,6 +33,7 @@ public class LocalityRepositoryTest {
     }
 
     // Failed conditions
+    @Transactional("arilabdbTransactionManager")
     @Test(expected = javax.validation.ConstraintViolationException.class)
     public void noCountryInLocality() {
         Locality locality = new Locality();

@@ -46,6 +46,7 @@ public class CtScanRepositoryTest {
 
     // Failed conditions
 
+    @Transactional("arilabdbTransactionManager")
     @Test(expected = ConstraintViolationException.class)
     public void noEthanolConcInCTScans() {
         Specimen specimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get();
@@ -62,6 +63,7 @@ public class CtScanRepositoryTest {
         }
     }
 
+    @Transactional("arilabdbTransactionManager")
     @Test(expected = ConstraintViolationException.class)
     public void noScanUserInCTScans() {
         Specimen specimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get();
@@ -78,7 +80,7 @@ public class CtScanRepositoryTest {
         }
     }
 
-   // @Transactional("arilabdbTransactionManager")
+    @Transactional("arilabdbTransactionManager")
     @Test(expected = ConstraintViolationException.class)
     public void noAntScanInCTScans() {
         Specimen specimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get();

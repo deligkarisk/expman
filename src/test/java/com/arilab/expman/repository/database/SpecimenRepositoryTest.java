@@ -63,6 +63,7 @@ public class SpecimenRepositoryTest {
     }
 
     // Failed conditions
+    @Transactional("arilabdbTransactionManager")
     @Test(expected = javax.validation.ConstraintViolationException.class)
     public void noTypeStatusInSpecimen() {
         Specimen specimen = new Specimen();
