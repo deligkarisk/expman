@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -23,6 +24,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class SpecimenRepositoryTest {
+
+    private String REFERENCE_SPECIMEN_CODE = "CASENT0494848"; // This specific
+    // specimen has non-null country and biogeographic region so they can be replaced by a proxy. If any were to
+    // be null (in the database) they would get null value and thus the isLoaded method would return True.
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -43,9 +48,7 @@ public class SpecimenRepositoryTest {
     public void entityGraphIsApplied() {
         PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
 
-        Optional<Specimen> optSpecimen = specimenRepository.findBySpecimenCode("CASENT0494848"); // This specific
-        // specimen has non-null country and biogeographic region so they can be replaced by a proxy. If any were to
-        // be null (in the database) they would get null value and thus the isLoaded method would return True.
+        Optional<Specimen> optSpecimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE);
         Specimen specimen = optSpecimen.get();
         assertTrue(persistenceUtil.isLoaded(specimen, "locality"));
         assertTrue(persistenceUtil.isLoaded(specimen, "collectionEvent"));
@@ -60,13 +63,17 @@ public class SpecimenRepositoryTest {
     }
 
     // Failed conditions
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = javax.validation.ConstraintViolationException.class)
     public void noTypeStatusInSpecimen() {
         Specimen specimen = new Specimen();
         specimen.setSpecimenCode("TestSpecimenCode");
-        specimenRepository.save(specimen);
-
-
+        try {
+            specimenRepository.saveAndFlush(specimen);
+        } catch (ConstraintViolationException cve) {
+            assertEquals(cve.getConstraintViolations().size(), 1); // Ensures that there is only one constraint
+            // violation.
+            throw cve;
+        }
 
     }
 

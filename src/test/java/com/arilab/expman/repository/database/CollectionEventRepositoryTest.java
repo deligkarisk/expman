@@ -8,8 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionSystemException;
 
 import javax.validation.ConstraintViolationException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -27,14 +30,18 @@ public class CollectionEventRepositoryTest {
     }
 
 
-
-
     // Failed conditions
-
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = javax.validation.ConstraintViolationException.class)
     public void noLocalityInCollectionEvent() {
         CollectionEvent collectionEvent = new CollectionEvent();
         collectionEvent.setCollectionEventCode("TestCode");
-        collectionEventRepository.save(collectionEvent);
+        try {
+            collectionEventRepository.saveAndFlush(collectionEvent);
+        } catch (ConstraintViolationException cve) {
+            assertEquals(cve.getConstraintViolations().size(), 1); // Ensures that there is only one constraint
+            // violation.
+            throw cve;
+        }
+
     }
 }
