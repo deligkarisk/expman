@@ -28,6 +28,8 @@ public class CtScanRepositoryTest {
 
     private final String REFERENCE_SPECIMEN_CODE = "CASENT0741232";
 
+
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -41,6 +43,15 @@ public class CtScanRepositoryTest {
     public void ctScanRepositoryWorks() {
         Integer numberOfScans = ctScanRepository.findAll().size();
         logger.info(String.format("Found %d CT scans", numberOfScans));
+    }
+
+    @Transactional("arilabdbTransactionManager")
+    @Test
+    public void newCtScanCanBeAdded() {
+        CtScan ctScan = new CtScan(specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get(),"70%",
+                                   "TestNewUser","No");
+        ctScan.setCtScanNote("JUnitTest");
+        ctScanRepository.saveAndFlush(ctScan);
     }
 
 

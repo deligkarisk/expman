@@ -1,24 +1,31 @@
 package com.arilab.expman.domain.database;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Species {
 
-    @Id
-    @Column(name = "species_id")
-    private Integer speciesId;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "taxon_code")
     private String taxonCode;
 
-    @Column(name = "genus_name")
-    private String genusName;
+    @NonNull
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "genus_name", referencedColumnName = "genus_name")
+    private Genus genus;
 
     @Column(name = "species_name")
     private String speciesName;

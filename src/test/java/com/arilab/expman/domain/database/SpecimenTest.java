@@ -40,7 +40,7 @@ public class SpecimenTest {
         specimen.setOwnedBy("TestOwnedBy");
         specimen.setLifestageSex("Worker");
         specimen.setMedium("destroyed");
-        specimen.setTaxonCode("pheidole.oceanica");
+      //  specimen.setTaxonCode("pheidole.oceanica");
         specimen.setDeterminedBy("F.Hita Garcia");
         specimen.setDateIdentified("2011-03-12");
 

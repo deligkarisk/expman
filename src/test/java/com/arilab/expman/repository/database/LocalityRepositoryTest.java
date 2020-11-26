@@ -2,6 +2,7 @@ package com.arilab.expman.repository.database;
 
 
 import com.arilab.expman.domain.database.Locality;
+import com.arilab.expman.repository.database.supplementary.CountryRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -9,10 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,15 +20,28 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 public class LocalityRepositoryTest {
 
+    private String REFERENCE_COUNTRY = "Argentina";
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     LocalityRepository localityRepository;
 
+    @Autowired
+    CountryRepository countryRepository;
+
     @Test
     public void localityRepositoryWorks() {
         Integer localities = localityRepository.findAll().size();
         logger.info(String.format("Found %d localities", localities));
+    }
+
+    @Test
+    @Transactional("arilabdbTransactionManager")
+    public void newLocalityCanBeAdded() {
+        Locality locality = new Locality("TestLocalityCode",
+                                         countryRepository.findAllByCountryName(REFERENCE_COUNTRY).get());
+        localityRepository.saveAndFlush(locality);
     }
 
     // Failed conditions

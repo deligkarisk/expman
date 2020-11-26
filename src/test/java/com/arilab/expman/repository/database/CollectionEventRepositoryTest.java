@@ -1,6 +1,7 @@
 package com.arilab.expman.repository.database;
 
 import com.arilab.expman.domain.database.CollectionEvent;
+import com.arilab.expman.domain.database.Locality;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -19,15 +20,28 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 public class CollectionEventRepositoryTest {
 
+    private final String REFERENCE_LOCALITY = "Kitti 105";
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     CollectionEventRepository collectionEventRepository;
 
+    @Autowired
+    LocalityRepository localityRepository;
+
     @Test
     public void collectionEventRepositoryWorks() {
         Integer collectionEvents = collectionEventRepository.findAll().size();
         logger.info(String.format("Found %d collection events", collectionEvents));
+    }
+
+    @Transactional("arilabdbTransactionManager")
+    @Test
+    public void collectionEventCanBeAdded() {
+        Locality locality = localityRepository.findByLocalityCode(REFERENCE_LOCALITY).get();
+        CollectionEvent collectionEvent = new CollectionEvent("TestCollCode", locality);
+        collectionEventRepository.saveAndFlush(collectionEvent);
     }
 
 

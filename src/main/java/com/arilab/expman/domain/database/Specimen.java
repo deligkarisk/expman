@@ -71,8 +71,9 @@ public class Specimen {
     @JoinColumn(name = "type_status", referencedColumnName = "type_status")
     private TypeStatus typeStatus;
 
-    @Column(name = "taxon_code")
-    private String taxonCode;
+    @ManyToOne
+    @JoinColumn(name = "taxon_code", referencedColumnName = "taxon_code")
+    private Species species;
 
     @Column(name = "determined_by")
     private String determinedBy;

@@ -2,24 +2,33 @@ package com.arilab.expman.domain.database;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Data
-public class Genus {
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class Genus implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "genus_id")
     private Integer genusId;
 
+    @NonNull
+    @NotNull
     @Column(name = "genus_name")
     private String genusName;
 
-    @Column(name = "subfamily")
-    private String subfamily;
+    @ManyToOne
+    @JoinColumn(name = "subfamily", referencedColumnName = "subfamily")
+    private Subfamily subfamily;
 
     @Column(name = "tribe")
     private String tribe;
