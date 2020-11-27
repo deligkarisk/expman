@@ -2,33 +2,27 @@ package com.arilab.expman.repository.database;
 
 
 import com.arilab.expman.domain.database.CtScan;
-import com.arilab.expman.domain.database.Locality;
 import com.arilab.expman.domain.database.Specimen;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class CtScanRepositoryTest {
 
-    private final String REFERENCE_SPECIMEN_CODE = "CASENT0741232";
-
-
+    @Value("${REFERENCE_SPECIMEN_CODE}")
+    private String REFERENCE_SPECIMEN_CODE;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 

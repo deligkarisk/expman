@@ -1,25 +1,24 @@
-package com.arilab.expman.repository.database.repositories;
+package com.arilab.expman.repository.database;
 
 import com.arilab.expman.domain.database.Species;
-import com.arilab.expman.repository.database.GenusRepository;
-import com.arilab.expman.repository.database.SpeciesRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class SpeciesRepositoryTest {
 
-    private final String REFERENCE_GENUS = "Adetomyrma";
+    @Value("${REFERENCE_GENUS}")
+    private String REFERENCE_GENUS;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 

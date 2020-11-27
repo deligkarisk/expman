@@ -8,19 +8,21 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class LocalityRepositoryTest {
 
-    private String REFERENCE_COUNTRY = "Argentina";
+    @Value("${REFERENCE_COUNTRY_NAME}")
+    private String REFERENCE_COUNTRY_NAME;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -40,7 +42,7 @@ public class LocalityRepositoryTest {
     @Transactional("arilabdbTransactionManager")
     public void newLocalityCanBeAdded() {
         Locality locality = new Locality("TestLocalityCode",
-                                         countryRepository.findAllByCountryName(REFERENCE_COUNTRY).get());
+                                         countryRepository.findByCountryName(REFERENCE_COUNTRY_NAME).get());
         localityRepository.saveAndFlush(locality);
     }
 

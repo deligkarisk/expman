@@ -1,6 +1,5 @@
-package com.arilab.expman.repository.database.repositories;
+package com.arilab.expman.repository.database;
 
-import com.arilab.expman.repository.database.SubfamilyRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 public class GenusRepositoryTest {
 
-    private final String REFERENCE_SUBFAMILY = "Formicinae";
+    @Value("${REFERENCE_SUBFAMILY}")
+    private String REFERENCE_SUBFAMILY;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
