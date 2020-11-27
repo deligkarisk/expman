@@ -1,6 +1,8 @@
-package com.arilab.expman.repository.database;
+package com.arilab.expman.repository.database.repositories;
 
 import com.arilab.expman.domain.database.Species;
+import com.arilab.expman.repository.database.GenusRepository;
+import com.arilab.expman.repository.database.SpeciesRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
