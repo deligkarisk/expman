@@ -1,5 +1,7 @@
 package com.arilab.expman.domain.database;
 
+import com.arilab.expman.domain.database.validator.OnInsert;
+import com.arilab.expman.domain.database.validator.SpeciesNames;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -13,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@SpeciesNames(groups = OnInsert.class)
 public class Species {
 
 
