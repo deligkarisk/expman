@@ -123,7 +123,7 @@ public class IntegrationTest {
         specimen.setCollectionEvent(collectionEvent);
         specimen.setSpecies(species);
         specimenRepository.save(specimen);
-        CtScan ctScan = new CtScan(specimen, "70%", "TestUser","No");
+        CtScan ctScan = new CtScan(specimen, "70%","Yes", "TestUser","No");
         ctScanRepository.save(ctScan);
 
 

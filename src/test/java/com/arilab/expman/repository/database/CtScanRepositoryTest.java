@@ -44,7 +44,7 @@ public class CtScanRepositoryTest {
     @Transactional("arilabdbTransactionManager")
     @Test
     public void newCtScanCanBeAdded() {
-        CtScan ctScan = new CtScan(specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get(),"70%",
+        CtScan ctScan = new CtScan(specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get(),"70%", "Yes",
                                    "TestNewUser","No");
         ctScan.setCtScanNote("JUnitTest");
         ctScanRepository.saveAndFlush(ctScan);
@@ -59,13 +59,13 @@ public class CtScanRepositoryTest {
         Specimen specimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get();
         CtScan ctScan = new CtScan();
         ctScan.setSpecimen(specimen);
-        ctScan.setAntscan("Yes");
         ctScan.setScanUser("TestUser");
+        ctScan.setAntscan("No");
+        ctScan.setWet("Yes");
         try {
             ctScanRepository.save(ctScan);
         } catch (ConstraintViolationException cve) {
-            assertTrue(cve.getConstraintViolations().size() == 1); // Ensures that there is only one constraint
-            // violation.
+            assertTrue(cve.getConstraintViolations().size() == 1);
             throw cve;
         }
     }
@@ -76,13 +76,13 @@ public class CtScanRepositoryTest {
         Specimen specimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE).get();
         CtScan ctScan = new CtScan();
         ctScan.setSpecimen(specimen);
-        ctScan.setAntscan("Yes");
+        ctScan.setAntscan("No");
         ctScan.setEthanolConcentration("70%");
+        ctScan.setWet("Yes");
         try {
             ctScanRepository.saveAndFlush(ctScan);
         } catch (ConstraintViolationException cve) {
-            assertTrue(cve.getConstraintViolations().size() == 1); // Ensures that there is only one constraint
-            // violation.
+            assertTrue(cve.getConstraintViolations().size() == 1);
             throw cve;
         }
     }
@@ -95,11 +95,11 @@ public class CtScanRepositoryTest {
         ctScan.setSpecimen(specimen);
         ctScan.setEthanolConcentration("70%");
         ctScan.setScanUser("TestUser");
+        ctScan.setWet("Yes");
         try {
             ctScanRepository.saveAndFlush(ctScan);
         } catch (ConstraintViolationException cve) {
-            assertTrue(cve.getConstraintViolations().size() == 1); // Ensures that there is only one constraint
-            // violation.
+            assertTrue(cve.getConstraintViolations().size() == 2);
             throw cve;
         }
     }

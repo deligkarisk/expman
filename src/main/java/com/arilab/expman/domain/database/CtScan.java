@@ -1,5 +1,9 @@
 package com.arilab.expman.domain.database;
 
+import com.arilab.expman.domain.database.validator.CtScanAntScanCoding;
+import com.arilab.expman.domain.database.validator.CtScanDryMethodValues;
+import com.arilab.expman.domain.database.validator.CtScanDryWetFields;
+import com.arilab.expman.domain.database.validator.OnInsert;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -27,6 +31,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "ctscans")
+@CtScanAntScanCoding(groups = OnInsert.class)
+@CtScanDryWetFields(groups = OnInsert.class)
+@CtScanDryMethodValues(groups = OnInsert.class)
 public class CtScan {
 
     @Id
@@ -49,6 +56,8 @@ public class CtScan {
     @Column(name = "ethanol_conc")
     private String ethanolConcentration;
 
+    @NotEmpty
+    @NonNull
     @Column(name = "wet")
     private String wet;
 
