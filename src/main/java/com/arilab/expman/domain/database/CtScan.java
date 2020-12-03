@@ -1,5 +1,7 @@
 package com.arilab.expman.domain.database;
 
+import com.arilab.expman.domain.database.enums.BodyPart;
+import com.arilab.expman.domain.database.enums.Model;
 import com.arilab.expman.domain.database.validator.CtScanAntScanCoding;
 import com.arilab.expman.domain.database.validator.CtScanDryMethodValues;
 import com.arilab.expman.domain.database.validator.CtScanDryWetFields;
@@ -42,6 +44,7 @@ public class CtScan {
     private Long scanId;
 
 
+
     @NonNull
     @NotNull
     @ManyToOne
@@ -61,8 +64,9 @@ public class CtScan {
     @Column(name = "wet")
     private String wet;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "body_part")
-    private String bodyPart;
+    private BodyPart bodyPart;
 
     @Column(name = "special_identifier")
     private String specialIdentifier;
@@ -87,8 +91,9 @@ public class CtScan {
     @Column(name = "antscan_code")
     private String antscanCode;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "model")
-    private String model;
+    private Model model;
 
     @Column(name = "dry_method")
     private String dryMethod;

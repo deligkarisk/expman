@@ -1,5 +1,6 @@
 package com.arilab.expman.domain.database;
 
+import com.arilab.expman.domain.database.enums.Model;
 import com.arilab.expman.domain.database.validator.OnInsert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -158,6 +159,14 @@ public class CtScanTest {
         Set<ConstraintViolation<CtScan>> violations = validator.validate(ctScan, OnInsert.class);
         assertEquals(1, violations.size());
         assertEquals("{validation.ctscan.drymethodvalues}", violations.iterator().next().getMessageTemplate());
+    }
+
+    @Test
+    public void correctModelEnum() {
+        CtScan ctScan = new CtScan(specimen, "99%", "Yes", "TestUser", "No");
+        ctScan.setModel(Model.Ants);
+        Set<ConstraintViolation<CtScan>> violations = validator.validate(ctScan, OnInsert.class);
+        assertEquals(0, violations.size());
     }
 
 }
