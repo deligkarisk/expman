@@ -1,5 +1,5 @@
 package com.arilab.expman.domain.database.enums;
 
 public enum BodyPart {
-    Head, WholeBody, Legs, Thorax, Abdomen
+    Head, Whole_body, Legs, Thorax, Abdomen
 }

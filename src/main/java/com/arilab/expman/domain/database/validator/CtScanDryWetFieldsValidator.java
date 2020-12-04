@@ -26,11 +26,11 @@ public class CtScanDryWetFieldsValidator implements ConstraintValidator<CtScanDr
             return false;
         }
 
-        if (ctscan.getWet().equals("Yes") && StringUtils.isNotEmpty(ctscan.getDryMethod())) {
+        if (ctscan.getWet().equals("Yes") && ctscan.getDryMethod() != null ) {
             return false;
         }
 
-        if (ctscan.getWet().equals("No") && StringUtils.isEmpty(ctscan.getDryMethod())) {
+        if (ctscan.getWet().equals("No") && ctscan.getDryMethod() == null) {
             return false;
         }
 

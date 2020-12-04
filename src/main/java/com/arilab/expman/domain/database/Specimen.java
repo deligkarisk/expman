@@ -71,7 +71,7 @@ public class Specimen {
     @JoinColumn(name = "type_status", referencedColumnName = "type_status")
     private TypeStatus typeStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "taxon_code", referencedColumnName = "taxon_code")
     private Species species;
 

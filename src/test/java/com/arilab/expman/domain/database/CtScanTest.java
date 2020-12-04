@@ -1,5 +1,6 @@
 package com.arilab.expman.domain.database;
 
+import com.arilab.expman.domain.database.enums.DryMethod;
 import com.arilab.expman.domain.database.enums.Model;
 import com.arilab.expman.domain.database.validator.OnInsert;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class CtScanTest {
     public void validFieldsDryOnAntscan() {
         CtScan ctScan = new CtScan(specimen, "99%", "No", "TestUser", "Yes");
         ctScan.setAntscanCode("SomeCode");
-        ctScan.setDryMethod("Pin");
+        ctScan.setDryMethod(DryMethod.Pin);
         Set<ConstraintViolation<CtScan>> violations = validator.validate(ctScan, OnInsert.class);
         assertEquals(0, violations.size());
     }
@@ -57,7 +58,7 @@ public class CtScanTest {
     @Test
     public void validFieldsDryNotOnAntscan() {
         CtScan ctScan = new CtScan(specimen, "99%", "No", "TestUser", "No");
-        ctScan.setDryMethod("Pin");
+        ctScan.setDryMethod(DryMethod.Pin);
         Set<ConstraintViolation<CtScan>> violations = validator.validate(ctScan, OnInsert.class);
         assertEquals(0, violations.size());
     }
@@ -134,7 +135,7 @@ public class CtScanTest {
         Set<ConstraintViolation<CtScan>> violations = validator.validate(ctScan, OnInsert.class);
         assertEquals(0, violations.size()); // Dry method not set yet, so this should be valid
 
-        ctScan.setDryMethod("Pin");
+        ctScan.setDryMethod(DryMethod.Pin);
         Set<ConstraintViolation<CtScan>> violationsPost = validator.validate(ctScan, OnInsert.class);
         assertEquals(1, violationsPost.size());
         assertEquals("{validation.ctscan.drywet}", violationsPost.iterator().next().getMessageTemplate());
@@ -148,18 +149,10 @@ public class CtScanTest {
         assertEquals(1, violations.size());
         assertEquals("{validation.ctscan.drywet}", violations.iterator().next().getMessageTemplate());
 
-        ctScan.setDryMethod("Pin");
+        ctScan.setDryMethod(DryMethod.Pin);
         assertEquals(0, validator.validate(ctScan, OnInsert.class).size());
     }
 
-    @Test
-    public void wrongDryMethod() {
-        CtScan ctScan = new CtScan(specimen, "99%", "No", "TestUser", "No");
-        ctScan.setDryMethod("ErroneousDryMethod");
-        Set<ConstraintViolation<CtScan>> violations = validator.validate(ctScan, OnInsert.class);
-        assertEquals(1, violations.size());
-        assertEquals("{validation.ctscan.drymethodvalues}", violations.iterator().next().getMessageTemplate());
-    }
 
     @Test
     public void correctModelEnum() {
@@ -168,5 +161,7 @@ public class CtScanTest {
         Set<ConstraintViolation<CtScan>> violations = validator.validate(ctScan, OnInsert.class);
         assertEquals(0, violations.size());
     }
+
+
 
 }

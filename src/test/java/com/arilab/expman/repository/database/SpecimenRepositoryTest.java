@@ -50,6 +50,7 @@ public class SpecimenRepositoryTest {
     }
 
     @Test
+    @Transactional("arilabdbTransactionManager")
     public void specimenEntityGraphIsApplied() {
         PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
 
@@ -64,6 +65,17 @@ public class SpecimenRepositoryTest {
         // work. As the country name is the @Id field, and used as a foreign key, the object is not initialized. In
         // fact, if an initialization is needed, this will fail as this test is outside of a transaction, hence only
         // the findBySpecimenCode method will run in a transaction.
+
+        // Country should remain unloaded
+        assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+
+        // Accessing a non-Id field should initialize the object
+        String countryCode = specimen.getCollectionEvent().getLocality().getCountry().getCountryCode();
+        assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+
+
+
+
     }
 
 

@@ -1,9 +1,9 @@
 package com.arilab.expman.domain.database;
 
 import com.arilab.expman.domain.database.enums.BodyPart;
+import com.arilab.expman.domain.database.enums.DryMethod;
 import com.arilab.expman.domain.database.enums.Model;
 import com.arilab.expman.domain.database.validator.CtScanAntScanCoding;
-import com.arilab.expman.domain.database.validator.CtScanDryMethodValues;
 import com.arilab.expman.domain.database.validator.CtScanDryWetFields;
 import com.arilab.expman.domain.database.validator.OnInsert;
 import lombok.Data;
@@ -35,7 +35,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "ctscans")
 @CtScanAntScanCoding(groups = OnInsert.class)
 @CtScanDryWetFields(groups = OnInsert.class)
-@CtScanDryMethodValues(groups = OnInsert.class)
 public class CtScan {
 
     @Id
@@ -95,8 +94,9 @@ public class CtScan {
     @Column(name = "model")
     private Model model;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "dry_method")
-    private String dryMethod;
+    private DryMethod dryMethod;
 
     @Column(name = "scan_reason")
     private String scanReason;
