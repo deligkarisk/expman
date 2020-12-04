@@ -39,8 +39,9 @@ public class Species {
     @Column(name = "morpho_code")
     private String morphoCode;
 
-    @Column(name = "senior_synonym")
-    private String seniorSynonym;
+    @ManyToOne
+    @JoinColumn(name = "senior_synonym")
+    private Species seniorSynonym;
 
     @Column(name = "unacceptibility_reason")
     private String unacceptabilityReason;

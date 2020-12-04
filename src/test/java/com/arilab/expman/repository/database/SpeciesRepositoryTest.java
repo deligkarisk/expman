@@ -1,5 +1,6 @@
 package com.arilab.expman.repository.database;
 
+import com.arilab.expman.domain.database.CtScan;
 import com.arilab.expman.domain.database.Species;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +13,19 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations = {"classpath:test-references.properties"})
 public class SpeciesRepositoryTest {
+
+    @Value("${REFERENCE_SPECIES_TAXON_CODE}")
+    private String REFERENCE_SPECIES_TAXON_CODE;
 
     @Value("${REFERENCE_GENUS}")
     private String REFERENCE_GENUS;
@@ -43,6 +51,15 @@ public class SpeciesRepositoryTest {
         species.setSpeciesName("TestSpecies");
         Species savedSpecies = speciesRepository.saveAndFlush(species);
         assertEquals(savedSpecies.getTaxonCode(), "Adetomyrma.TestSpecies");
+    }
 
+
+    @Test
+    public void seniorSynonymSelfReferencingCanBeLoaded() {
+       Optional<Species> speciesOptional = speciesRepository.findByTaxonCode(REFERENCE_SPECIES_TAXON_CODE);
+       if (speciesOptional.isEmpty()) { fail("Could not run test. Taxon code not found"); }
+       Species species = speciesOptional.get();
+       assertNotNull(species.getSeniorSynonym());
+       assertEquals(species.getClass(), species.getSeniorSynonym().getClass());
     }
 }
