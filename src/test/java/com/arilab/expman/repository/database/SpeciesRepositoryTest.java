@@ -60,6 +60,5 @@ public class SpeciesRepositoryTest {
        if (speciesOptional.isEmpty()) { fail("Could not run test. Taxon code not found"); }
        Species species = speciesOptional.get();
        assertNotNull(species.getSeniorSynonym());
-       assertEquals(species.getClass(), species.getSeniorSynonym().getClass());
     }
 }

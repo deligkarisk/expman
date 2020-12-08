@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main_layout :: head('Expman')}">
+</head>
+
+
+<body>
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div th:replace="layouts/main_layout::jumbotron"></div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <h1 th:text="#{db.explore.page.title}"> Welcome to the experiment manager </h1>
+        </div>
+        <div class="row">
+            <h2 th:text="#{db.explore.page.subtitle}"> This software help you manage the experimental metadata </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div th:if="${not #lists.isEmpty(specimens)}">
+        <h2> Specimens List </h2>
+        <table class="table table-striped">
+            <tr>
+                <th>specimenCode</th>
+                <th>taxonCode</th>
+                <th>collectionEvent</th>
+                <th>collectedBy</th>
+                <th>localityName</th>
+            </tr>
+            <tr th:each="specimen : ${specimens}">
+                <td th:text="${specimen.getSpecimenCode()}"></td>
+                <td th:text="${specimen.getSpecies()} != null ? ${specimen.getSpecies().getTaxonCode()} : 'null'"></td>
+                <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getCollectionEventCode()} : 'null'"></td>
+                <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getCollectedBy()} : 'null'"></td>
+                <td th:text="${specimen.getCollectionEvent()} != null and ${specimen.getCollectionEvent().getLocality()} != null ? ${specimen.getCollectionEvent().getLocality().localityName} : 'null'"></td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

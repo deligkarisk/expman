@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -28,7 +29,8 @@ import javax.validation.constraints.NotNull;
                                                                 @NamedAttributeNode(value = "biogeographicRegion")})})
 @NamedEntityGraph(name = "Specimen.FetchBasic",
                   attributeNodes = {@NamedAttributeNode(value = "collectionEvent",
-                                                        subgraph = "subgraph.collectionEvent")},
+                                                        subgraph = "subgraph.collectionEvent"),
+                                    @NamedAttributeNode(value = "species")},
                   subgraphs = {@NamedSubgraph(name = "subgraph.collectionEvent",
                                               attributeNodes = {@NamedAttributeNode(value = "locality")})})
 @Table(name = "specimen")

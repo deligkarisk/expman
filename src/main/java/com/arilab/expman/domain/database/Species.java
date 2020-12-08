@@ -26,7 +26,7 @@ public class Species {
 
     @NonNull
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genus_name", referencedColumnName = "genus_name")
     private Genus genus;
 
@@ -39,7 +39,7 @@ public class Species {
     @Column(name = "morpho_code")
     private String morphoCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "senior_synonym")
     private Species seniorSynonym;
 

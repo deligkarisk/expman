@@ -16,17 +16,14 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 public class Genus implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "genus_id")
-    private Integer genusId;
 
+    @Id
     @NonNull
     @NotNull
     @Column(name = "genus_name")
     private String genusName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subfamily", referencedColumnName = "subfamily")
     private Subfamily subfamily;
 

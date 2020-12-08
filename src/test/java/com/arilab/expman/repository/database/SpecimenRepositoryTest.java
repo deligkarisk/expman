@@ -68,11 +68,12 @@ public class SpecimenRepositoryTest {
 
         // Country should remain unloaded
         assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
-
         // Accessing a non-Id field should initialize the object
         String countryCode = specimen.getCollectionEvent().getLocality().getCountry().getCountryCode();
         assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
 
+        // Species should be loaded
+        assertTrue(persistenceUtil.isLoaded(specimen, "species"));
     }
 
 
