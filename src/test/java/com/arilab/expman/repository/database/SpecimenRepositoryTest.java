@@ -51,7 +51,7 @@ public class SpecimenRepositoryTest {
 
     @Test
     @Transactional("arilabdbTransactionManager")
-    public void specimenEntityGraphIsApplied() {
+    public void specimenEntityGraphIsAppliedOnFindByCode() {
         PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
 
         Optional<Specimen> optSpecimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE);
@@ -73,8 +73,33 @@ public class SpecimenRepositoryTest {
         String countryCode = specimen.getCollectionEvent().getLocality().getCountry().getCountryCode();
         assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
 
+    }
 
 
+    @Test
+    @Transactional("arilabdbTransactionManager")
+    public void specimenEntityGraphIsAppliedOnFindAll() {
+        PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
+
+        Specimen specimen = specimenRepository.findAll().get(0);
+        assertTrue(persistenceUtil.isLoaded(specimen, "locality"));
+        assertTrue(persistenceUtil.isLoaded(specimen, "collectionEvent"));
+        //assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent(), "collectionEventCode"));
+        //assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"localityCode"));
+       // assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"biogeographicRegion"));
+        assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+        assertFalse(persistenceUtil.isLoaded(specimen,"typeStatus"));
+        assertNotNull(specimen.getCollectionEvent().getLocality().getCountry().getCountryName()); // This should
+        // work. As the country name is the @Id field, and used as a foreign key, the object is not initialized. In
+        // fact, if an initialization is needed, this will fail as this test is outside of a transaction, hence only
+        // the findBySpecimenCode method will run in a transaction.
+
+        // Country should remain unloaded
+        assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+
+        // Accessing a non-Id field should initialize the object
+        String countryCode = specimen.getCollectionEvent().getLocality().getCountry().getCountryCode();
+        assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
 
     }
 
