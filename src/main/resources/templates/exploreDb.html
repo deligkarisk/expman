@@ -43,10 +43,24 @@
     <div> &nbsp; </div>
     <div>
     Total items: [[${totalSpecimens}]] - Page [[${currentPage}]] of [[${totalPages}]]
-        &nbsp;
-        <span th:each="i: ${#numbers.sequence(currentPage,currentPage + 9)}">
-            <a th:href="@{'/db/page/' + ${i}}"> [[${i}]] </a>
+        &nbsp; - &nbsp;
+
+        <a th:if="${currentPage} > 1" th:href="@{'/db/page/1'}"> First </a>
+        <span th:if="${currentPage} == 1"> First </span>
+
+        <a th:if="${currentPage} > 1" th:href="@{'/db/page/' + ${currentPage - 1}}"> Previous </a>
+        <a th:if="${currentPage} == 1"> Previous </a>
+
+        <span th:each="i: ${#numbers.sequence(currentPage - 4,currentPage + 5)}">
+            <a th:if="${i} < ${totalPages} and ${i} > 0" th:href="@{'/db/page/' + ${i}}"> [[${i}]] </a>
         </span>
+
+        <a th:if="${currentPage} < ${totalPages}" th:href="@{'/db/page/' + ${currentPage + 1}}"> Next </a>
+        <a th:if="${currentPage} == ${totalPages}"> Next </a>
+
+        <a th:if="${currentPage} < ${totalPages}" th:href="@{'/db/page/' + ${totalPages}}"> Last </a>
+        <span th:if="${currentPage} == ${totalPages}"> Last </span>
+
     </div>
 </div>
 
