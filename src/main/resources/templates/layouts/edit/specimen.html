@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main_layout :: head('Expman')}">
+</head>
+
+
+<body>
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div th:replace="layouts/main_layout::jumbotron"></div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <h1 th:text="#{db.explore.page.title}"> Welcome to the experiment manager </h1>
+        </div>
+        <div class="row">
+            <h2 th:text="#{db.explore.page.subtitle}"> This software help you manage the experimental metadata </h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <form method="post" th:action="@{'/edit/specimen'}" th:object="${specimen}">
+        <div class="form-group row">
+            <label for="specimenCode" class="col-md-3 col-form-label text-right"> Specimen Code </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{specimenCode}" id="specimenCode" readonly required autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="sampleCode" class="col-md-3 col-form-label text-right"> Sample Code </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{sampleCode}" id="sampleCode" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="collectionEvent" class="col-md-3 col-form-label text-right"> Collection Event TODO </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{collectionEvent}" id="collectionEvent" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="basisOfRecord" class="col-md-3 col-form-label text-right"> Basis of Record </label>
+            <div class="col-md-6">
+                <select class="form-control" th:field="*{basisOfRecord}" id="basisOfRecord" autofocus>
+                    <option value=""> Select Basis of Record</option>
+                    <option th:each="basisOfRecord : ${basisOfRecords}"
+                            th:value="${basisOfRecord.basisOfRecord}"
+                            th:text="${basisOfRecord.basisOfRecord}" }
+                            th:selected="*{basisOfRecord} == ${basisOfRecord.basisOfRecord} ? true : false"></option>
+                </select>
+
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="locatedAt" class="col-md-3 col-form-label text-right"> Located at </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{locatedAt}" id="locatedAt" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ownedBy" class="col-md-3 col-form-label text-right"> Owned by </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{ownedBy}" id="ownedBy" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lifestageSex" class="col-md-3 col-form-label text-right"> Lifestagesex </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{lifestageSex}" id="lifestageSex" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="medium" class="col-md-3 col-form-label text-right"> Medium </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{medium}" id="medium" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="typeStatus" class="col-md-3 col-form-label text-right"> Type Status </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{typeStatus}" id="typeStatus" required autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="species" class="col-md-3 col-form-label text-right"> Species </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{species}" id="species" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="determinedBy" class="col-md-3 col-form-label text-right"> Determined by </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{determinedBy}" id="determinedBy" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="dateIdentified" class="col-md-3 col-form-label text-right"> Date identified </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{dateIdentified}" id="dateIdentified" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="fbaCode" class="col-md-3 col-form-label text-right"> FBA code </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{fbaCode}" id="fbaCode" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="fjCode" class="col-md-3 col-form-label text-right"> FJ code </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{fjCode}" id="fjCode" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="epeCode" class="col-md-3 col-form-label text-right"> EPE code </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{epeCode}" id="epeCode" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="emsCode" class="col-md-3 col-form-label text-right"> EMS code </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{emsCode}" id="emsCode" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="otherCode" class="col-md-3 col-form-label text-right"> Other code </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{otherCode}" id="otherCode" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="flag" class="col-md-3 col-form-label text-right"> Flag </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{flag}" id="flag" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="transectNotes" class="col-md-3 col-form-label text-right"> Transect notes </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{transectNotes}" id="transectNotes" autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="antwebManage" class="col-md-3 col-form-label text-right"> Antweb manage </label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{antwebManage}" id="antwebManage" autofocus>
+            </div>
+        </div>
+        <div class="form-group row" style="padding-top: 1rem">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success"><i
+                        class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+    </form>
+
+
+</div>
+
+</body>
+</html>

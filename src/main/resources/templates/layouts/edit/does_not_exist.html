@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main_layout :: head('Expman')}">
+</head>
+
+
+<body>
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div th:replace="layouts/main_layout::jumbotron"></div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <h1 th:text="#{db.explore.page.title}"> Welcome to the experiment manager </h1>
+        </div>
+        <div class="row">
+            <h2 th:text="#{db.explore.page.subtitle}"> This software help you manage the experimental metadata </h2>
+        </div>
+    </div>
+</div>
+
+<h2> CORRESPONDING ENTITY COULD NOT BE FOUND. </h2>
+
+
+</body>
+</html>

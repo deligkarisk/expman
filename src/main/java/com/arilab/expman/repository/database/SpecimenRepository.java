@@ -15,14 +15,16 @@ import java.util.Optional;
 @Repository
 public interface SpecimenRepository extends JpaRepository<Specimen,String> {
 
-    @EntityGraph(value = "Specimen.FetchBasic", type= EntityGraph.EntityGraphType.FETCH)
+    @EntityGraph(value = "Specimen.GlobalFetchBasic", type= EntityGraph.EntityGraphType.FETCH)
     Optional<Specimen> findBySpecimenCode(String specimenCode);
 
+    Optional<Specimen> findSingleSpecimenBySpecimenCode(String specimenCode);
 
-    @EntityGraph(value = "Specimen.FetchBasic", type= EntityGraph.EntityGraphType.FETCH)
+
+    @EntityGraph(value = "Specimen.GlobalFetchBasic", type= EntityGraph.EntityGraphType.FETCH)
     List<Specimen> findAll();
 
-    @EntityGraph(value = "Specimen.FetchBasic", type= EntityGraph.EntityGraphType.FETCH)
+    @EntityGraph(value = "Specimen.GlobalFetchBasic", type= EntityGraph.EntityGraphType.FETCH)
     Page<Specimen> findAll(Pageable pageable);
 
 

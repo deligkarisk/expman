@@ -2,10 +2,7 @@ package com.arilab.expman.domain.database;
 
 import com.arilab.expman.domain.database.validator.OnInsert;
 import com.arilab.expman.domain.database.validator.SpeciesNames;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -13,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @SpeciesNames(groups = OnInsert.class)
@@ -20,6 +18,7 @@ public class Species {
 
 
     @Id
+    @ToString.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "taxon_code")
     private String taxonCode;

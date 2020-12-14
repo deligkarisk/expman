@@ -2,10 +2,7 @@ package com.arilab.expman.domain.database;
 
 import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
 import com.arilab.expman.domain.database.supplementary.TypeStatus;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
@@ -14,9 +11,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
-@NamedEntityGraph(name = "Specimen.FetchAll",
+@NamedEntityGraph(name = "Specimen.GlobalFetchAll",
                   attributeNodes = {@NamedAttributeNode("typeStatus"),
                                     @NamedAttributeNode(value = "collectionEvent",
                                                         subgraph = "subgraph.collectionEvent"),
@@ -27,18 +25,22 @@ import javax.validation.constraints.NotNull;
                                @NamedSubgraph(name = "subgraph.locality",
                                               attributeNodes = {@NamedAttributeNode(value = "country"),
                                                                 @NamedAttributeNode(value = "biogeographicRegion")})})
-@NamedEntityGraph(name = "Specimen.FetchBasic",
+@NamedEntityGraph(name = "Specimen.GlobalFetchBasic",
                   attributeNodes = {@NamedAttributeNode(value = "collectionEvent",
                                                         subgraph = "subgraph.collectionEvent"),
                                     @NamedAttributeNode(value = "species")},
                   subgraphs = {@NamedSubgraph(name = "subgraph.collectionEvent",
                                               attributeNodes = {@NamedAttributeNode(value = "locality")})})
+
+
+
 @Table(name = "specimen")
 public class Specimen {
 
     @Id
     @NonNull
     @NotNull
+    @ToString.Include
     @NotEmpty(message = "Please enter a specimen code.")
     @Column(name = "specimen_code", unique = true, nullable = false)
     private String specimenCode;
@@ -51,7 +53,7 @@ public class Specimen {
     private CollectionEvent collectionEvent;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "basis_of_record", referencedColumnName = "basis_of_record")
     private BasisOfRecord basisOfRecord;
 
@@ -69,11 +71,11 @@ public class Specimen {
 
     @NotNull
     @NonNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "type_status", referencedColumnName = "type_status")
     private TypeStatus typeStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "taxon_code", referencedColumnName = "taxon_code")
     private Species species;
 

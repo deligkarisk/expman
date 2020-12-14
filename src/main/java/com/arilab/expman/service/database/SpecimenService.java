@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SpecimenService {
@@ -23,6 +24,19 @@ public class SpecimenService {
        return specimenRepository.findAll(pageable);
 
    }
+
+   public Optional<Specimen> findBySpecimenCode(String specimenCode) {
+       return specimenRepository.findBySpecimenCode(specimenCode);
+   }
+
+
+    public Optional<Specimen> findSingleSpecimenBySpecimenCode(String specimenCode) {
+        return specimenRepository.findSingleSpecimenBySpecimenCode(specimenCode);
+    }
+
+
+
+
 
 
 }

@@ -6,10 +6,7 @@ import com.arilab.expman.domain.database.enums.Model;
 import com.arilab.expman.domain.database.validator.CtScanAntScanCoding;
 import com.arilab.expman.domain.database.validator.CtScanDryWetFields;
 import com.arilab.expman.domain.database.validator.OnInsert;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -33,11 +30,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "ctscans")
+@ToString(onlyExplicitlyIncluded = true)
 @CtScanAntScanCoding(groups = OnInsert.class)
 @CtScanDryWetFields(groups = OnInsert.class)
 public class CtScan {
 
     @Id
+    @ToString.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ct_scan_id", unique = true)
     private Long scanId;

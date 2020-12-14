@@ -2,6 +2,7 @@ package com.arilab.expman.domain.database.supplementary;
 
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@ToString(onlyExplicitlyIncluded = true)
 @Table(name = "specimen_status_types", schema = "admin")
 public class TypeStatus implements Serializable {
 
@@ -19,6 +21,7 @@ public class TypeStatus implements Serializable {
     private Integer typeStatusId;
 
     @Id
+    @ToString.Include
     @Column(name = "type_status", unique = true)
     private String typeStatus;
 

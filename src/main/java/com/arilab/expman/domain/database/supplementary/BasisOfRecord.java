@@ -1,9 +1,6 @@
 package com.arilab.expman.domain.database.supplementary;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +12,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "specimen_basis_of_record", schema = "supplementary")
@@ -25,8 +23,12 @@ public class BasisOfRecord implements Serializable {
     @NonNull
     @NotNull
     @NotEmpty
+    @ToString.Include
     private String basisOfRecord;
 
-
+    // For some reason the lombok annotation ToString returns the full object, hence this is needed.
+    public String toString() {
+        return this.basisOfRecord;
+    }
 
 }

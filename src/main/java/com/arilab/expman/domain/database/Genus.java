@@ -1,10 +1,7 @@
 package com.arilab.expman.domain.database;
 
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Genus implements Serializable {
@@ -20,6 +18,7 @@ public class Genus implements Serializable {
     @Id
     @NonNull
     @NotNull
+    @ToString.Include
     @Column(name = "genus_name")
     private String genusName;
 
