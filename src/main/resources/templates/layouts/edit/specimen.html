@@ -49,7 +49,7 @@
                     <option th:each="basisOfRecord : ${basisOfRecords}"
                             th:value="${basisOfRecord.basisOfRecord}"
                             th:text="${basisOfRecord.basisOfRecord}" }
-                            th:selected="*{basisOfRecord} == ${basisOfRecord.basisOfRecord} ? true : false"></option>
+                            th:selected="(*{basisOfRecord} == ${basisOfRecord.basisOfRecord})"></option>
                 </select>
 
 
