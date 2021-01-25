@@ -2,8 +2,8 @@ package com.arilab.expman.controllers;
 
 import com.arilab.expman.domain.database.Specimen;
 import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
-import com.arilab.expman.repository.database.supplementary.BasisOfRecordRepository;
 import com.arilab.expman.service.database.SpecimenService;
+import com.arilab.expman.service.database.supplementary.BasisOfRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -20,24 +20,24 @@ import java.util.Optional;
 
 
 @Controller
-public class DatabaseController {
+public class SpecimenController {
 
     private SpecimenService specimenService;
 
     @Autowired
-    private BasisOfRecordRepository basisOfRecordRepository;
+    private BasisOfRecordService basisOfRecordService;
 
-    DatabaseController(SpecimenService specimenService) {
+    SpecimenController(SpecimenService specimenService) {
         this.specimenService = specimenService;
     }
 
     @GetMapping("/explore/specimens")
-    public String returnExploreDb(Model model) {
-        return specimensByPage(model, 1);
+    public String exploreSpecimens(Model model) {
+        return exploreSpecimensByPage(model, 1);
     }
 
     @GetMapping("/explore/specimens/page/{pageNumber}")
-    public String specimensByPage(Model model, @PathVariable("pageNumber") int currentPage) {
+    public String exploreSpecimensByPage(Model model, @PathVariable("pageNumber") int currentPage) {
 
         Page<Specimen> specimenPage = specimenService.findAll(currentPage);
         int totalPages = specimenPage.getTotalPages();
@@ -59,14 +59,12 @@ public class DatabaseController {
         }
 
         Specimen specimen = optionalSpecimen.get();
-        List<BasisOfRecord> basisOfRecords = basisOfRecordRepository.findAll();
+        List<BasisOfRecord> basisOfRecords = basisOfRecordService.findAll();
         model.addAttribute("basisOfRecords",basisOfRecords);
         model.addAttribute("specimen", specimen);
         return("layouts/edit/specimen");
 
     }
-
-
 
 
     @PostMapping("/edit/specimen")
