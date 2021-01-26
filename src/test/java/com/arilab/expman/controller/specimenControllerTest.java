@@ -6,7 +6,10 @@ import com.arilab.expman.domain.database.supplementary.BiogeographicRegion;
 import com.arilab.expman.service.database.SpecimenService;
 import com.arilab.expman.service.database.supplementary.BasisOfRecordService;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.*;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
