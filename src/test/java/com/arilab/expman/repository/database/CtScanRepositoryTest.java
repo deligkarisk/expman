@@ -69,6 +69,9 @@ public class CtScanRepositoryTest {
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "typeStatus"));
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "basisOfRecord"));
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "species"));
+        logger.debug("Finished checking the default initialization of objects, continuing with reading properties of " +
+                             "the specimen.");
+
 
         // Reading the id of a lazy entity does not initialize the object
         String speciesId = ctScan.getSpecimen().getSpecies().getTaxonCode();
