@@ -58,9 +58,6 @@ public class CtScanRepositoryTest {
     @Transactional("arilabdbTransactionManager")
     public void FetchPlanInFindAll() {
         List<CtScan> allCtScans = ctScanRepository.findAll();
-       // List<CtScan> ctScanFiltered =
-        //        allCtScans.stream().filter(scan -> scan.getScanId() == REFERENCE_CTSCAN_CODE).collect(Collectors
-        //        .toList());
         logger.debug("Finished fetching all ct scans, continuing with getting one item from list");
         CtScan ctScan = allCtScans.get(0);
         assertTrue(persistenceUtil.isLoaded(ctScan, "specimen"));
