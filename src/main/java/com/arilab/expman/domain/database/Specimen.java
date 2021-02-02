@@ -53,7 +53,7 @@ public class Specimen {
     private CollectionEvent collectionEvent;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "basis_of_record", referencedColumnName = "basis_of_record")
     private BasisOfRecord basisOfRecord;
 
@@ -71,11 +71,11 @@ public class Specimen {
 
     @NotNull
     @NonNull
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "type_status", referencedColumnName = "type_status")
     private TypeStatus typeStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "taxon_code", referencedColumnName = "taxon_code")
     private Species species;
 
