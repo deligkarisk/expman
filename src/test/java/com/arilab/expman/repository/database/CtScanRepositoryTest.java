@@ -49,6 +49,7 @@ public class CtScanRepositoryTest {
 
 
     @Test
+    @Transactional("arilabdbTransactionManager")
     public void ctScanRepositoryWorks() {
         Integer numberOfScans = ctScanRepository.findAll().size();
         logger.info(String.format("Found %d CT scans", numberOfScans));
