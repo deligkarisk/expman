@@ -63,7 +63,6 @@ import java.util.Properties;
             factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
             Properties jpaProperties = new Properties();
-            jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
             jpaProperties.put("hibernate.show-sql", "false"); // we use the logging framework instead.
             jpaProperties.put("hibernate.format_sql", "true");
             jpaProperties.put("hibernate.generate_statistics","true");

@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@TestPropertySource(locations = {"classpath:test-references.properties"})
+@ActiveProfiles("test")
 public class CtScanRepositoryTest {
 
     @Value("${REFERENCE_SPECIMEN_CODE}")
@@ -56,14 +58,16 @@ public class CtScanRepositoryTest {
     @Transactional("arilabdbTransactionManager")
     public void FetchPlanInFindAll() {
         List<CtScan> allCtScans = ctScanRepository.findAll();
-        List<CtScan> ctScanFiltered =
-                allCtScans.stream().filter(scan -> scan.getScanId() == REFERENCE_CTSCAN_CODE).collect(Collectors.toList());
-        CtScan ctScan = ctScanFiltered.get(0);
+       // List<CtScan> ctScanFiltered =
+        //        allCtScans.stream().filter(scan -> scan.getScanId() == REFERENCE_CTSCAN_CODE).collect(Collectors
+        //        .toList());
+        logger.debug("Finished fetching all ct scans, continuing with getting one item from list");
+        CtScan ctScan = allCtScans.get(0);
         assertTrue(persistenceUtil.isLoaded(ctScan, "specimen"));
         assertTrue(persistenceUtil.isLoaded(ctScan.getSpecimen(), "collectionEvent"));
         assertTrue(persistenceUtil.isLoaded(ctScan.getSpecimen().getCollectionEvent(), "locality"));
-        assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "basisOfRecord"));
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "typeStatus"));
+        assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "basisOfRecord"));
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "species"));
 
         // Reading the id of a lazy entity does not initialize the object
