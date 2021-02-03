@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
 public class LocalityRepositoryTest {
 
     @Value("${REFERENCE_COUNTRY_NAME}")

@@ -26,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
 public class SpecimenRepositoryTest {
 
 

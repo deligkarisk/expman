@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //@TestPropertySource(locations = {"classpath:test-references.properties"})
 //@Sql(scripts = "/dataArilabdb-tests.sql")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@ActiveProfiles("test")
 public class IntegrationTest {
 
 

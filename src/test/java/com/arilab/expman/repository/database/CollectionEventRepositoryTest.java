@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
 public class CollectionEventRepositoryTest {
 
     @Value("${REFERENCE_LOCALITY}")

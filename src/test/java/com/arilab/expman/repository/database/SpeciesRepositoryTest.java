@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
 public class SpeciesRepositoryTest {
 
     @Value("${REFERENCE_SPECIES_TAXON_CODE}")

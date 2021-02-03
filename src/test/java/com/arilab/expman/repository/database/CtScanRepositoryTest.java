@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
 public class CtScanRepositoryTest {
 
     @Value("${REFERENCE_SPECIMEN_CODE}")
@@ -49,6 +48,7 @@ public class CtScanRepositoryTest {
     public void ctScanRepositoryWorks() {
         Integer numberOfScans = ctScanRepository.findAll().size();
         logger.info(String.format("Found %d CT scans", numberOfScans));
+        assertEquals(12,numberOfScans);
     }
 
     @Test
