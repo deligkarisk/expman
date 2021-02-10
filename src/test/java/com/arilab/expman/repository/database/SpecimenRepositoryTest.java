@@ -69,6 +69,13 @@ public class SpecimenRepositoryTest {
 
         // Country should remain unloaded
         assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+
+        // Basis of record should be unloaded
+        assertFalse(persistenceUtil.isLoaded(specimen,"basisOfRecord"));
+        // Accessing basis of record id field should not initialize the object
+        String temp = specimen.getBasisOfRecord().getBasisOfRecord();
+        assertFalse(persistenceUtil.isLoaded(specimen,"basisOfRecord"));
+
         // Accessing a non-Id field should initialize the object
         String countryCode = specimen.getCollectionEvent().getLocality().getCountry().getCountryCode();
         assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));

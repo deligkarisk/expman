@@ -18,6 +18,8 @@ public interface SpecimenRepository extends JpaRepository<Specimen,String> {
     @EntityGraph(value = "Specimen.GlobalFetchBasic", type= EntityGraph.EntityGraphType.FETCH)
     Optional<Specimen> findBySpecimenCode(String specimenCode);
 
+
+    @EntityGraph(value = "Specimen.GlobalFetchAll" , type = EntityGraph.EntityGraphType.FETCH)
     Optional<Specimen> findSingleSpecimenBySpecimenCode(String specimenCode);
 
 

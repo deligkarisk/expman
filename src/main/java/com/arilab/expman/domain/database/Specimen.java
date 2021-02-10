@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 @RequiredArgsConstructor
 @NamedEntityGraph(name = "Specimen.GlobalFetchAll",
                   attributeNodes = {@NamedAttributeNode("typeStatus"),
+                                    @NamedAttributeNode("species"),
                                     @NamedAttributeNode(value = "collectionEvent",
                                                         subgraph = "subgraph.collectionEvent"),
                                     @NamedAttributeNode("basisOfRecord")},

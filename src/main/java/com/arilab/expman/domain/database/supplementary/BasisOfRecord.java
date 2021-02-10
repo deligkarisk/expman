@@ -12,7 +12,6 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "specimen_basis_of_record", schema = "supplementary")
