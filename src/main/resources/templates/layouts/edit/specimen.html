@@ -44,14 +44,26 @@
         <div class="form-group row">
             <label for="basisOfRecord" class="col-md-3 col-form-label text-right"> Basis of Record </label>
             <div class="col-md-6">
-                <select class="form-control" th:field="*{basisOfRecord}" id="basisOfRecord" autofocus>
-                    <option value=""> Select Basis of Record</option>
-                    <option th:each="basisOfRecord : ${basisOfRecords}"
-                            th:value="${basisOfRecord.basisOfRecord}"
-                            th:text="${basisOfRecord.basisOfRecord}"
-                            th:selected="${basisOfRecord.basisOfRecord.equals(specimen.basisOfRecord.basisOfRecord)}">
-                    </option>
-                </select>
+                <div th:if="${specimen.basisOfRecord != null}">
+                    <select class="form-control" th:field="*{basisOfRecord}" id="basisOfRecord" autofocus>
+                        <option value=""> Select Basis of Record</option>
+                        <option th:each="basisOfRecord : ${basisOfRecords}"
+                                th:value="${basisOfRecord.basisOfRecord}"
+                                th:text="${basisOfRecord.basisOfRecord}"
+                                th:selected="${basisOfRecord.basisOfRecord.equals(specimen.basisOfRecord.basisOfRecord)}">
+                        </option>
+                    </select>
+                </div>
+                <div th:if="${specimen.basisOfRecord == null}">
+                    <select class="form-control" th:field="*{basisOfRecord}" id="basisOfRecord" autofocus>
+                        <option value=""> Select Basis of Record</option>
+                        <option th:each="basisOfRecord : ${basisOfRecords}"
+                                th:value="${basisOfRecord.basisOfRecord}"
+                                th:text="${basisOfRecord.basisOfRecord}">
+                        </option>
+                    </select>
+                </div>
+
 
 
             </div>
