@@ -34,22 +34,22 @@
             </tr>
             <tr th:each="specimen : ${specimens}">
 
-                <td> <a th:href="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" th:text="${specimen.getSpecimenCode()}"></a></td>
+                <td> <a th:href="@{'/view/specimen/' + ${specimen.getSpecimenCode()}}" th:text="${specimen.getSpecimenCode()}"></a></td>
 
                 <td><a th:if="${specimen.getSpecies()} != null"
-                       th:href="@{'/edit/species/' + ${specimen.getSpecies().getTaxonCode()}}"
+                       th:href="@{'/view/species/' + ${specimen.getSpecies().getTaxonCode()}}"
                        th:text="${specimen.getSpecies().getTaxonCode()}"></a>
                     <span th:if="${specimen.getSpecies()} == null"> null </span></td>
 
                 <td><a th:if="${specimen.getCollectionEvent()} != null"
-                       th:href="@{'/edit/collectionEvent/' + ${specimen.getCollectionEvent().getCollectionEventCode()}}"
+                       th:href="@{'/view/collectionEvent/' + ${specimen.getCollectionEvent().getCollectionEventCode()}}"
                        th:text="${specimen.getCollectionEvent().getCollectionEventCode()}"></a>
                     <span th:if="${specimen.getCollectionEvent()} == null"> null </span></td>
 
                 <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getCollectedBy()} : 'null'"></td>
 
                 <td><a th:if="${specimen.getCollectionEvent()} != null and ${specimen.getCollectionEvent().getLocality()} != null"
-                       th:href="@{'/edit/locality/' + ${specimen.getCollectionEvent().getLocality().getLocalityCode()}}"
+                       th:href="@{'/view/locality/' + ${specimen.getCollectionEvent().getLocality().getLocalityCode()}}"
                        th:text="${specimen.getCollectionEvent().getLocality().getLocalityCode()}"></a>
                     <span th:if="${specimen.getCollectionEvent()} == null or ${specimen.getCollectionEvent().getLocality()} == null"> null </span></td>
 

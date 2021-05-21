@@ -35,6 +35,12 @@ public class SpecimenService {
     }
 
 
+    public Specimen saveSpecimen(Specimen specimen) {
+       Specimen savedSpecimen = specimenRepository.save(specimen);
+       return savedSpecimen;
+    }
+
+
 
 
 
