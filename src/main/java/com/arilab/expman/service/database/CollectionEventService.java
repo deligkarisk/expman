@@ -4,6 +4,7 @@ import com.arilab.expman.domain.database.CollectionEvent;
 import com.arilab.expman.repository.database.CollectionEventRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,4 +19,15 @@ public class CollectionEventService {
     public Optional<CollectionEvent> findByCollectionEventCode(String collectionEventCode) {
         return collectionEventRepository.findById(collectionEventCode);
     }
+
+
+    public List<String> getAllCollectionEventCodes() {
+        return collectionEventRepository.getAllCollectionEventCodes();
+    }
+
+
+    public List<String> getMatchingCollectionEventCodes(String matchingCode) {
+        return collectionEventRepository.getMatchingEventCodes(matchingCode);
+    }
+
 }
