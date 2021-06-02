@@ -1,26 +1,20 @@
 package com.arilab.expman.controllers;
 
-import com.arilab.expman.domain.database.CollectionEvent;
 import com.arilab.expman.domain.database.Specimen;
 import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
 import com.arilab.expman.service.database.SpecimenService;
 import com.arilab.expman.service.database.supplementary.BasisOfRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -94,9 +88,8 @@ public class SpecimenController {
 
 
     @PostMapping("/edit/specimen")
-    public String updateSpecimen(@Validated Specimen specimen, BindingResult bindingResult, Errors errors,
-                                 Model model, RedirectAttributes redirectAttributes) {
-
+    public String updateSpecimen(@ModelAttribute("specimen") @Validated Specimen specimen, BindingResult bindingResult,
+                                 Model model) {
 
         if (bindingResult.hasErrors()) {
             List<BasisOfRecord> basisOfRecords = basisOfRecordService.findAll();

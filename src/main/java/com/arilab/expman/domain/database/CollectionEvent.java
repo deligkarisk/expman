@@ -12,7 +12,6 @@ import java.io.Serializable;
         @NamedAttributeNode("locality")})
 @Entity
 @Data
-@ToString(onlyExplicitlyIncluded = true)
 @Table(name = "collection_event")
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -23,7 +22,6 @@ public class CollectionEvent implements Serializable {
     @NotNull
     @NonNull
     @NotEmpty
-    @ToString.Include
     @Column(name = "collection_event_code", unique = true, nullable = false)
     private String collectionEventCode;
 
@@ -68,5 +66,10 @@ public class CollectionEvent implements Serializable {
 
     public CollectionEvent(@NonNull String collectionEventCode) {
         this.collectionEventCode = collectionEventCode;
+    }
+
+    @Override
+    public String toString() {
+        return collectionEventCode.toString();
     }
 }
