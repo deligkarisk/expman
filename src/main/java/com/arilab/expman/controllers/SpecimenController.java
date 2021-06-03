@@ -22,19 +22,25 @@ import java.util.Optional;
 public class SpecimenController {
 
     private SpecimenService specimenService;
-
-    @Autowired
     private BasisOfRecordService basisOfRecordService;
 
+    SpecimenController(SpecimenService specimenService, BasisOfRecordService basisOfRecordService) {
+        this.specimenService = specimenService;
+        this.basisOfRecordService = basisOfRecordService;
+    }
 
     @InitBinder     /* Converts empty strings into null when a form is submitted */
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
-    SpecimenController(SpecimenService specimenService) {
-        this.specimenService = specimenService;
+
+    @ModelAttribute("basisOfRecords")
+    public List<BasisOfRecord> basisOfRecords() {
+        List<BasisOfRecord> basisOfRecords = basisOfRecordService.findAll();
+        return basisOfRecords;
     }
+
 
     @GetMapping("/explore/specimens")
     public String exploreSpecimens(Model model) {
@@ -79,8 +85,6 @@ public class SpecimenController {
         }
 
         Specimen specimen = optionalSpecimen.get();
-        List<BasisOfRecord> basisOfRecords = basisOfRecordService.findAll();
-        model.addAttribute("basisOfRecords",basisOfRecords);
         model.addAttribute("specimen", specimen);
         return("layouts/edit/specimen");
 
@@ -95,7 +99,6 @@ public class SpecimenController {
             List<BasisOfRecord> basisOfRecords = basisOfRecordService.findAll();
 
             model.addAttribute("specimen", specimen);
-            model.addAttribute("basisOfRecords",basisOfRecords);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "layouts/edit/specimen";
         } else {
