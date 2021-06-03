@@ -44,10 +44,13 @@
                 <input class="form-control" type="text" th:field="*{collectionEvent}" id="collectionEvent" autofocus>
             </div>
         </div>-->
-        <div class="form-group row">
+        <div class="form-group row" th:class="${#fields.hasErrors('collectionEvent')}? 'form-group  row is-invalid': 'form-group row'">
             <label for="collectionEvent" class="col-md-3 col-form-label text-right"> Collection Event </label>
             <div class="col-md-6">
-                <input class="form-control" type="text" th:field="*{collectionEvent}" id="collectionEvent">
+                <input class="form-control" type="text" th:field="*{collectionEvent}" id="collectionEvent" th:errorclass="is-invalid">
+            <span class="invalid-feedback">
+                Please enter a valid collection event code.
+            </span>
             </div>
         </div>
 
