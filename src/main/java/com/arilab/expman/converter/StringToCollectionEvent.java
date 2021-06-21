@@ -18,6 +18,8 @@ public class StringToCollectionEvent implements Converter<String, CollectionEven
     @Override
     public CollectionEvent convert(String collectionEventCode) {
 
+        if (collectionEventCode == "") { return null;}
+
         Optional<CollectionEvent> optionalCollectionEvent =
                 collectionEventService.findByCollectionEventCode(collectionEventCode);
         if (optionalCollectionEvent.isEmpty()) {
