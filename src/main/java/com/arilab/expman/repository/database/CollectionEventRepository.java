@@ -20,9 +20,8 @@ public interface CollectionEventRepository extends JpaRepository<CollectionEvent
     @Query(value = "SELECT collection_event_code FROM collection_event", nativeQuery = true)
     public List<String> getAllCollectionEventCodes();
 
-    @Query(value = "SELECT collection_event_code FROM collection_event WHERE collection_event_code LIKE %?1%",
-           nativeQuery =
-            true)
+    @Query(value = "SELECT collection_event_code FROM collection_event WHERE collection_event_code LIKE '%?1%'",
+           nativeQuery = true)
     public List<String> getMatchingEventCodes(String matchingCode);
 
 }

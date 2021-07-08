@@ -30,6 +30,17 @@
             });
         });
     </script>
+
+
+    <script type="text/javascript">
+    $(function () {
+        $("#species").autocomplete({
+            source: "/speciesAutocomplete",
+            minLength: 2
+        });
+    });
+    </script>
+
 </head>
 <body>
 

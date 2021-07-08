@@ -2,8 +2,10 @@ package com.arilab.expman.controllers;
 
 import com.arilab.expman.domain.database.Specimen;
 import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
+import com.arilab.expman.domain.database.supplementary.TypeStatus;
 import com.arilab.expman.service.database.SpecimenService;
 import com.arilab.expman.service.database.supplementary.BasisOfRecordService;
+import com.arilab.expman.service.database.supplementary.TypeStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Page;
@@ -23,10 +25,13 @@ public class SpecimenController {
 
     private SpecimenService specimenService;
     private BasisOfRecordService basisOfRecordService;
+    private TypeStatusService typeStatusService;
 
-    SpecimenController(SpecimenService specimenService, BasisOfRecordService basisOfRecordService) {
+    SpecimenController(SpecimenService specimenService, BasisOfRecordService basisOfRecordService,
+                       TypeStatusService typeStatusService) {
         this.specimenService = specimenService;
         this.basisOfRecordService = basisOfRecordService;
+        this.typeStatusService = typeStatusService;
     }
 
     @InitBinder     /* Converts empty strings into null when a form is submitted */
@@ -40,6 +45,13 @@ public class SpecimenController {
         List<BasisOfRecord> basisOfRecords = basisOfRecordService.findAll();
         return basisOfRecords;
     }
+
+    @ModelAttribute("typeStatus")
+    public List<TypeStatus> typeStatuses() {
+        List<TypeStatus> typeStatuses = typeStatusService.findAll();
+        return typeStatuses;
+    }
+
 
 
     @GetMapping("/explore/specimens")

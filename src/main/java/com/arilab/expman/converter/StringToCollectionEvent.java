@@ -18,7 +18,9 @@ public class StringToCollectionEvent implements Converter<String, CollectionEven
     @Override
     public CollectionEvent convert(String collectionEventCode) {
 
-        if (collectionEventCode == "") { return null;}
+
+        if (collectionEventCode == null) {throw new IllegalArgumentException();}
+        if (collectionEventCode.equals("")) { return null;}
 
         Optional<CollectionEvent> optionalCollectionEvent =
                 collectionEventService.findByCollectionEventCode(collectionEventCode);
