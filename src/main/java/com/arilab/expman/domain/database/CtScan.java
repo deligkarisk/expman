@@ -18,15 +18,15 @@ import javax.validation.constraints.NotNull;
 
 @NamedEntityGraph(name = "CtScan.Basic", attributeNodes = {
         @NamedAttributeNode(value = "specimen", subgraph = "subgraph.specimen")},
-                  subgraphs = {
-                          @NamedSubgraph(name = "subgraph.specimen", attributeNodes = {
-                                  @NamedAttributeNode(value = "collectionEvent",
-                                                      subgraph = "subgraph.collectionEvent")
-                          }),
-                          @NamedSubgraph(name = "subgraph.collectionEvent", attributeNodes = {
-                                  @NamedAttributeNode(value = "locality")
-                          })
-                  }
+        subgraphs = {
+                @NamedSubgraph(name = "subgraph.specimen", attributeNodes = {
+                        @NamedAttributeNode(value = "collectionEvent",
+                                subgraph = "subgraph.collectionEvent")
+                }),
+                @NamedSubgraph(name = "subgraph.collectionEvent", attributeNodes = {
+                        @NamedAttributeNode(value = "locality")
+                })
+        }
 )
 @Entity
 @Data
@@ -41,7 +41,6 @@ public class CtScan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ct_scan_id", unique = true)
     private Long scanId;
-
 
 
     @NonNull

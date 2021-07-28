@@ -62,6 +62,9 @@ public class User  implements UserDetails {
     @NotEmpty(message = "You must enter Last Name.")
     private String lastName;
 
+    @Column(name = "activation_code")
+    private String activationCode;
+
 
     @NotEmpty(message = "Please enter the confirmation password")
     @Transient
@@ -95,7 +98,7 @@ public class User  implements UserDetails {
     }
 
 
-    private String activationCode;
+
 
     @Override
     public String getUsername() {
