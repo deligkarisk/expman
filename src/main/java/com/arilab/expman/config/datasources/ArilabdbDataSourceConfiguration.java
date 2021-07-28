@@ -2,12 +2,14 @@ package com.arilab.expman.config.datasources;
 
 import com.arilab.expman.domain.database.validator.OnInsert;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -29,6 +31,9 @@ import java.util.Properties;
 
         private final Validator validator;
 
+        @Autowired
+        private Environment env;
+
         public ArilabdbDataSourceConfiguration(@Qualifier("localValidatorFactoryBean") Validator validator) {
             this.validator = validator;
         }
@@ -43,6 +48,7 @@ import java.util.Properties;
 
 
         @Bean
+        @Primary
         @ConfigurationProperties("expman.datasource.arilabdb.configuration")
         public HikariDataSource arilabdbdataSource() {
             return arilabdbDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
@@ -57,7 +63,6 @@ import java.util.Properties;
             factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
             Properties jpaProperties = new Properties();
-            jpaProperties.put("hibernate.hbm2ddl.auto", "validate");
             jpaProperties.put("hibernate.show-sql", "false"); // we use the logging framework instead.
             jpaProperties.put("hibernate.format_sql", "true");
             jpaProperties.put("hibernate.generate_statistics","true");

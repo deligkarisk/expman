@@ -64,4 +64,12 @@ public class CollectionEvent implements Serializable {
     @Column(name = "jira_user")
     private String jiraUser;
 
+    public CollectionEvent(@NonNull String collectionEventCode) {
+        this.collectionEventCode = collectionEventCode;
+    }
+
+    @Override
+    public String toString() {
+        return collectionEventCode.toString();
+    }
 }

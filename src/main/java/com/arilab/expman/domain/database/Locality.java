@@ -2,10 +2,7 @@ package com.arilab.expman.domain.database;
 
 import com.arilab.expman.domain.database.supplementary.BiogeographicRegion;
 import com.arilab.expman.domain.database.supplementary.Country;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Locality implements Serializable {
@@ -22,6 +20,7 @@ public class Locality implements Serializable {
     @Id
     @NotEmpty
     @NonNull
+    @ToString.Include
     @Column(name = "locality_code")
     private String localityCode;
 

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main_layout :: head('Expman')}">
+</head>
+
+
+<body>
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div th:replace="layouts/main_layout::jumbotron"></div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <h1 th:text="#{db.explore.page.title}"> Welcome to the experiment manager </h1>
+        </div>
+        <div class="row">
+            <h2 th:text="#{db.explore.page.subtitle}"> This software help you manage the experimental metadata </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+    <div class="table-responsive col-md-6">
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Basic info</h3>
+            </div>
+            <div class="col-md-6">
+                <a th:href="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped"  id="specimenDataTable" th:object="${specimen}">
+            <colgroup>
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 70%;">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th>Specimen code</th>
+                <td th:text="*{specimenCode}"></td>
+            </tr>
+            <tr>
+                <th>Sample code</th>
+                <td th:text="*{sampleCode}"></td>
+            </tr>
+            <tr>
+                <th>Collection event</th>
+                <td th:text="*{{collectionEvent}}"></td>
+            </tr>
+            <tr>
+                <th>Basis of record</th>
+                <td th:text="*{{basisOfRecord}}"></td>
+            </tr>
+            <tr>
+                <th>Located at</th>
+                <td th:text="*{locatedAt}"></td>
+            </tr>
+            <tr>
+                <th>Owned by</th>
+                <td th:text="*{ownedBy}"></td>
+            </tr>
+            <tr>
+                <th>Lifestagesex</th>
+                <td th:text="*{lifestageSex}"></td>
+            </tr>
+            <tr>
+                <th>Medium</th>
+                <td th:text="*{medium}"></td>
+            </tr>
+            <tr>
+                <th>Type status</th>
+                <td th:text="*{{typeStatus}}"></td>
+            </tr>
+            <tr>
+                <th>Species</th>
+                <td th:text="*{{species}}"></td>
+            </tr>
+            <tr>
+                <th>Determined by</th>
+                <td th:text="*{determinedBy}"></td>
+            </tr>
+            <tr>
+                <th>Date identified</th>
+                <td th:text="*{dateIdentified}"></td>
+            </tr>
+            <tr>
+                <th>Flag</th>
+                <td th:text="*{flag}"></td>
+            </tr>
+            <tr>
+                <th>Transect notes</th>
+                <td th:text="*{transectNotes}"></td>
+            </tr>
+            <tr>
+                <th>Antweb manage</th>
+                <td th:text="*{antwebManage}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive col-md-6">
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Specimen codes</h3>
+            </div>
+            <div class="col-md-6">
+                <a th:href="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped"  id="specimenCodeDataTable" th:object="${specimen}">
+            <colgroup>
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 70%;">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th> fba code</th>
+                <td th:text="*{fbaCode}"></td>
+            </tr>
+            <tr>
+                <th>fj code</th>
+                <td th:text="*{fjCode}"></td>
+            </tr>
+            <tr>
+                <th>epe code</th>
+                <td th:text="*{epeCode}"></td>
+            </tr>
+            <tr>
+                <th>ems code</th>
+                <td th:text="*{emsCode}"></td>
+            </tr>
+            <tr>
+                <th>other code</th>
+                <td th:text="*{otherCode}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</div>
+
+
+
+</body>
+</html>

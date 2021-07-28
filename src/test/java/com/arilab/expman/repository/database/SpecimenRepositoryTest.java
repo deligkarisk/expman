@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@TestPropertySource(locations = {"classpath:test-references.properties"})
 public class SpecimenRepositoryTest {
 
 
@@ -51,7 +52,7 @@ public class SpecimenRepositoryTest {
 
     @Test
     @Transactional("arilabdbTransactionManager")
-    public void specimenEntityGraphIsApplied() {
+    public void specimenEntityGraphIsAppliedOnFindByCode() {
         PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
 
         Optional<Specimen> optSpecimen = specimenRepository.findBySpecimenCode(REFERENCE_SPECIMEN_CODE);
@@ -69,12 +70,45 @@ public class SpecimenRepositoryTest {
         // Country should remain unloaded
         assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
 
+        // Basis of record should be unloaded
+        assertFalse(persistenceUtil.isLoaded(specimen,"basisOfRecord"));
+        // Accessing basis of record id field should not initialize the object
+        String temp = specimen.getBasisOfRecord().getBasisOfRecord();
+        assertFalse(persistenceUtil.isLoaded(specimen,"basisOfRecord"));
+
         // Accessing a non-Id field should initialize the object
         String countryCode = specimen.getCollectionEvent().getLocality().getCountry().getCountryCode();
         assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
 
+        // Species should be loaded
+        assertTrue(persistenceUtil.isLoaded(specimen, "species"));
+    }
 
 
+    @Test
+    @Transactional("arilabdbTransactionManager")
+    public void specimenEntityGraphIsAppliedOnFindAll() {
+        PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
+
+        Specimen specimen = specimenRepository.findAll().get(0);
+        assertTrue(persistenceUtil.isLoaded(specimen, "locality"));
+        assertTrue(persistenceUtil.isLoaded(specimen, "collectionEvent"));
+        //assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent(), "collectionEventCode"));
+        //assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"localityCode"));
+       // assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"biogeographicRegion"));
+        assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+        assertFalse(persistenceUtil.isLoaded(specimen,"typeStatus"));
+        assertNotNull(specimen.getCollectionEvent().getLocality().getCountry().getCountryName()); // This should
+        // work. As the country name is the @Id field, and used as a foreign key, the object is not initialized. In
+        // fact, if an initialization is needed, this will fail as this test is outside of a transaction, hence only
+        // the findBySpecimenCode method will run in a transaction.
+
+        // Country should remain unloaded
+        assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+
+        // Accessing a non-Id field should initialize the object
+        String countryCode = specimen.getCollectionEvent().getLocality().getCountry().getCountryCode();
+        assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
 
     }
 

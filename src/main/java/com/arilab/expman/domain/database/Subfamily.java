@@ -2,6 +2,7 @@ package com.arilab.expman.domain.database;
 
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +11,15 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@ToString(onlyExplicitlyIncluded = true)
 public class Subfamily implements Serializable {
 
-    @Id
+
     @Column(name = "subfamily_id")
     private Integer subfamilyId;
 
+    @Id
+    @ToString.Include
     @Column(name = "subfamily")
     private String subfamily;
 

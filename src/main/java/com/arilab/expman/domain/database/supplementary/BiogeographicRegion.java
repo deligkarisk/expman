@@ -1,9 +1,6 @@
 package com.arilab.expman.domain.database.supplementary;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -12,12 +9,14 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "biogeo_region", schema = "admin")
 public class BiogeographicRegion implements Serializable {
 
     @Id
+    @ToString.Include
     @NotNull
     @NonNull
     @NotEmpty
