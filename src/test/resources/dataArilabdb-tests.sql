@@ -876,7 +876,7 @@ INSERT INTO public.species (taxon_code,genus_name,species_name,subspecies,morpho
 	 ('Pheidole.hercules_cf','Pheidole',NULL,NULL,'hercules_cf',NULL,NULL,'quadrispinosa','hercules',NULL,NULL,NULL,NULL,false,NULL,NULL,NULL),
 	 ('Pheidole.gf015','Pheidole',NULL,NULL,'gf015',NULL,NULL,NULL,NULL,'cf oculata',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 	 ('Strumigenys.augustandrewi','Strumigenys','augustandrewi',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-	 ('Strumigenys.hemichlaena','Strumigenys','hemichlaena',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('Strumigenys.hemichlaena','Strumigenys','hemichlaena',NULL,NULL,'Pheidole.BP12',NULL,NULL,NULL,NULL,NULL,'Mexico',NULL,NULL,NULL,NULL,NULL),
 	 ('Strumigenys.ignota','Strumigenys','ignota',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 	 ('Pheidole.ankerana08','Pheidole',NULL,NULL,'ankerana08',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 	 ('Pheidole.BP12','Pheidole',NULL,NULL,'BP12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,false,NULL,NULL,NULL),
@@ -967,19 +967,18 @@ INSERT INTO public.specimen (specimen_code,sample_code,collection_event_code,bas
 	 ('CASENT0180226',NULL,'FJVL02_M01_04',NULL,'EPEC','EPEC','1w','pin','Not Provided','Colobopsis.cristata',NULL,NULL,'FBA085485',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL),
 	 ('CASENT0181342',NULL,'EMS2483',NULL,'EPEC','EMSC','1w','pin','Not Provided','Nylanderia.vaga',NULL,NULL,NULL,NULL,NULL,'EMS2483',NULL,NULL,NULL,1,NULL);
 
-INSERT INTO public.ctscans (ct_scan_id,specimen_code,ct_scan_note,voxel_size,body_size_voxels,exposure_time,projections,source_detector_distance,xray_power,xray_power_w,source_distance,detector_distance,ethanol_conc,wet,body_part,special_identifier,folder_location,scan_user,insert_user,staining,antscan,antscan_code,model,dry_method,scan_reason,prep_note) VALUES
-	 (123,'CASENT0000538',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'95%','Yes','Head',NULL,'Z:\CTScans\Ants\Terataner\fhg-vena\CASENT0000538_Ter_Head_2020-02-02_000000','kosmas-deligkaris','jira','No staining','No',NULL,'Ants',NULL,NULL,NULL),
-	 (124,'CASENT0741232','Fossil Ant in Amber with some soft tissue preservation',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'No ethanol used','No','Whole_body',NULL,'Z:\CTScans\Ants\Gerontoformica\sp\CASENT0741232_Ger_Whole_body_2020-06-17_105837','julian-katzke','jira','No staining','No',NULL,'Ants','Amber',NULL,NULL),
-	 (125,'CASENT0741232','Fossil Ant in Amber with some soft tissue preservation',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'No ethanol used','No','Head',NULL,'Y:\CTScans\Ants\Gerontoformica\sp\CASENT0741232_Ger_Head_2020-06-28_112803','julian-katzke','jira','No staining','No',NULL,'Ants','Amber',NULL,NULL),
-	 (126,'CASENT0741232','Fossil Ant in Amber with some soft tissue preservation',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'No ethanol used','No','Thorax',NULL,'Y:\CTScans\Ants\Gerontoformica\sp\CASENT0741232_Ger_Thorax_2020-07-02_093537','julian-katzke','jira','No staining','No',NULL,'Ants','Amber',NULL,NULL),
-	 (30,'CASENT0282333','some streaks',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
-	 (47,'CASENT0714080','good, specimen missing abdomen',4.5146,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
-	 (97,'CASENT0741223','Plastic embedded OsO4 stained Novomessor head',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'No ethanol used','No','Head',NULL,'CTScans/Ants/Novomessor/cockerelli/CASENT0741223_Nov_Head_2020-01-13_123523','julian-katzke','jira','Osmium','No',NULL,NULL,'Resin',NULL,NULL),
-	 (98,'CASENT0741222','not fully stained, good image quality',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'No ethanol used','No','Head','Brain_dissect','CTScans/Ants/Novomessor/cockerelli/CASENT0741222_Nov_Head_Brain_dissect_2020-01-31_142856','julian-katzke','jira','Osmium','No',NULL,NULL,'Resin',NULL,NULL),
-	 (78,'CASENT0181506','blurry, streaks',2.6232,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Not known',NULL,NULL,NULL,
+INSERT INTO public.ctscans (specimen_code,ct_scan_note,voxel_size,exposure_time,projections,ethanol_conc,wet,body_part,special_identifier,folder_location,scan_user,insert_user,staining,antscan,antscan_code,model,dry_method,scan_reason,prep_note) VALUES
+	 ('CASENT0000538',NULL,NULL,NULL,NULL,'95%','Yes','Head',NULL,'Z:\CTScans\Ants\Terataner\fhg-vena\CASENT0000538_Ter_Head_2020-02-02_000000','kosmas-deligkaris','jira','No staining','No',NULL,'Ants',NULL,NULL,NULL),
+	 ('CASENT0741232','Fossil Ant in Amber with some soft tissue preservation',NULL,NULL,NULL,'No ethanol used','No','Whole_body',NULL,'Z:\CTScans\Ants\Gerontoformica\sp\CASENT0741232_Ger_Whole_body_2020-06-17_105837','julian-katzke','jira','No staining','No',NULL,'Ants','Amber',NULL,NULL),
+	 ('CASENT0741232','Fossil Ant in Amber with some soft tissue preservation',NULL,NULL,NULL,'No ethanol used','No','Head',NULL,'Y:\CTScans\Ants\Gerontoformica\sp\CASENT0741232_Ger_Head_2020-06-28_112803','julian-katzke','jira','No staining','No',NULL,'Ants','Amber',NULL,NULL),
+	 ('CASENT0741232','Fossil Ant in Amber with some soft tissue preservation',NULL,NULL,NULL,'No ethanol used','No','Thorax',NULL,'Y:\CTScans\Ants\Gerontoformica\sp\CASENT0741232_Ger_Thorax_2020-07-02_093537','julian-katzke','jira','No staining','No',NULL,'Ants','Amber',NULL,NULL),
+	 ('CASENT0282333','some streaks',NULL,NULL,NULL,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
+	 ('CASENT0714080','good, specimen missing abdomen',4.5146,NULL,NULL,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
+	 ('CASENT0741223','Plastic embedded OsO4 stained Novomessor head',NULL,NULL,NULL,'No ethanol used','No','Head',NULL,'CTScans/Ants/Novomessor/cockerelli/CASENT0741223_Nov_Head_2020-01-13_123523','julian-katzke','jira','Osmium','No',NULL,NULL,'Resin',NULL,NULL),
+	 ('CASENT0741222','not fully stained, good image quality',NULL,NULL,NULL,'No ethanol used','No','Head','Brain_dissect','CTScans/Ants/Novomessor/cockerelli/CASENT0741222_Nov_Head_Brain_dissect_2020-01-31_142856','julian-katzke','jira','Osmium','No',NULL,NULL,'Resin',NULL,NULL),
+	 ('CASENT0181506','blurry, streaks',2.6232,NULL,NULL,'Not known',NULL,NULL,NULL,
 	 NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL);
-INSERT INTO public.ctscans (ct_scan_id,specimen_code,ct_scan_note,voxel_size,body_size_voxels,exposure_time,projections,source_detector_distance,xray_power,xray_power_w,source_distance,detector_distance,ethanol_conc,wet,body_part,special_identifier,folder_location,scan_user,insert_user,staining,antscan,antscan_code,model,dry_method,scan_reason,prep_note) VALUES
-	 (72,'CASENT0180226','good, scan missing part of abdomen',5.3578,NULL,3.0,3200,38.9889,'40kV',NULL,NULL,NULL,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
-	 (6,'CASENT0181342','blurry',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
-	 (43,'CASENT0174049','good, scan missing part of abdomen',5.2039,NULL,20.0,1600,79.1423,'30kV',NULL,NULL,NULL,
-	 'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO public.ctscans (specimen_code,ct_scan_note,voxel_size,exposure_time,projections,ethanol_conc,wet,body_part,special_identifier,folder_location,scan_user,insert_user,staining,antscan,antscan_code,model,dry_method,scan_reason,prep_note) VALUES
+	 ('CASENT0180226','good, scan missing part of abdomen',5.3578,3.0,3200,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
+	 ('CASENT0181342','blurry',NULL,NULL,NULL,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL),
+	 ('CASENT0174049','good, scan missing part of abdomen',5.2039,20.0,1600,'Not known',NULL,NULL,NULL,NULL,'Unknown',NULL,NULL,'No',NULL,NULL,NULL,NULL,NULL);

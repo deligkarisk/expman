@@ -48,7 +48,7 @@ public class editSpecimenHTMLTest {
     HtmlInput ownedByField;
     HtmlInput lifestageSexField;
     HtmlInput mediumField;
-    HtmlInput typeStatusField;
+    HtmlSelect typeStatusField;
     HtmlInput speciesField;
     HtmlInput determinedByField;
     HtmlInput dateIdentifiedField;
@@ -83,7 +83,7 @@ public class editSpecimenHTMLTest {
         ownedByField = form.getInputByName("ownedBy");
         lifestageSexField = form.getInputByName("lifestageSex");
         mediumField = form.getInputByName("medium");
-        typeStatusField = form.getInputByName("typeStatus");
+        typeStatusField = form.getSelectByName("typeStatus");
         speciesField = form.getInputByName("species");
         determinedByField = form.getInputByName("determinedBy");
         dateIdentifiedField = form.getInputByName("dateIdentified");
@@ -93,16 +93,13 @@ public class editSpecimenHTMLTest {
         assertEquals("CASENT0741227", specimenCodeField.asText());
         assertEquals("PSW15299", sampleCodeField.asText());
         assertEquals("AL0637", collectionEventField.asText());
-        assertEquals("Destructive sample", basisOfRecordSelect.asText());
+        assertEquals("Preserved specimen", basisOfRecordSelect.asText());
         assertEquals("", locatedAtField.asText());
         assertEquals("", ownedByField.asText());
-        assertEquals("2w", lifestageSexField.asText());
         assertEquals("", mediumField.asText());
         assertEquals("Not Provided", typeStatusField.asText());
         assertEquals("Orectognathus.versicolor", speciesField.asText());
         assertEquals("", determinedByField.asText());
-        assertEquals("2000-01-01", dateIdentifiedField.asText());
-        assertEquals("0", antwebManageField.asText());
 
     }
 }

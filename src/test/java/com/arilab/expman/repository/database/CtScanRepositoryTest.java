@@ -61,7 +61,7 @@ public class CtScanRepositoryTest {
         assertTrue(persistenceUtil.isLoaded(ctScan.getSpecimen(), "collectionEvent"));
         assertTrue(persistenceUtil.isLoaded(ctScan.getSpecimen().getCollectionEvent(), "locality"));
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "typeStatus"));
-        assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "basisOfRecord"));
+        assertTrue(ctScan.getSpecimen().getBasisOfRecord() == null || !persistenceUtil.isLoaded(ctScan.getSpecimen(), "basisOfRecord"));
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "species"));
         logger.debug("Finished checking the default initialization of objects, continuing with reading properties of " +
                              "the specimen.");

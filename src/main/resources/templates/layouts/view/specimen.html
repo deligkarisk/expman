@@ -10,7 +10,6 @@
 <div th:replace="layouts/main_layout::jumbotron"></div>
 
 
-
 <div class="container">
     <div class="row">
     <div class="table-responsive col-md-6">
@@ -101,6 +100,7 @@
                 <a th:href="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" class="btn btn-primary">Edit</a>
             </div>
         </div>
+        <br>
         <table class="table table-bordered table-striped"  id="specimenCodeDataTable" th:object="${specimen}">
             <colgroup>
                 <col span="1" style="width: 15%;">
