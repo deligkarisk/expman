@@ -44,7 +44,8 @@ public class CollectionEventRepositoryTest {
     @Test
     public void collectionEventCanBeAdded() {
         Locality locality = localityRepository.findByLocalityCode(REFERENCE_LOCALITY).get();
-        CollectionEvent collectionEvent = new CollectionEvent("TestCollCode", locality);
+        CollectionEvent collectionEvent = new CollectionEvent("TestCollCode");
+        collectionEvent.setLocality(locality);
         collectionEventRepository.saveAndFlush(collectionEvent);
     }
 

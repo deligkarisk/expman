@@ -115,7 +115,8 @@ public class IntegrationTest {
         Country country = countryRepository.findByCountryName(REFERENCE_COUNTRY_NAME).get();
         Locality locality = new Locality("TestLocalityCode",country);
         localityRepository.save(locality);
-        CollectionEvent collectionEvent = new CollectionEvent("TestCollectionEventCode", locality);
+        CollectionEvent collectionEvent = new CollectionEvent("TestCollectionEventCode");
+        collectionEvent.setLocality(locality);
         collectionEventRepository.save(collectionEvent);
         Genus genus = new Genus("TestGenus");
         genusRepository.save(genus);

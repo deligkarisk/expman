@@ -22,12 +22,11 @@ public class CollectionEvent implements Serializable {
     @NotNull
     @NonNull
     @NotEmpty
-    @Column(name = "collection_event_code", unique = true, nullable = false)
+    @Column(name = "collection_event_code", unique = true, nullable = false, columnDefinition = "VARCHAR")
     private String collectionEventCode;
 
-    @NonNull
-    @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "locality_code", referencedColumnName = "locality_code")
     private Locality locality;
 
@@ -64,9 +63,9 @@ public class CollectionEvent implements Serializable {
     @Column(name = "jira_user")
     private String jiraUser;
 
-    public CollectionEvent(@NonNull String collectionEventCode) {
+   /* public CollectionEvent(@NonNull String collectionEventCode) {
         this.collectionEventCode = collectionEventCode;
-    }
+    }*/
 
     @Override
     public String toString() {

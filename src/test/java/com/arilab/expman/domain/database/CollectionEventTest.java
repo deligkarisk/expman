@@ -31,11 +31,4 @@ public class CollectionEventTest {
         collectionEvent.setDateFlag((3));
     }
 
-
-    @Test
-    public void requiredArgsConstructor() {
-        collectionEvent = new CollectionEvent("TestCollectionEventCode",locality);
-    }
-
-
 }
