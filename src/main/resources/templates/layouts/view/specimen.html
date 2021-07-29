@@ -15,10 +15,7 @@
     <div class="table-responsive col-md-6">
         <div class="row">
             <div class="col-md-6">
-                <h3>Basic info</h3>
-            </div>
-            <div class="col-md-6">
-                <a th:href="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" class="btn btn-primary">Edit</a>
+                <h4>Basic info</h4>
             </div>
         </div>
         <br>
@@ -94,10 +91,7 @@
     <div class="table-responsive col-md-6">
         <div class="row">
             <div class="col-md-6">
-                <h3>Specimen codes</h3>
-            </div>
-            <div class="col-md-6">
-                <a th:href="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" class="btn btn-primary">Edit</a>
+                <h4>Specimen codes</h4>
             </div>
         </div>
         <br>
@@ -128,9 +122,14 @@
                 <td th:text="*{otherCode}"></td>
             </tr>
             </tbody>
-
         </table>
+
+        <div class="col-md-6">
+            <a th:href="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" class="btn btn-info"><i
+                    class="fas fa-cogs"></i> Edit data</a>
+        </div>
     </div>
+
 </div>
 </div>
 
