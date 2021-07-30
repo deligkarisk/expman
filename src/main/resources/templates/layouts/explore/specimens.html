@@ -8,11 +8,12 @@
 <body>
 <nav th:replace="layouts/main_layout::navigation"></nav>
 <div th:replace="layouts/main_layout::jumbotron"></div>
+<div th:replace="layouts/main_layout::breaks_top"></div>
 
 
 <div class="container">
     <div th:if="${not #lists.isEmpty(specimens)}">
-        <h2> Specimens List </h2>
+        <h3> Specimens List </h3>
         <table class="table table-striped">
             <tr>
                 <th>specimenCode</th>

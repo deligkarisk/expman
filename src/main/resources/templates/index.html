@@ -7,17 +7,14 @@
 <body>
 <nav th:replace="layouts/main_layout::navigation"></nav>
 <div th:replace="layouts/main_layout::jumbotron"></div>
-
+<div th:replace="layouts/main_layout::breaks_top"></div>
 <div class="container">
     <div class="col-md-12">
         <div class="row">
-            <h1 th:text="#{index.page.title}"> Welcome to the experiment manager </h1>
+            <h2 th:text="#{index.page.title}"> Welcome to the experiment manager </h2>
         </div>
         <div class="row">
-            <h2 th:text="#{index.page.subtitle}"> This software help you manage the experimental metadata </h2>
-        </div>
-        <div class="row">
-            <h6 th:text="#{index.page.usermessage}"> Use the menu above to select the appropriate service   </h6>
+            <h4 th:text="#{index.page.usermessage}"> This software help you manage the experimental metadata </h4>
         </div>
     </div>
 

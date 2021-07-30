@@ -10,6 +10,8 @@
 <body>
 <nav th:replace="layouts/main_layout::navigation"></nav>
 <div th:replace="layouts/main_layout::jumbotron"></div>
+<div th:replace="layouts/main_layout::breaks_top"></div>
+
 
 <div class="container">
     <form method="post" th:action="@{'/edit/specimen'}" th:object="${specimen}" id="editSpecimenForm">
@@ -44,7 +46,7 @@
                 <div class="col-md-6">
                     <div th:if="${specimen.basisOfRecord != null}">
                         <select class="form-control" th:field="*{basisOfRecord}" id="basisOfRecord" autofocus>
-                            <option value=""> Select Basis of Record</option>
+                            <option value=" "></option>
                             <option th:each="basisOfRecord : ${basisOfRecords}"
                                     th:value="${basisOfRecord.basisOfRecord}"
                                     th:text="${basisOfRecord.basisOfRecord}"
@@ -54,7 +56,7 @@
                     </div>
                     <div th:if="${specimen.basisOfRecord == null}">
                         <select class="form-control" th:field="*{basisOfRecord}" id="basisOfRecord" autofocus>
-                            <option value=""> Select Basis of Record</option>
+                            <option value=" "></option>
                             <option th:each="basisOfRecord : ${basisOfRecords}"
                                     th:value="${basisOfRecord.basisOfRecord}"
                                     th:text="${basisOfRecord.basisOfRecord}">
@@ -96,7 +98,6 @@
                     <div th:if="${specimen.typeStatus != null}">
                         <select class="form-control" th:errorclass="is-invalid" th:field="*{typeStatus}" id="typeStatus"
                                 autofocus>
-                            <option value=""> Select Type Status</option>
                             <option th:each="typeStatus : ${typeStatus}"
                                     th:value="${typeStatus.typeStatus}"
                                     th:text="${typeStatus.typeStatus}"
