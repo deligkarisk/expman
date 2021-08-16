@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main_layout :: head('Expman')}">
+</head>
+
+
+
+
+<body>
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div th:replace="layouts/main_layout::jumbotron"></div>
+<div th:replace="layouts/main_layout::breaks_top"></div>
+
+<div class="container">
+    <form method="post" th:action="@{'/new/ctscan'}" th:object="${ctScan}" id="newCtScanForm">
+        <div class="row">
+            <div class="table-responsive col-md-6">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <h4>Basic data</h4>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label for="specimen" class="col-md-3 col-form-label text-right"> Specimen Code</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{specimen}" id="specimen" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="model" class="col-md-3 col-form-label text-right"> Model</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{model}" id="model" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="bodyPart" class="col-md-3 col-form-label text-right"> Body part</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{bodyPart}" id="bodyPart" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="specialIdentifier" class="col-md-3 col-form-label text-right"> Special identifier</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{specialIdentifier}" id="specialIdentifier" autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="prepNote" class="col-md-3 col-form-label text-right"> Prep note</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{prepNote}" id="prepNote" autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="antscan" class="col-md-3 col-form-label text-right"> Antscan</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{antscan}" id="antScan" autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="scanReason" class="col-md-3 col-form-label text-right"> Scan reason</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{scanReason}" id="scanReason" autofocus>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <h4>Staining</h4>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label for="staining" class="col-md-3 col-form-label text-right"> Staining</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{staining}" id="staining" required autofocus>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="wet" class="col-md-3 col-form-label text-right"> Wet</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{wet}" id="wet" required autofocus>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="ethanolConcentration" class="col-md-3 col-form-label text-right"> Ethanol concentration</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{ethanolConcentration}" id="ethanolConcentration" required autofocus>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="stainingStart" class="col-md-3 col-form-label text-right"> Staining start</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{stainingStart}" id="stainingStart" autofocus>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dryMethod" class="col-md-3 col-form-label text-right"> Dry method</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{dryMethod}" id="dryMethod" autofocus>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </form>
+
+</div>
+
+</body>
+</html>
