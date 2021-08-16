@@ -28,22 +28,22 @@ public class StringToCollectionEventTest {
     StringToCollectionEvent stringToCollectionEvent;
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNullParameter() throws Exception {
+    public void testNullParameter() {
         stringToCollectionEvent.convert(null);
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
         assertNull(stringToCollectionEvent.convert(""));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testInvalidCollectionEvent() throws Exception {
+    public void testInvalidCollectionEvent() {
         stringToCollectionEvent.convert("InvalidCollectionEventCode");
     }
 
     @Test
-    public void testExistingCollectionEvent() throws Exception {
+    public void testExistingCollectionEvent() {
         CollectionEvent collectionEvent = stringToCollectionEvent.convert(REFERENCE_COLLECTION_EVENT_CODE);
         assertEquals(REFERENCE_COLLECTION_EVENT_LOCALITY_CODE, collectionEvent.getLocality().getLocalityCode());
     }
