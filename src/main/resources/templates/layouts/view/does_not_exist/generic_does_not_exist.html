@@ -8,19 +8,18 @@
 <body>
 <nav th:replace="layouts/main_layout::navigation"></nav>
 <div th:replace="layouts/main_layout::jumbotron"></div>
+<div th:replace="layouts/main_layout::breaks_top"></div>
+
 
 <div class="container">
-    <div class="col-md-12">
-        <div class="row">
-            <h1 th:text="#{db.explore.page.title}"> Welcome to the experiment manager </h1>
-        </div>
-        <div class="row">
-            <h2 th:text="#{db.explore.page.subtitle}"> This software help you manage the experimental metadata </h2>
+    <div class="row">
+        <div class="table-responsive col-md-6">
+            <div class="row">
+                <h2> CORRESPONDING ENTITY COULD NOT BE FOUND. </h2>
+            </div>
         </div>
     </div>
 </div>
-
-<h2> CORRESPONDING ENTITY COULD NOT BE FOUND. </h2>
 
 
 </body>

@@ -13,7 +13,7 @@
 <div th:replace="layouts/main_layout::breaks_top"></div>
 
 <div class="container">
-    <form method="post" th:action="@{'/new/ctscan'}" th:object="${ctScan}" id="newCtScanForm">
+    <form method="post" th:action="@{'/edit/ctscan'}" th:object="${ctscan}" id="newCtScanForm">
         <div class="row">
             <div class="table-responsive col-md-6">
                 <div class="row">
@@ -61,15 +61,37 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="antscanCode" class="col-md-3 col-form-label text-right"> Antscan code</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{antscanCode}" id="antscanCode" autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="scanReason" class="col-md-3 col-form-label text-right"> Scan reason</label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" th:field="*{scanReason}" id="scanReason" autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="scanUser" class="col-md-3 col-form-label text-right"> Scan user</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{scanUser}" id="scanUser" autofocus>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="ctScanNote" class="col-md-3 col-form-label text-right"> Scan note</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" th:field="*{ctScanNote}" id="ctScanNote" autofocus>
                     </div>
                 </div>
 
 
 
             </div>
+            <div class="table-responsive col-md-6">
+
+
+
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
@@ -97,25 +119,33 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="stainingStart" class="col-md-3 col-form-label text-right"> Staining start</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{stainingStart}" id="stainingStart" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label for="dryMethod" class="col-md-3 col-form-label text-right"> Dry method</label>
                 <div class="col-md-6">
                     <input class="form-control" type="text" th:field="*{dryMethod}" id="dryMethod" autofocus>
                 </div>
             </div>
+                <div class="form-group row" style="padding-top: 1rem">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <button name="createScan" type="submit" class="btn btn-info"><i
+                                class="fas fa-spinner"></i> Submit
+                        </button>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+                <div class="form-group row" style="padding-top: 0rem">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <a th:href="@{'/explore/ctscans'}" class="btn btn-secondary"><i
+                                class="fab fa-affiliatetheme"></i> Back to CT Scans</a>
+                    </div>
+                    <div class="col-md-3"></div>
+
+                </div>
 
 
-
-
+            </div>
         </div>
-
-
-
     </form>
 
 </div>

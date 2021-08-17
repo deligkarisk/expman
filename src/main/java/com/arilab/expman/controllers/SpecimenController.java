@@ -6,7 +6,6 @@ import com.arilab.expman.domain.database.supplementary.TypeStatus;
 import com.arilab.expman.service.database.SpecimenService;
 import com.arilab.expman.service.database.supplementary.BasisOfRecordService;
 import com.arilab.expman.service.database.supplementary.TypeStatusService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
