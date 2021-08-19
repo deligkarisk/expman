@@ -14,7 +14,7 @@
 
 
 <div class="container">
-    <form method="post" th:action="@{'/edit/specimen'}" th:object="${specimen}" id="editSpecimenForm">
+    <form method="post" th:action="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" th:object="${specimen}" id="editSpecimenForm">
         <div class="row">
             <div class="table-responsive col-md-6">
 
@@ -240,17 +240,9 @@
                         <div class="col-md-3"></div>
 
                     </div>
-
-
-
             </div>
         </div>
-
-
     </form>
-
-
 </div>
-
 </body>
 </html>

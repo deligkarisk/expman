@@ -51,6 +51,14 @@ public class SpecimenController {
         return typeStatuses;
     }
 
+    @ModelAttribute("specimen")
+    public Specimen ctScanModel(@PathVariable(value = "specimenCode", required = false) String specimenCode) {
+        if (specimenCode == null) {
+            return null;
+        }
+        Optional<Specimen> specimen = specimenService.findSingleSpecimenBySpecimenCode(specimenCode);
+        return specimen.orElse(null);
+    }
 
 
     @GetMapping("/explore/specimens")
@@ -66,7 +74,7 @@ public class SpecimenController {
         long totalSpecimens = specimenPage.getTotalElements();
         List<Specimen> specimens = specimenPage.getContent();
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("specimens", specimens );
+        model.addAttribute("specimens", specimens);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalSpecimens", totalSpecimens);
         return "layouts/explore/specimens";
@@ -75,40 +83,28 @@ public class SpecimenController {
 
     @GetMapping("/view/specimen/{specimenCode}")
     public String viewSpecimen(Model model, @PathVariable("specimenCode") String specimenCode) {
-        Optional<Specimen> optionalSpecimen = specimenService.findSingleSpecimenBySpecimenCode(specimenCode);
-
-        if (optionalSpecimen.isEmpty()) {
-            return "/layouts/view/view_specimen_does_not_exist";
+        if (model.getAttribute("specimen") == null) {
+            return("/layouts/view/does_not_exist/generic_does_not_exist");
         }
 
-        Specimen specimen = optionalSpecimen.get();
-        model.addAttribute("specimen", specimen);
-        return("layouts/view/specimen");
-
+        return ("layouts/view/specimen");
     }
 
     @GetMapping("/edit/specimen/{specimenCode}")
     public String editSpecimen(Model model, @PathVariable("specimenCode") String specimenCode) {
-        Optional<Specimen> optionalSpecimen = specimenService.findSingleSpecimenBySpecimenCode(specimenCode);
-
-        if (optionalSpecimen.isEmpty()) {
-            return "/layouts/edit/does_not_exist";
+        if (model.getAttribute("specimen") == null) {
+            return("/layouts/view/does_not_exist/generic_does_not_exist");
         }
-
-        Specimen specimen = optionalSpecimen.get();
-        model.addAttribute("specimen", specimen);
-        return("layouts/edit/specimen");
+        return ("layouts/edit/specimen");
 
     }
 
 
-    @PostMapping("/edit/specimen")
+    @PostMapping("/edit/specimen/{specimenCode}")
     public String updateSpecimen(@ModelAttribute("specimen") @Validated Specimen specimen, BindingResult bindingResult,
                                  Model model) {
 
         if (bindingResult.hasErrors()) {
-            List<BasisOfRecord> basisOfRecords = basisOfRecordService.findAll();
-
             model.addAttribute("specimen", specimen);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "layouts/edit/specimen";

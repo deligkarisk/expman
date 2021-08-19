@@ -13,7 +13,7 @@
 <div th:replace="layouts/main_layout::breaks_top"></div>
 
 <div class="container">
-    <form method="post" th:action="@{'/edit/ctscan'}" th:object="${ctscan}" id="newCtScanForm">
+    <form method="post" th:action="@{'/edit/ctscan/' + ${ctscan.getScanId()}}" th:object="${ctscan}" id="newCtScanForm">
         <div class="row">
             <div class="table-responsive col-md-6">
                 <div class="row">

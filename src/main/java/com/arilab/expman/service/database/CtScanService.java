@@ -24,8 +24,4 @@ public class CtScanService {
         Optional<CtScan> ctScan = ctScanRepository.findById(ctScanId);
         return ctScan;
     }
-
-
-
-
 }
