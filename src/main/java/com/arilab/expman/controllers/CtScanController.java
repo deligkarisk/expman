@@ -40,7 +40,7 @@ public class CtScanController {
     @GetMapping("/view/ctscan/{ctScanId}")
     public String viewCtScan(Model model, @PathVariable(value = "ctScanId") Long ctScanId) {
         if (model.getAttribute("ctscan") == null) {
-            return ("layouts/view/does_not_exist/generic_does_not_exist");
+            return ("layouts/does_not_exist");
         }
         return ("layouts/view/ctscan");
     }
@@ -48,7 +48,7 @@ public class CtScanController {
     @GetMapping("/edit/ctscan/{ctScanId}")
     public String editCtScan(Model model, @PathVariable("ctScanId") Long ctScanId) {
         if (model.getAttribute("ctscan") == null) {
-            return ("layouts/view/does_not_exist/generic_does_not_exist");
+            return ("layouts/does_not_exist");
         }
         return ("layouts/edit/ctscan");
     }

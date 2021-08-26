@@ -9,7 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-public class exploreSpecimen {
+public class exploreSpecimenTest {
 
     @Mock
     SpecimenService specimenService;
