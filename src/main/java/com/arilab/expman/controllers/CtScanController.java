@@ -3,7 +3,6 @@ package com.arilab.expman.controllers;
 import com.arilab.expman.domain.CtScan;
 import com.arilab.expman.service.CtScanService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -13,8 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Optional;
 
-@Controller
-public class CtScanController {
+@RestController public class CtScanController {
 
     private CtScanService ctScanService;
 
