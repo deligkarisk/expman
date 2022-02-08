@@ -1,7 +1,7 @@
 package com.arilab.expman.controllers;
 
-import com.arilab.expman.domain.database.CtScan;
-import com.arilab.expman.service.database.CtScanService;
+import com.arilab.expman.domain.CtScan;
+import com.arilab.expman.service.CtScanService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

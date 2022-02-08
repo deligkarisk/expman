@@ -1,23 +1,20 @@
 package com.arilab.expman.integration;
 
 
-import com.arilab.expman.domain.database.*;
-import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
-import com.arilab.expman.domain.database.supplementary.Country;
-import com.arilab.expman.domain.database.supplementary.TypeStatus;
-import com.arilab.expman.repository.database.*;
-import com.arilab.expman.repository.database.supplementary.BasisOfRecordRepository;
-import com.arilab.expman.repository.database.supplementary.CountryRepository;
-import com.arilab.expman.repository.database.supplementary.TypeStatusRepository;
+import com.arilab.expman.domain.*;
+import com.arilab.expman.domain.supplementary.BasisOfRecord;
+import com.arilab.expman.domain.supplementary.Country;
+import com.arilab.expman.domain.supplementary.TypeStatus;
+import com.arilab.expman.repository.*;
+import com.arilab.expman.repository.supplementary.BasisOfRecordRepository;
+import com.arilab.expman.repository.supplementary.CountryRepository;
+import com.arilab.expman.repository.supplementary.TypeStatusRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,5 @@
 package com.arilab.expman.config.datasources;
 
-import com.arilab.expman.domain.database.validator.OnInsert;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +22,7 @@ import java.util.Properties;
 
     @Configuration
     @EnableTransactionManagement
-    @EnableJpaRepositories(basePackages = "com.arilab.expman.repository.database",
+    @EnableJpaRepositories(basePackages = "com.arilab.expman.repository",
             entityManagerFactoryRef = "arilabdbEntityManagerFactory",
             transactionManagerRef = "arilabdbTransactionManager")
     public class ArilabdbDataSourceConfiguration {
@@ -59,14 +58,14 @@ import java.util.Properties;
         public LocalContainerEntityManagerFactoryBean arilabdbEntityManagerFactory() {
             LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
             factory.setDataSource(arilabdbdataSource());
-            factory.setPackagesToScan("com.arilab.expman.domain.database");
+            factory.setPackagesToScan("com.arilab.expman.domain");
             factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
             Properties jpaProperties = new Properties();
             jpaProperties.put("hibernate.show-sql", "false"); // we use the logging framework instead.
             jpaProperties.put("hibernate.format_sql", "true");
             jpaProperties.put("hibernate.generate_statistics","true");
-            jpaProperties.put("javax.persistence.validation.group.pre-persist", "com.arilab.expman.domain.database" +
+            jpaProperties.put("javax.persistence.validation.group.pre-persist", "com.arilab.expman.domain" +
                     ".validator.OnInsert");
             jpaProperties.put("javax.persistence.validation.factory", validator);
             factory.setJpaProperties(jpaProperties);

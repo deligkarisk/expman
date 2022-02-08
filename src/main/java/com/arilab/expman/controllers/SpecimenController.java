@@ -1,11 +1,11 @@
 package com.arilab.expman.controllers;
 
-import com.arilab.expman.domain.database.Specimen;
-import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
-import com.arilab.expman.domain.database.supplementary.TypeStatus;
-import com.arilab.expman.service.database.SpecimenService;
-import com.arilab.expman.service.database.supplementary.BasisOfRecordService;
-import com.arilab.expman.service.database.supplementary.TypeStatusService;
+import com.arilab.expman.domain.Specimen;
+import com.arilab.expman.domain.supplementary.BasisOfRecord;
+import com.arilab.expman.domain.supplementary.TypeStatus;
+import com.arilab.expman.service.SpecimenService;
+import com.arilab.expman.service.supplementary.BasisOfRecordService;
+import com.arilab.expman.service.supplementary.TypeStatusService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
