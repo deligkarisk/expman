@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -87,16 +84,23 @@ public class SpecimenRepositoryTest {
 
     @Test
     @Transactional("arilabdbTransactionManager")
-    public void specimenEntityGraphIsAppliedOnFindAll() {
+    public void specimenEntityGraphFetchBasicIsAppliedOnFindAll() {
         PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
 
-        Specimen specimen = specimenRepository.findAll().get(0);
+        List<Specimen> specimenList = specimenRepository.findAll();
+        // Get only a specific specimen to use for the tests
+        Optional<Specimen> optionalSpecimen = getReferenceSpecimenObject(specimenList);
+        if (optionalSpecimen.isEmpty()) {
+            fail("No reference specimen found in the test database. Can't proceed with test.");
+        }
+
+        Specimen specimen = optionalSpecimen.get();
+
         assertTrue(persistenceUtil.isLoaded(specimen, "locality"));
         assertTrue(persistenceUtil.isLoaded(specimen, "collectionEvent"));
-        //assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent(), "collectionEventCode"));
-        //assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"localityCode"));
-       // assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"biogeographicRegion"));
-        assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
+        assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent(), "collectionEventCode"));
+        assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"localityCode"));
+        assertFalse(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"biogeographicRegion"));
         assertFalse(persistenceUtil.isLoaded(specimen,"typeStatus"));
         assertNotNull(specimen.getCollectionEvent().getLocality().getCountry().getCountryName()); // This should
         // work. As the country name is the @Id field, and used as a foreign key, the object is not initialized. In
@@ -111,6 +115,15 @@ public class SpecimenRepositoryTest {
         assertTrue(persistenceUtil.isLoaded(specimen.getCollectionEvent().getLocality(),"country"));
 
     }
+
+        private Optional<Specimen> getReferenceSpecimenObject(List<Specimen> specimenList) {
+            for (Specimen specimen : specimenList) {
+                if (specimen.getSpecimenCode().equals(REFERENCE_SPECIMEN_CODE)) {
+                    return Optional.of(specimen);
+                }
+            }
+            return Optional.empty();
+        }
 
 
     // Failed conditions
