@@ -19,6 +19,12 @@ public class SpecimenService {
        this.specimenRepository = specimenRepository;
    }
 
+
+   public List<Specimen> findAll() {
+       return specimenRepository.findAll();
+   }
+
+
    public Page<Specimen> findAll(int pageNumber) {
        Pageable pageable = PageRequest.of(pageNumber -1,10);
        return specimenRepository.findAll(pageable);
