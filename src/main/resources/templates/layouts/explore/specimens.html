@@ -52,25 +52,49 @@
         </table>
     </div>
     <div> &nbsp;</div>
-    <div>
-        Total items: [[${totalSpecimens}]] - Page [[${currentPage}]] of [[${totalPages}]]
-        &nbsp; - &nbsp;
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                Total items: <span th:text="${#numbers.formatDecimal(totalSpecimens, 0, 'COMMA', 0, 'POINT')}"></span>
+                - Page <span th:text="${#numbers.formatDecimal(currentPage, 0, 'COMMA', 0, 'POINT')}"></span>
+                of <span  th:text="${#numbers.formatDecimal(totalPages, 0, 'COMMA', 0, 'POINT')}"></span>
+                &nbsp;  &nbsp;
+            </div>
 
-        <a th:if="${currentPage} > 1" th:href="@{'/explore/specimens/page/1'}"> First </a>
-        <span th:if="${currentPage} == 1"> First </span>
 
-        <a th:if="${currentPage} > 1" th:href="@{'/explore/specimens/page/' + ${currentPage - 1}}"> < Previous </a>
-        <a th:if="${currentPage} == 1"> < Previous </a>
 
-        <span th:each="i: ${#numbers.sequence(currentPage - 4,currentPage + 5)}">
-            <a th:if="${i} < ${totalPages} and ${i} > 0" th:href="@{'/explore/specimens/page/' + ${i}}"> [[${i}]] </a>
-        </span>
 
-        <a th:if="${currentPage} < ${totalPages}" th:href="@{'/explore/specimens/page/' + ${currentPage + 1}}"> Next ></a>
-        <a th:if="${currentPage} == ${totalPages}"> Next </a>
 
-        <a th:if="${currentPage} < ${totalPages}" th:href="@{'/explore/specimens/page/' + ${totalPages}}"> Last >> </a>
-        <span th:if="${currentPage} == ${totalPages}"> Last </span>
+                <div class="col table_navigation_container">
+
+                    <div th:if="${currentPage} > 1" class="flex-item table_navigation_element_string_withref">
+                        <a th:href="@{'/explore/specimens/page/1'}"> &lt;&lt; First</a></div>
+                    <div th:if="${currentPage} == 1" class="flex-item table_navigation_element_string">&lt;&lt; First</div>
+
+                    <div th:if="${currentPage} > 1" class="flex-item table_navigation_element_string_withref">
+                        <a th:href="@{'/explore/specimens/page/' + ${currentPage - 1}}">&lt; Previous</a>
+                    </div>
+                    <div th:if="${currentPage} ==1" class="flex-item table_navigation_element_string">&lt; Previous</div>
+
+                    <div th:each="i: ${#numbers.sequence(currentPage - 2, currentPage + 3)}" th:if="${i} <= ${totalPages} and ${i} > 0" class="flex-item table_navigation_element_numbering">
+                        <a  th:href="@{'/explore/specimens/page/' + ${i}}"> <span  th:text="${#numbers.formatDecimal(i, 0, 'COMMA', 0, 'POINT')}"></span> </a>
+                    </div>
+
+                    <div th:if="${currentPage} < ${totalPages}" class="flex-item table_navigation_element_string_withref">
+                        <a th:href="@{'/explore/specimens/page/' + ${currentPage + 1}}">Next &gt;</a>
+                    </div>
+                    <div th:if="${currentPage} == ${totalPages}" class="flex-item table_navigation_element_string">Next &gt;</div>
+
+                    <div th:if="${currentPage} < ${totalPages}" class="flex-item table_navigation_element_string_withref">
+                        <a th:href="@{'/explore/specimens/page/' + ${totalPages}}">Last &gt;&gt;</a>
+                    </div>
+                    <div th:if="${currentPage} == ${totalPages}" class="flex-item table_navigation_element_string">Last &gt;&gt;</div>
+
+                </div>
+            </div>
+
+
+
 
     </div>
 </div>

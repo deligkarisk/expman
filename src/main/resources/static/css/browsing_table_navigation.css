@@ -1,0 +1,68 @@
+
+
+.table_navigation_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0px;
+}
+
+
+.table_navigation_element_string, .table_navigation_element_string_withref {
+    align-items: center;
+    display:flex;
+    padding: 2px;
+    width: 75px;
+    height: 40px;
+    background: lightseagreen;
+    margin: 2px;
+    border-radius: 5px;
+    justify-content: center;
+    transition: background 0.5s;
+}
+
+.table_navigation_element_string a:link, .table_navigation_element_string_withref a:link {
+    color:black;
+}
+
+.table_navigation_element_string a:visited, .table_navigation_element_string_withref a:visited {
+    color:black;
+}
+
+.table_navigation_element_numbering {
+    display:flex;
+    padding: 2px;
+    width: 40px;
+    height: 40px;
+    background: #17a2b8;
+    margin: 2px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.5s;
+}
+
+.table_navigation_element_numbering a:link {
+    color:black;
+}
+
+.table_navigation_element_numbering a:visited {
+    color:black;
+}
+
+
+.table_navigation_element_string_withref:hover, .table_navigation_element_numbering:hover  {
+    background: #9fcdff;
+}
+
+/* Increase the clickable area of the links (otherwise you need to click exactly on the text) */
+.table_navigation_element_string_withref a,  .table_navigation_element_numbering a  {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
