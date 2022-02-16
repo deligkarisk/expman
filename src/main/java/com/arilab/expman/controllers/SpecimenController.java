@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -113,6 +114,22 @@ public class SpecimenController {
             System.out.println("OK");
             return "redirect:/view/specimen/" + savedSpecimen.getSpecimenCode();
         }
+
+    }
+
+    @GetMapping("/search/specimen/byspecimencode")
+    public String searchSpecimenBySpecimenCode(@RequestParam String specimenCode, Model model) {
+       List<Specimen> specimenList = new ArrayList<Specimen>();
+       Optional<Specimen> optionalSpecimen = specimenService.findSingleSpecimenBySpecimenCode(specimenCode);
+       if (optionalSpecimen.isEmpty()) {
+           return("/layouts/view/does_not_exist/generic_does_not_exist");
+
+       }
+
+       specimenList.add(optionalSpecimen.get());
+       model.addAttribute("specimens", specimenList);
+
+       return "layouts/search_result/specimens_result";
 
     }
 

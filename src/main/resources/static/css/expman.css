@@ -12,8 +12,12 @@ body {
     color: #333;
     font-size: 14px;
     line-height: 1.42857;
-    padding-top: 70px;
+    padding-top: 50px;
     font-family: 'Oxygen', serif;
+}
+
+.navbar {
+    height:50px;
 }
 
 
@@ -32,4 +36,30 @@ button.nav-link {
     border:none;
     cursor: pointer;
 }
+
+.specimen_search_bar {
+    height: 50px;
+    background-color: darkslategrey;
+    margin-top: 0;
+}
+
+.specimen_search_bar_inside_container {
+    height:50px;
+}
+
+#main_row_specimen_search_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+
+#specimens_list_container {
+    margin-top: 30px;
+}
+
+
+
+
 
