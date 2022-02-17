@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <!--suppress ThymeleafVariablesResolveInspection -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="~{layouts/main_layout :: head('Expman')}">
-</head>
+<head th:replace="~{layouts/main_layout :: head('Expman')}"></head>
 
-<h2>Specimens result</h2>
 
 <body>
+
+<!-- necessary for the bootstrap-table plugin -->
+<script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div th:replace="layouts/specimen_search_bar::specimen_search_bar"></div>
+
+
+
+
+
+
+<div id="specimens_list_container" class="container">
+    <div class="col-12">
+        <div class="row">
+            <h3> Specimens List </h3>
+            <table
+                    id="specimensTable"
+                    class="table table-striped table-borderless"
+                    data-toggle="table"
+                    data-search="true"
+                    data-show-export="true"
+                    data-show-columns="true"
+                    data-pagination="true"
+            >
+                <thead>
+                <tr>
+                    <th th:data-field="specimencode">Specimen code</th>
+                    <th th:data-field="taxoncode">Taxon code</th>
+                    <th th:data-field="collectionEvent">Collection event</th>
+                    <th th:data-field="collectedby"> Collected by</th>
+                    <th th:data-field="localityCode">Locality code</th>
+                    <th th:data-field="localityName">Locality name</th>
+                </tr>
+                </thead>
+
+                <tr th:each="specimen : ${specimens}">
+                    <td><a th:href="@{'/view/specimen/' + ${specimen.getSpecimenCode()}}"
+                    th:text="${specimen.getSpecimenCode()}"></a></td>
+
+                    <td th:text="${specimen.getSpecies()}"></td>
+                    <td th:text="${specimen.getCollectionEvent()}"></td>
+                    <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getCollectedBy()} : ''"></td>
+                    <td th:text="${specimen.getCollectionEvent()} != null and ${specimen.getCollectionEvent().getLocality()} != null ?
+                    ${specimen.getCollectionEvent().getLocality().getLocalityCode()} : '' "></td>
+                    <td th:text="${specimen.getCollectionEvent()} != null and ${specimen.getCollectionEvent().getLocality()} != null ?
+                    ${specimen.getCollectionEvent().getLocality().getLocalityName()} : '' "></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 </body>
 </html>

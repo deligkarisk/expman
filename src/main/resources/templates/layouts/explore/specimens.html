@@ -7,41 +7,7 @@
 
 <body>
 <nav th:replace="layouts/main_layout::navigation"></nav>
-
-<div class="container-fluid specimen_search_bar">
-    <div class="container specimen_search_bar_inside_container">
-        <div id="main_row_specimen_search_bar" class="row">
-            <h4 class="col-3">Search specimens by: </h4>
-            <div class="col-3">
-                <form action="/search/specimen/byspecimencode">
-                <div class="input-group">
-                    <input type="text" name="specimenCode" class="form-control" placeholder="Specimen code">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                </form>
-            </div>
-            <div class="col-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Locality code">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="col-3"></div>
-
-        </div>
-
-    </div>
+<div th:replace="layouts/specimen_search_bar::specimen_search_bar"></div>
 
 
 
