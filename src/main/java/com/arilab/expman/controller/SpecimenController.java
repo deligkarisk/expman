@@ -1,4 +1,4 @@
-package com.arilab.expman.controllers;
+package com.arilab.expman.controller;
 
 import com.arilab.expman.domain.database.Specimen;
 import com.arilab.expman.domain.database.supplementary.BasisOfRecord;
@@ -85,7 +85,7 @@ public class SpecimenController {
     @GetMapping("/view/specimen/{specimenCode}")
     public String viewSpecimen(Model model, @PathVariable("specimenCode") String specimenCode) {
         if (model.getAttribute("specimen") == null) {
-            return("/layouts/view/does_not_exist/generic_does_not_exist");
+            return("/layouts/does_not_exist");
         }
 
         return ("layouts/view/specimen");
@@ -94,7 +94,7 @@ public class SpecimenController {
     @GetMapping("/edit/specimen/{specimenCode}")
     public String editSpecimen(Model model, @PathVariable("specimenCode") String specimenCode) {
         if (model.getAttribute("specimen") == null) {
-            return("/layouts/view/does_not_exist/generic_does_not_exist");
+            return("/layouts/does_not_exist");
         }
         return ("layouts/edit/specimen");
 
@@ -128,11 +128,9 @@ public class SpecimenController {
 
        boolean dataLimitExceeded;
 
-
-
        if (specimenList.size() > 1000) {
            dataLimitExceeded = true;
-           specimenList = specimenList.subList(0, 999);
+           specimenList = specimenList.subList(0, 1000);
        } else {
            dataLimitExceeded = false;
        }

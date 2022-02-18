@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class specimenControllerTest {
+public class SpecimenControllerTest {
 
 
     Integer PAGE_SIZE = 10;
@@ -44,7 +44,7 @@ public class specimenControllerTest {
     @MockBean
     BasisOfRecordService basisOfRecordService;
 
-
+    @Autowired
     SpecimenService specimenService;
 
     @Before
@@ -96,4 +96,9 @@ public class specimenControllerTest {
                 .andExpect(model().attribute("specimen", instanceOf(Specimen.class)));
 
     }
+
+
+
+
+
 }

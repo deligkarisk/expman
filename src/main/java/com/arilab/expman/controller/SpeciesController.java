@@ -1,4 +1,4 @@
-package com.arilab.expman.controllers;
+package com.arilab.expman.controller;
 
 import com.arilab.expman.service.database.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
