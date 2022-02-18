@@ -14,8 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,20 +118,39 @@ public class SpecimenController {
     }
 
     @GetMapping("/search/specimen/byspecimencode")
-    public String searchSpecimenBySpecimenCode(@RequestParam String specimenCode, Model model) {
-       List<Specimen> specimenList = new ArrayList<Specimen>();
-       Optional<Specimen> optionalSpecimen = specimenService.findSingleSpecimenBySpecimenCode(specimenCode);
-       if (optionalSpecimen.isEmpty()) {
-           return("/layouts/view/does_not_exist/generic_does_not_exist");
+    public String searchSpecimenBySpecimenCodeLike(@RequestParam String specimenCode, Model model,
+                                                   RedirectAttributes redirectAttributes) {
+       List<Specimen> specimenList  = specimenService.findBySpecimenCodeContainingIgnoreCase(specimenCode);
 
+       if (specimenList.isEmpty()) {
+           return("layouts/does_not_exist");
        }
 
-       specimenList.add(optionalSpecimen.get());
-       model.addAttribute("specimens", specimenList);
+       boolean dataLimitExceeded;
 
-       return "layouts/search_result/specimens_result";
+
+
+       if (specimenList.size() > 1000) {
+           dataLimitExceeded = true;
+           specimenList = specimenList.subList(0, 999);
+       } else {
+           dataLimitExceeded = false;
+       }
+
+       redirectAttributes.addFlashAttribute("specimens", specimenList);
+       redirectAttributes.addFlashAttribute("dataLimitExceeded", dataLimitExceeded);
+
+       return "redirect:/search_result/specimens_result";
 
     }
+
+    @GetMapping("/search_result/specimens_result")
+    public String showSpecimensResults() {
+
+        return "layouts/search_result/specimens_result";
+
+    }
+
 
 
 

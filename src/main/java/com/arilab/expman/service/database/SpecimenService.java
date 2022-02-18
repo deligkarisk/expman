@@ -31,10 +31,6 @@ public class SpecimenService {
 
    }
 
-   public Optional<Specimen> findBySpecimenCode(String specimenCode) {
-       return specimenRepository.findBySpecimenCode(specimenCode);
-   }
-
 
     public Optional<Specimen> findSingleSpecimenBySpecimenCode(String specimenCode) {
         return specimenRepository.findSingleSpecimenBySpecimenCode(specimenCode);
@@ -47,8 +43,8 @@ public class SpecimenService {
     }
 
 
-
-
-
+    public List<Specimen> findBySpecimenCodeContainingIgnoreCase(String specimenCode) {
+       return specimenRepository.findBySpecimenCodeContainingIgnoreCase(specimenCode);
+    }
 
 }

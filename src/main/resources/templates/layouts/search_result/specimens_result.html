@@ -17,12 +17,15 @@
 <div th:replace="layouts/specimen_search_bar::specimen_search_bar"></div>
 
 
-
-
-
-
 <div id="specimens_list_container" class="container">
     <div class="col-12">
+        <div class="row" id="warning_data_limit_row" th:if="${dataLimitExceeded}">
+            <i class="fas fa-exclamation-circle fa-2x my-auto"></i>
+            <h5 id="warning_data_limit_message" class="my-auto">
+                Data limit exceeded. Showing only the first 1,000 entries
+            </h5>
+
+        </div>
         <div class="row">
             <h3> Specimens List </h3>
             <table
@@ -47,7 +50,7 @@
 
                 <tr th:each="specimen : ${specimens}">
                     <td><a th:href="@{'/view/specimen/' + ${specimen.getSpecimenCode()}}"
-                    th:text="${specimen.getSpecimenCode()}"></a></td>
+                           th:text="${specimen.getSpecimenCode()}"></a></td>
 
                     <td th:text="${specimen.getSpecies()}"></td>
                     <td th:text="${specimen.getCollectionEvent()}"></td>
@@ -62,9 +65,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 </body>

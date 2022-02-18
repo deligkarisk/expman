@@ -37,27 +37,6 @@ button.nav-link {
     cursor: pointer;
 }
 
-.specimen_search_bar {
-    height: 50px;
-    background-color: darkslategrey;
-    margin-top: 0;
-}
-
-.specimen_search_bar_inside_container {
-    height:50px;
-}
-
-#main_row_specimen_search_bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-}
-
-
-#specimens_list_container {
-    margin-top: 30px;
-}
 
 
 
