@@ -1,7 +1,7 @@
 <div class="container-fluid specimen_search_bar" th:fragment="specimen_search_bar">
   <div class="container specimen_search_bar_inside_container">
     <div id="main_row_specimen_search_bar" class="row">
-      <h5 class="col-3">Search specimens by: </h5>
+      <h5 class="col-2 specimen_search_bar_label">Search specimens by: </h5>
       <div class="col-3">
         <form action="/search/specimen/byspecimencode">
           <div class="input-group">
@@ -15,15 +15,29 @@
         </form>
       </div>
       <div class="col-3">
+        <form action="/search/specimen/bylocalitycode">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Locality code">
+          <input type="text" name="localityCode" class="form-control" placeholder="Locality code">
           <div class="input-group-append">
-            <button class="btn btn-secondary" type="button">
+            <button class="btn btn-secondary" type="submit">
               <i class="fa fa-search"></i>
             </button>
           </div>
         </div>
+        </form>
       </div>
-      <div class="col-3"></div>
-    </div>
+      <div class="col-3">
+        <form action="/search/specimen/bytaxoncode">
+          <div class="input-group">
+            <input type="text" name="taxonCode" class="form-control" placeholder="Taxon code">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
   </div>
+
+</div>

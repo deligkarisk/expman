@@ -15,6 +15,10 @@
     height: 50px;
 }
 
+.specimen_search_bar_label {
+    color: #c8cbcf;
+}
+
 
 #specimens_list_container {
     margin-top: 30px;

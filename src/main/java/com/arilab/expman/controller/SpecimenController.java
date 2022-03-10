@@ -122,24 +122,48 @@ public class SpecimenController {
                                                    RedirectAttributes redirectAttributes) {
        List<Specimen> specimenList  = specimenService.findBySpecimenCodeContainingIgnoreCase(specimenCode);
 
-       if (specimenList.isEmpty()) {
-           return("layouts/does_not_exist");
-       }
+        return showSpecimenSearchResults(redirectAttributes, specimenList);
 
-       boolean dataLimitExceeded;
+    }
 
-       if (specimenList.size() > 1000) {
-           dataLimitExceeded = true;
-           specimenList = specimenList.subList(0, 1000);
-       } else {
-           dataLimitExceeded = false;
-       }
 
-       redirectAttributes.addFlashAttribute("specimens", specimenList);
-       redirectAttributes.addFlashAttribute("dataLimitExceeded", dataLimitExceeded);
+    @GetMapping("/search/specimen/bylocalitycode")
+    public String searchSpecimenByLocalityCodeLike(@RequestParam String localityCode, Model model,
+                                                   RedirectAttributes redirectAttributes) {
+        List<Specimen> specimenList  = specimenService.findByLocalityCodeContainingIgnoreCase(localityCode);
 
-       return "redirect:/search_result/specimens_result";
+        return showSpecimenSearchResults(redirectAttributes, specimenList);
 
+    }
+
+
+    @GetMapping("/search/specimen/bytaxoncode")
+    public String searchSpecimenByTaxonCodeLike(@RequestParam String taxonCode, Model model,
+                                                   RedirectAttributes redirectAttributes) {
+        List<Specimen> specimenList  = specimenService.findByTaxonCodeContainingIgnoreCase(taxonCode);
+
+        return showSpecimenSearchResults(redirectAttributes, specimenList);
+
+    }
+
+    private String showSpecimenSearchResults(RedirectAttributes redirectAttributes, List<Specimen> specimenList) {
+        if (specimenList.isEmpty()) {
+            return("layouts/does_not_exist");
+        }
+
+        boolean dataLimitExceeded;
+
+        if (specimenList.size() > 1000) {
+            dataLimitExceeded = true;
+            specimenList = specimenList.subList(0, 1000);
+        } else {
+            dataLimitExceeded = false;
+        }
+
+        redirectAttributes.addFlashAttribute("specimens", specimenList);
+        redirectAttributes.addFlashAttribute("dataLimitExceeded", dataLimitExceeded);
+
+        return "redirect:/search_result/specimens_result";
     }
 
     @GetMapping("/search_result/specimens_result")

@@ -34,4 +34,15 @@ public interface SpecimenRepository extends JpaRepository<Specimen,String> {
     List<Specimen> findBySpecimenCodeContainingIgnoreCase(String specimenCode);
 
 
+    @EntityGraph(value = "Specimen.GlobalFetchBasic", type= EntityGraph.EntityGraphType.FETCH)
+    List<Specimen> findByCollectionEvent_Locality_LocalityCodeContainingIgnoreCase(String localityCode); // this is how we can search
+    // parent objects for child objects' values. See also https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions
+
+
+    @EntityGraph(value = "Specimen.GlobalFetchBasic", type= EntityGraph.EntityGraphType.FETCH)
+    List<Specimen> findBySpecies_TaxonCodeContainingIgnoreCase(String taxonCode); // this is how we can search
+    // parent objects for child objects' values. See also https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions
+
+
+
 }

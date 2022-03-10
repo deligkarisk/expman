@@ -47,4 +47,12 @@ public class SpecimenService {
        return specimenRepository.findBySpecimenCodeContainingIgnoreCase(specimenCode);
     }
 
+    public List<Specimen> findByLocalityCodeContainingIgnoreCase(String localityCode) {
+       return specimenRepository.findByCollectionEvent_Locality_LocalityCodeContainingIgnoreCase(localityCode);
+    }
+
+
+    public List<Specimen> findByTaxonCodeContainingIgnoreCase(String taxonCode) {
+        return specimenRepository.findBySpecies_TaxonCodeContainingIgnoreCase(taxonCode);
+    }
 }
