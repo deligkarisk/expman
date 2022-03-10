@@ -12,10 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolationException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class CollectionEventRepositoryTest {
@@ -46,21 +42,4 @@ public class CollectionEventRepositoryTest {
         collectionEventRepository.saveAndFlush(collectionEvent);
     }
 
-
-    // Failed conditions
-    @Transactional("arilabdbTransactionManager")
-    @Test(expected = javax.validation.ConstraintViolationException.class)
-    public void noLocalityInCollectionEvent() {
-        CollectionEvent collectionEvent = new CollectionEvent();
-        collectionEvent.setCollectionEventCode("TestCode");
-        try {
-            collectionEventRepository.saveAndFlush(collectionEvent);
-        } catch (ConstraintViolationException cve) {
-            assertEquals(cve.getConstraintViolations().size(), 1); // Ensures that there is only one constraint
-            // violation.
-            throw cve;
-        }
-        System.out.println("failing...");
-
-    }
 }
