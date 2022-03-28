@@ -18,10 +18,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder;
 
+import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -73,6 +73,30 @@ public class CtScanControllerTest {
 
         verify(ctScanServiceMock, times(1)).findById(Long.valueOf(1));
         verify(ctScanServiceMock, times(1)).findById(Long.valueOf(2));
+
+    }
+
+    @Test
+    public void exploreCtscansTest() throws Exception {
+
+        Integer PAGE_SIZE = 10;
+
+
+        mockMvc.perform(get("/explore/ctscans")).andExpect(status().isOk())
+                .andExpect(view().name("layouts/explore/ctscans"))
+                .andExpect(model().attribute("scans", instanceOf(List.class)))
+                .andExpect(model().attribute("scans", hasSize(PAGE_SIZE)))
+                .andExpect(model().attribute("currentPage", instanceOf(int.class)))
+                .andExpect(model().attribute("totalPages", instanceOf(int.class)))
+                .andExpect(model().attribute("totalScans", instanceOf(long.class)));
+
+        mockMvc.perform(get("/explore/ctscans/page/1")).andExpect(status().isOk())
+                .andExpect(view().name("layouts/explore/ctscans"))
+                .andExpect(model().attribute("ctscans", instanceOf(List.class)))
+                .andExpect(model().attribute("ctscans", hasSize(PAGE_SIZE)))
+                .andExpect(model().attribute("currentPage", instanceOf(int.class)))
+                .andExpect(model().attribute("totalPages", instanceOf(int.class)))
+                .andExpect(model().attribute("totalScans", instanceOf(long.class)));
 
     }
 

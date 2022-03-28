@@ -1,0 +1,43 @@
+<div class="container-fluid search_bar" th:fragment="ctscans_search_bar">
+    <div class="container search_bar_inside_container">
+        <div id="main_row_search_bar" class="row">
+            <h5 class="col-2 search_bar_label">Search ctscans by: </h5>
+            <div class="col-3">
+                <form action="/search/ctscan/byspecimencode">
+                    <div class="input-group">
+                        <input type="text" name="specimenCode" class="form-control" placeholder="Specimen code">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3">
+                <form action="/search/ctscan/bylocalitycode">
+                    <div class="input-group">
+                        <input type="text" name="localityCode" class="form-control" placeholder="Locality code">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3">
+                <form action="/search/ctscan/bytaxoncode">
+                    <div class="input-group">
+                        <input type="text" name="taxonCode" class="form-control" placeholder="Taxon code">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>

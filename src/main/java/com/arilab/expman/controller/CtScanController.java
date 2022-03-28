@@ -3,6 +3,7 @@ package com.arilab.expman.controller;
 import com.arilab.expman.domain.database.CtScan;
 import com.arilab.expman.service.database.CtScanService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -77,6 +79,22 @@ public class CtScanController {
     @GetMapping("/explore/ctscans")
     public String exploreCtScans(Model model) {
 
+        return exploreCtscansByPage(model, 1);
+    }
+
+    @GetMapping("/explore/ctscans/page/{pageNumber}")
+    public String exploreCtscansByPage(Model model, @PathVariable("pageNumber") int currentPage) {
+
+        Page<CtScan> ctscanPage = ctScanService.findAll(currentPage);
+        int totalPages = ctscanPage.getTotalPages();
+        long totalCtscans = ctscanPage.getTotalElements();
+        List<CtScan> ctScans = ctscanPage.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("ctscans", ctScans);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalCtscans", totalCtscans);
+
         return "layouts/explore/ctscans";
+
     }
 }
