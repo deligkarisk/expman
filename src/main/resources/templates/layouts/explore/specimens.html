@@ -10,105 +10,97 @@
 <div th:replace="layouts/specimen_search_bar::specimen_search_bar"></div>
 
 
+<div id="specimens_list_container" class="container">
+    <div class="col-12">
+        <div class="row">
+            <h3> Specimens List </h3>
+            <table id="specimensTable" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Specimen code</th>
+                    <th>Taxon code</th>
+                    <th>Collection event</th>
+                    <th> Collected by</th>
+                    <th>Locality code</th>
+                    <th>Locality name</th>
+                </tr>
+                </thead>
 
+                <tr th:each="specimen : ${specimens}">
 
+                    <td><a th:href="@{'/view/specimen/' + ${specimen.getSpecimenCode()}}"
+                           th:text="${specimen.getSpecimenCode()}"></a></td>
 
-    <div id="specimens_list_container" class="container">
-        <div class="col-12">
-            <div class="row">
-                <h3> Specimens List </h3>
-                <table id="specimensTable" class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Specimen code</th>
-                        <th>Taxon code</th>
-                        <th>Collection event</th>
-                        <th> Collected by</th>
-                        <th>Locality code</th>
-                        <th>Locality name</th>
-                    </tr>
-                    </thead>
+                    <td th:text="${specimen.getSpecies()}"></td>
 
-                    <tr th:each="specimen : ${specimens}">
+                    <td th:text="${specimen.getCollectionEvent()}"></td>
 
-                        <td><a th:href="@{'/view/specimen/' + ${specimen.getSpecimenCode()}}"
-                               th:text="${specimen.getSpecimenCode()}"></a></td>
+                    <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getCollectedBy()} : ''"></td>
 
-                        <td th:text="${specimen.getSpecies()}"></td>
+                    <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getLocality()} : ''"></td>
 
-                        <td th:text="${specimen.getCollectionEvent()}"></td>
-
-                        <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getCollectedBy()} : ''"></td>
-
-                        <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getLocality()} : ''"></td>
-
-                        <td th:text="${specimen.getCollectionEvent()} != null and ${specimen.getCollectionEvent().getLocality()} != null ?
+                    <td th:text="${specimen.getCollectionEvent()} != null and ${specimen.getCollectionEvent().getLocality()} != null ?
                 ${specimen.getCollectionEvent().getLocality().getLocalityName()} : ''"></td>
 
+                </tr>
+            </table>
 
-                        <!-- <td th:text="${specimen.getSpecies()} != null ? ${specimen.getSpecies().getTaxonCode()} : 'null'"> </td>
-                        <td th:text="${specimen.getCollectionEvent()} != null ? ${specimen.getCollectionEvent().getCollectionEventCode()} : 'null'"></td> -->
-
-                        </a>
-                    </tr>
-                </table>
-
-                <div> &nbsp;</div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-6">
-                    Total items: <span
-                        th:text="${#numbers.formatDecimal(totalSpecimens, 0, 'COMMA', 0, 'POINT')}"></span>
-                    - Page <span th:text="${#numbers.formatDecimal(currentPage, 0, 'COMMA', 0, 'POINT')}"></span>
-                    of <span th:text="${#numbers.formatDecimal(totalPages, 0, 'COMMA', 0, 'POINT')}"></span>
-                    &nbsp; &nbsp;
-                </div>
-
-
-                <div class="col-6 table_navigation_container">
-
-                    <div th:if="${currentPage} > 1" class="flex-item table_navigation_element_string_withref">
-                        <a th:href="@{'/explore/specimens/page/1'}"> &lt;&lt; First</a></div>
-                    <div th:if="${currentPage} == 1" class="flex-item table_navigation_element_string">&lt;&lt; First
-                    </div>
-
-                    <div th:if="${currentPage} > 1" class="flex-item table_navigation_element_string_withref">
-                        <a th:href="@{'/explore/specimens/page/' + ${currentPage - 1}}">&lt; Previous</a>
-                    </div>
-                    <div th:if="${currentPage} ==1" class="flex-item table_navigation_element_string">&lt; Previous
-                    </div>
-
-                    <div th:each="i: ${#numbers.sequence(currentPage - 2, currentPage + 3)}"
-                         th:if="${i} <= ${totalPages} and ${i} > 0"
-                         class="flex-item table_navigation_element_numbering">
-                        <a th:href="@{'/explore/specimens/page/' + ${i}}"> <span
-                                th:text="${#numbers.formatDecimal(i, 0, 'COMMA', 0, 'POINT')}"></span> </a>
-                    </div>
-
-                    <div th:if="${currentPage} < ${totalPages}"
-                         class="flex-item table_navigation_element_string_withref">
-                        <a th:href="@{'/explore/specimens/page/' + ${currentPage + 1}}">Next &gt;</a>
-                    </div>
-                    <div th:if="${currentPage} == ${totalPages}" class="flex-item table_navigation_element_string">Next
-                        &gt;
-                    </div>
-
-                    <div th:if="${currentPage} < ${totalPages}"
-                         class="flex-item table_navigation_element_string_withref">
-                        <a th:href="@{'/explore/specimens/page/' + ${totalPages}}">Last &gt;&gt;</a>
-                    </div>
-                    <div th:if="${currentPage} == ${totalPages}" class="flex-item table_navigation_element_string">Last
-                        &gt;&gt;
-                    </div>
-
-                </div>
-            </div>
+            <div> &nbsp;</div>
         </div>
 
 
+        <div class="row">
+            <div class="col-6">
+                Total items: <span
+                    th:text="${#numbers.formatDecimal(totalSpecimens, 0, 'COMMA', 0, 'POINT')}"></span>
+                - Page <span th:text="${#numbers.formatDecimal(currentPage, 0, 'COMMA', 0, 'POINT')}"></span>
+                of <span th:text="${#numbers.formatDecimal(totalPages, 0, 'COMMA', 0, 'POINT')}"></span>
+                &nbsp; &nbsp;
+            </div>
+
+
+            <div class="col-6 table_navigation_container">
+
+                <div th:if="${currentPage} > 1" class="flex-item table_navigation_element_string_withref">
+                    <a th:href="@{'/explore/specimens/page/1'}"> &lt;&lt; First</a></div>
+                <div th:if="${currentPage} == 1" class="flex-item table_navigation_element_string">&lt;&lt; First
+                </div>
+
+                <div th:if="${currentPage} > 1" class="flex-item table_navigation_element_string_withref">
+                    <a th:href="@{'/explore/specimens/page/' + ${currentPage - 1}}">&lt; Previous</a>
+                </div>
+                <div th:if="${currentPage} ==1" class="flex-item table_navigation_element_string">&lt; Previous
+                </div>
+
+                <div th:each="i: ${#numbers.sequence(currentPage - 2, currentPage + 3)}"
+                     th:if="${i} <= ${totalPages} and ${i} > 0"
+                     class="flex-item table_navigation_element_numbering">
+                    <a th:href="@{'/explore/specimens/page/' + ${i}}"> <span
+                            th:text="${#numbers.formatDecimal(i, 0, 'COMMA', 0, 'POINT')}"></span> </a>
+                </div>
+
+                <div th:if="${currentPage} < ${totalPages}"
+                     class="flex-item table_navigation_element_string_withref">
+                    <a th:href="@{'/explore/specimens/page/' + ${currentPage + 1}}">Next &gt;</a>
+                </div>
+                <div th:if="${currentPage} == ${totalPages}" class="flex-item table_navigation_element_string">Next
+                    &gt;
+                </div>
+
+                <div th:if="${currentPage} < ${totalPages}"
+                     class="flex-item table_navigation_element_string_withref">
+                    <a th:href="@{'/explore/specimens/page/' + ${totalPages}}">Last &gt;&gt;</a>
+                </div>
+                <div th:if="${currentPage} == ${totalPages}" class="flex-item table_navigation_element_string">Last
+                    &gt;&gt;
+                </div>
+
+            </div>
+        </div>
     </div>
+
+
+</div>
 </div>
 
 
