@@ -99,15 +99,20 @@
 
             <!-- if user is signed in -->
             <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                <a class="nav-link dropdown-toggle" href="#" id="menuBarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="submitDataBarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-link" aria-hidden="true"></i> Submit data </a>
-                <div class="dropdown-menu" aria-labelledby="menuBarDropdown">
-                    <a class="dropdown-item" href="/new/ctscan"> New CT Scan</a>
-                </div>
+                <ul class="dropdown-menu" aria-labelledby="SubmitDropDownButton">
+                    <li> <a class="dropdown-item" href="/templates/layouts/does_not_exist.html"> New Specimen</a> </li>
+                    <li> <a class="dropdown-item" href="/templates/layouts/does_not_exist.html"> New CT Scan</a></li>
+                </ul>
             </li>
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" th:href="@{/explore/specimens}">
-                    <i class="fa fa-link" aria-hidden="true"></i> Specimens </a>
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <a class="nav-link dropdown-toggle" href="#" id="browseDataBarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-link" aria-hidden="true"></i> Browse data </a>
+                <ul class="dropdown-menu" aria-labelledby="browseDropDownButton">
+                   <li><a class="dropdown-item" th:href="@{/explore/specimens}"> Specimens </a></li>
+                    <li><a class="dropdown-item" th:href="@{/explore/ctscans}"> CT Scans </a></li>
+                </ul>
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:href="@{/profile}">
