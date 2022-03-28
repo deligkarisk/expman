@@ -80,7 +80,7 @@ public class editSpecimenSubmitHTMLTest {
 
     @Test
     public void submitSpecimenWithChangedFieldsCallsCorrectMethodAndArguments() throws IOException {
-
+        // given
         when(specimenService.findSingleSpecimenBySpecimenCode("TESTCode00001")).thenReturn(Optional.of(specimen));
         when(specimenService.saveSpecimen(specimen)).thenReturn(specimen);
 
