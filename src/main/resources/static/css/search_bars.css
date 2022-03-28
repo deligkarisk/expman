@@ -1,0 +1,22 @@
+.search_bar {
+    height: 50px;
+    background-color: darkslategrey;
+    margin-top: 0;
+}
+
+.search_bar_inside_container {
+    height:50px;
+}
+
+#main_row_search_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.search_bar_label {
+    color: #c8cbcf;
+}
+
+
