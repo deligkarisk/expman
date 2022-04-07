@@ -41,6 +41,8 @@
 
                     <td th:text="${ctscan.getSpecimen().getCollectionEvent()} != null ? ${ctscan.getSpecimen().getCollectionEvent().getLocality()} : ''"></td>
 
+                    <td th:text="${ctscan.getBodyPart()}"></td>
+
                     <td th:text="${ctscan.getScanUser()}"></td>
 
                     <td th:text="${ctscan.getFolderLocation()}"></td>

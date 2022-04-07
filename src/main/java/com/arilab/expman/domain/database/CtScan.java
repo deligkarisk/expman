@@ -18,7 +18,8 @@ import javax.validation.constraints.NotNull;
         subgraphs = {
                 @NamedSubgraph(name = "subgraph.specimen", attributeNodes = {
                         @NamedAttributeNode(value = "collectionEvent",
-                                subgraph = "subgraph.collectionEvent")
+                                subgraph = "subgraph.collectionEvent"),
+                        @NamedAttributeNode("species")
                 }),
                 @NamedSubgraph(name = "subgraph.collectionEvent", attributeNodes = {
                         @NamedAttributeNode(value = "locality")

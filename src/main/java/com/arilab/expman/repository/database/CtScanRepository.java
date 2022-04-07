@@ -15,6 +15,7 @@ public interface CtScanRepository extends JpaRepository<CtScan, Long> {
     @EntityGraph(value = "CtScan.Basic", type = EntityGraph.EntityGraphType.FETCH)
     List<CtScan> findAll();
 
+    @EntityGraph(value = "CtScan.Basic", type = EntityGraph.EntityGraphType.FETCH)
     Page<CtScan> findAll(Pageable pageable);
 
 
