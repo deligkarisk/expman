@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,18 +61,10 @@ public class CtScanRepositoryTest {
         assertTrue(persistenceUtil.isLoaded(ctScan.getSpecimen().getCollectionEvent(), "locality"));
         assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "typeStatus"));
         assertTrue(ctScan.getSpecimen().getBasisOfRecord() == null || !persistenceUtil.isLoaded(ctScan.getSpecimen(), "basisOfRecord"));
-        assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "species"));
+        assertTrue(persistenceUtil.isLoaded(ctScan.getSpecimen(), "species"));
         logger.debug("Finished checking the default initialization of objects, continuing with reading properties of " +
                              "the specimen.");
 
-
-        // Reading the id of a lazy entity does not initialize the object
-        String speciesId = ctScan.getSpecimen().getSpecies().getTaxonCode();
-        assertFalse(persistenceUtil.isLoaded(ctScan.getSpecimen(), "species"));
-
-        // Reading another field initializes the object
-        String speciesName = ctScan.getSpecimen().getSpecies().getSpeciesName();
-        assertTrue(persistenceUtil.isLoaded(ctScan.getSpecimen(), "species"));
     }
 
     @Transactional("arilabdbTransactionManager")

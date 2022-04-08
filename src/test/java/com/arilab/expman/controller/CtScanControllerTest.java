@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder;
@@ -34,8 +34,10 @@ public class CtScanControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @MockBean
+    @SpyBean
     private CtScanService ctScanServiceMock;
+
+
 
     WebClient webClient;
 
@@ -79,16 +81,20 @@ public class CtScanControllerTest {
     @Test
     public void exploreCtscansTest() throws Exception {
 
+        // when
+        when(ctScanServiceMock.findAll()).thenCallRealMethod();
+        when(ctScanServiceMock.findAll(1)).thenCallRealMethod();
+
         Integer PAGE_SIZE = 10;
 
 
         mockMvc.perform(get("/explore/ctscans")).andExpect(status().isOk())
                 .andExpect(view().name("layouts/explore/ctscans"))
-                .andExpect(model().attribute("scans", instanceOf(List.class)))
-                .andExpect(model().attribute("scans", hasSize(PAGE_SIZE)))
+                .andExpect(model().attribute("ctscans", instanceOf(List.class)))
+                .andExpect(model().attribute("ctscans", hasSize(PAGE_SIZE)))
                 .andExpect(model().attribute("currentPage", instanceOf(int.class)))
                 .andExpect(model().attribute("totalPages", instanceOf(int.class)))
-                .andExpect(model().attribute("totalScans", instanceOf(long.class)));
+                .andExpect(model().attribute("totalCtscans", instanceOf(long.class)));
 
         mockMvc.perform(get("/explore/ctscans/page/1")).andExpect(status().isOk())
                 .andExpect(view().name("layouts/explore/ctscans"))
@@ -96,7 +102,7 @@ public class CtScanControllerTest {
                 .andExpect(model().attribute("ctscans", hasSize(PAGE_SIZE)))
                 .andExpect(model().attribute("currentPage", instanceOf(int.class)))
                 .andExpect(model().attribute("totalPages", instanceOf(int.class)))
-                .andExpect(model().attribute("totalScans", instanceOf(long.class)));
+                .andExpect(model().attribute("totalCtscans", instanceOf(long.class)));
 
     }
 
