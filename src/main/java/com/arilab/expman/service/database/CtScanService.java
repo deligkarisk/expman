@@ -30,6 +30,17 @@ public class CtScanService {
         return ctScanRepository.findAll(pageable);
     }
 
+    public List<CtScan> findBySpecimenCodeContainingIgnoreCase(String specimenCode) {
+        return ctScanRepository.findBySpecimen_SpecimenCodeContainingIgnoreCase(specimenCode);
+    }
+
+    public List<CtScan> findByTaxonCodeContainingIgnoreCase(String taxonCode) {
+        return ctScanRepository.findBySpecimen_Species_TaxonCodeContainingIgnoreCase(taxonCode);
+    }
+
+    public List<CtScan> findByLocalityCodeContainingIgnoreCase(String localityCode) {
+        return ctScanRepository.findBySpecimen_CollectionEvent_Locality_LocalityCodeContainingIgnoreCase(localityCode);
+    }
 
 
     public CtScan saveCtScan(CtScan ctScan) {

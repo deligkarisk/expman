@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -95,6 +96,55 @@ public class CtScanController {
         model.addAttribute("totalCtscans", totalCtscans);
 
         return "layouts/explore/ctscans";
+    }
 
+    @GetMapping("/search/ctscan/byspecimencode")
+    public String searchCtScansBySpecimenCodeLike(@RequestParam String specimenCode, Model model,
+                                                  RedirectAttributes redirectAttributes) {
+        List<CtScan> ctScansList = ctScanService.findBySpecimenCodeContainingIgnoreCase(specimenCode);
+        return showCtScansSearchResults(redirectAttributes, ctScansList);
+    }
+
+    @GetMapping("/search/ctscan/bylocalitycode")
+    public String searchCtScansByLocalityCodeLike(@RequestParam String localityCode, Model model,
+                                                  RedirectAttributes redirectAttributes) {
+        List<CtScan> ctScansList = ctScanService.findByLocalityCodeContainingIgnoreCase(localityCode);
+        return showCtScansSearchResults(redirectAttributes, ctScansList);
+    }
+
+    @GetMapping("/search/ctscan/bytaxoncode")
+    public String searchCtScansByTaxonCodeLike(@RequestParam String taxonCode, Model model,
+                                                  RedirectAttributes redirectAttributes) {
+        List<CtScan> ctScansList = ctScanService.findByTaxonCodeContainingIgnoreCase(taxonCode);
+        return showCtScansSearchResults(redirectAttributes, ctScansList);
+    }
+
+
+
+
+
+    private String showCtScansSearchResults(RedirectAttributes redirectAttributes, List<CtScan> ctScans) {
+        if (ctScans.isEmpty()) {
+            return("layouts/does_not_exist");
+        }
+
+        boolean dataLimitExceeded;
+
+        if (ctScans.size() > 1000) {
+            dataLimitExceeded = true;
+            ctScans = ctScans.subList(0, 1000);
+        } else {
+            dataLimitExceeded = false;
+        }
+
+        redirectAttributes.addFlashAttribute("ctScans", ctScans);
+        redirectAttributes.addFlashAttribute("dataLimitExceeded", dataLimitExceeded);
+
+        return "redirect:/search_result/ctscans_result";
+    }
+
+    @GetMapping("/search_result/ctscans_result")
+    public String showCtScans() {
+        return "layouts/search_result/ctscans_result";
     }
 }

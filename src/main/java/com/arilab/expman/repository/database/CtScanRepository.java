@@ -18,5 +18,15 @@ public interface CtScanRepository extends JpaRepository<CtScan, Long> {
     @EntityGraph(value = "CtScan.Basic", type = EntityGraph.EntityGraphType.FETCH)
     Page<CtScan> findAll(Pageable pageable);
 
+    @EntityGraph(value = "CtScan.Basic", type = EntityGraph.EntityGraphType.FETCH)
+    List<CtScan> findBySpecimen_SpecimenCodeContainingIgnoreCase(String specimenCode);
+
+    @EntityGraph(value = "CtScan.Basic", type = EntityGraph.EntityGraphType.FETCH)
+    List<CtScan> findBySpecimen_Species_TaxonCodeContainingIgnoreCase(String taxonCode);
+
+    @EntityGraph(value = "CtScan.Basic", type = EntityGraph.EntityGraphType.FETCH)
+    List<CtScan> findBySpecimen_CollectionEvent_Locality_LocalityCodeContainingIgnoreCase(String localityCode);
+
+
 
 }
