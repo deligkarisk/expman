@@ -53,24 +53,8 @@
 
 
 
-    <script type="text/javascript">
-        $(function () {
-            $("#collectionEvent").autocomplete({
-                source: "/collectionEventCodesAutocomplete",
-                minLength: 2
-            });
-        });
-    </script>
 
 
-    <script type="text/javascript">
-        $(function () {
-            $("#species").autocomplete({
-                source: "/speciesAutocomplete",
-                minLength: 2
-            });
-        });
-    </script>
 
 </head>
 <body>
@@ -104,6 +88,8 @@
                 <a class="nav-link dropdown-toggle" href="#" id="submitDataBarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-link" aria-hidden="true"></i> Submit data </a>
                 <ul class="dropdown-menu" aria-labelledby="SubmitDropDownButton">
+                    <li> <a class="dropdown-item" th:href="@{/submit/newlocality}"> New Locality </a></li>
+                    <li> <a class="dropdown-item" th:href="@{/submit/newcollectionevent}"> New Collection Event </a></li>
                     <li> <a class="dropdown-item" href="/templates/layouts/does_not_exist.html"> New Specimen</a> </li>
                     <li> <a class="dropdown-item" href="/templates/layouts/does_not_exist.html"> New CT Scan</a></li>
                 </ul>

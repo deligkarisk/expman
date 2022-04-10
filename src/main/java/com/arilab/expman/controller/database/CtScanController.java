@@ -1,4 +1,4 @@
-package com.arilab.expman.controller;
+package com.arilab.expman.controller.database;
 
 import com.arilab.expman.domain.database.CtScan;
 import com.arilab.expman.service.database.CtScanService;

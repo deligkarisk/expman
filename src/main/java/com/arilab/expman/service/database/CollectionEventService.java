@@ -27,9 +27,6 @@ public class CollectionEventService {
 
 
     public List<String> getMatchingCollectionEventCodes(String matchingCode) {
-        System.out.println("test2");
-
-
         return collectionEventRepository.getMatchingEventCodes(matchingCode);
     }
 

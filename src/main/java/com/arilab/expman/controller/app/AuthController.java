@@ -1,4 +1,4 @@
-package com.arilab.expman.controller;
+package com.arilab.expman.controller.app;
 
 import com.arilab.expman.domain.app.User;
 import com.arilab.expman.domain.app.validator.OnInsert;

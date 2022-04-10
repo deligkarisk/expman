@@ -1,5 +1,6 @@
 package com.arilab.expman.controller;
 
+import com.arilab.expman.controller.database.SpecimenController;
 import com.arilab.expman.service.database.SpecimenService;
 import org.junit.Before;
 import org.mockito.InjectMocks;

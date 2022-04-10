@@ -1,4 +1,4 @@
-package com.arilab.expman.controller;
+package com.arilab.expman.controller.app;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
