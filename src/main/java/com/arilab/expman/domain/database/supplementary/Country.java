@@ -2,14 +2,15 @@ package com.arilab.expman.domain.database.supplementary;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
 @Entity
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "country",schema = "admin")
@@ -32,4 +33,8 @@ public class Country implements Serializable {
     @Column(name = "iso3_code")
     private String iso3Code;
 
+    @Override
+    public String toString() {
+        return countryName;
+    }
 }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main_layout :: head('Expman')}">
+
+
+</head>
+
+<body>
+<nav th:replace="layouts/main_layout::navigation"></nav>
+<div th:replace="layouts/main_layout::breaks_top"></div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="table-responsive col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Basic data</h4>
+                </div>
+            </div>
+            <br>
+            <table class="table table-bordered table-striped"  id="localityGeneralDataTable" th:object="${locality}">
+                <colgroup>
+                    <col span="1" style="width: 15%;">
+                    <col span="1" style="width: 70%;">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>Locality code</th>
+                    <td th:text="*{localityCode}"></td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td th:text="*{country}"></td>
+                </tr>
+                <tr>
+                    <th>adm1</th>
+                    <td th:text="*{adm1}"></td>
+                </tr>
+                <tr>
+                    <th>adm2</th>
+                    <td th:text="*{adm2}"></td>
+                </tr>
+                <tr>
+                    <th>Island group</th>
+                    <td th:text="*{islandGroup}"></td>
+                </tr>
+                <tr>
+                    <th>Island</th>
+                    <td th:text="*{island}"></td>
+                </tr>
+                <tr>
+                    <th>Locality name</th>
+                    <td th:text="*{localityName}"></td>
+                </tr>
+                <tr>
+                    <th>Biogeographic region</th>
+                    <td th:text="*{biogeographicRegion}"></td>
+                </tr>
+                <tr>
+                    <th>ems site</th>
+                    <td th:text="*{emsSite}"></td>
+                </tr>
+                <tr>
+                    <th>fj site</th>
+                    <td th:text="*{fjSite}"></td>
+                </tr>
+                <tr>
+                    <th>Ecol. community orig.</th>
+                    <td th:text="*{ecologicalCommunityOriginal}"></td>
+                </tr>
+                <tr>
+                    <th>Ecol. community standard</th>
+                    <td th:text="*{ecologicalCommunityStandard}"></td>
+                </tr>
+                <tr>
+                    <th>Disturbance</th>
+                    <td th:text="*{disturbance}"></td>
+                </tr>
+                <tr>
+                    <th>Accuracy</th>
+                    <td th:text="*{accuracy}"></td>
+                </tr>
+                <tr>
+                    <th>Other site</th>
+                    <td th:text="*{otherSite}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Location</h4>
+                </div>
+            </div>
+            <br>
+            <table class="table table-bordered table-striped"  id="localityLocationDataTable" th:object="${locality}">
+                <colgroup>
+                    <col span="1" style="width: 15%;">
+                    <col span="1" style="width: 70%;">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>Latitude</th>
+                    <td th:text="*{latitude}"></td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td th:text="*{longitude}"></td>
+                </tr>
+                <tr>
+                    <th>Latlong error</th>
+                    <td th:text="*{latlongError}"></td>
+                </tr>
+                <tr>
+                    <th>Elevation</th>
+                    <td th:text="*{elevation}"></td>
+                </tr>
+                <tr>
+                    <th>Elevation error</th>
+                    <td th:text="*{elevationError}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="col-md-6">
+                <a th:href="@{'/edit/locality/' + ${locality.getLocalityCode()}}" class="btn btn-info"><i
+                        class="fas fa-cogs"></i> Edit data</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

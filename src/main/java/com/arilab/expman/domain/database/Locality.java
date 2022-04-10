@@ -27,7 +27,7 @@ public class Locality implements Serializable {
 
     @NotNull
     @NonNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country", referencedColumnName = "country_name", nullable = false)
     private Country country;
 
