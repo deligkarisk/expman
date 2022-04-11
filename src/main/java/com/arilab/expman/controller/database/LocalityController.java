@@ -50,7 +50,7 @@ public class LocalityController {
         }
 
         Locality savedLocality = localityService.saveLocality(locality);
-        return("redirect:/view/locality/" + savedLocality.getLocalityCode());
+        return("redirect:/view/locality/" + locality.getLocalityCode());
     }
 
     @GetMapping("/view/locality/{localityCode}")
