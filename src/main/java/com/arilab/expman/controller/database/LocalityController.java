@@ -54,7 +54,7 @@ public class LocalityController {
     }
 
     @GetMapping("/view/locality/{localityCode}")
-    public String viewLocality(Model model, @PathVariable(value = "localityCode") String localityCode) {
+    public String viewLocality(Model model) {
 
         if (model.getAttribute("locality") == null) {
             return ("layouts/does_not_exist");
@@ -63,7 +63,7 @@ public class LocalityController {
     }
 
     @GetMapping("/edit/locality/{localityCode}")
-    public String updateLocality(Model model, @PathVariable(value = "localityCode") String localityCode) {
+    public String updateLocality() {
         return ("layouts/edit/locality");
     }
 
