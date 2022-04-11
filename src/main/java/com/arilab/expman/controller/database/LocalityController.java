@@ -62,5 +62,21 @@ public class LocalityController {
         return ("layouts/view/locality");
     }
 
+    @GetMapping("/edit/locality/{localityCode}")
+    public String updateLocality(Model model, @PathVariable(value = "localityCode") String localityCode) {
+        return ("layouts/edit/locality");
+    }
+
+    @PostMapping("/edit/locality/{localityCode}")
+    public String editLocality(@ModelAttribute("locality") @Validated Locality locality, BindingResult bindingResult
+            , Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("validationErrors", bindingResult.getAllErrors());
+            return ("layouts/edit/locality");
+        }
+
+        localityService.saveLocality(locality);
+        return ("redirect:/view/locality/" + locality.getLocalityCode());
+    }
 
 }

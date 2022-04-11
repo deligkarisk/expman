@@ -12,13 +12,13 @@
 <script type="text/javascript" th:src="@{/js/autocomplete/collection_event_ac.js}"></script>
 
 
-
 <nav th:replace="layouts/main_layout::navigation"></nav>
 <div th:replace="layouts/main_layout::breaks_top"></div>
 
 
 <div class="container">
-    <form method="post" th:action="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" th:object="${specimen}" id="editSpecimenForm">
+    <form method="post" th:action="@{'/edit/specimen/' + ${specimen.getSpecimenCode()}}" th:object="${specimen}"
+          id="editSpecimenForm">
         <div class="row">
             <div class="table-responsive col-md-6">
 
@@ -235,15 +235,15 @@
                         <div class="col-md-3"></div>
                     </div>
                 </div>
-                    <div class="form-group row" style="padding-top: 0rem">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <a th:href="@{'/explore/specimens'}" class="btn btn-secondary"><i
-                                    class="fab fa-affiliatetheme"></i> Back to specimens</a>
-                        </div>
-                        <div class="col-md-3"></div>
-
+                <div class="form-group row" style="padding-top: 0rem">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <a th:href="@{'/explore/specimens'}" class="btn btn-secondary"><i
+                                class="fab fa-affiliatetheme"></i> Back to specimens</a>
                     </div>
+                    <div class="col-md-3"></div>
+
+                </div>
             </div>
         </div>
     </form>

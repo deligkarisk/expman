@@ -61,7 +61,7 @@ public class Locality implements Serializable {
     @Column(name = "elevation_error")
     private BigDecimal elevationError;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "biogeographic_region", referencedColumnName = "region")
     private BiogeographicRegion biogeographicRegion;
 

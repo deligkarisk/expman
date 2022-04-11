@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.*;
@@ -100,13 +101,58 @@ class LocalityControllerTest {
 
     @Test
     void viewLocality() throws Exception {
-
+        // given
         Locality returnedLocality = new Locality("locality1234", new Country("CountryCode"
-                ,"CountryName", "ISO"));
+                , "CountryName", "ISO"));
         when(localityService.findById("locality1234")).thenReturn(Optional.of(returnedLocality));
 
+        // when then
         mockMvc.perform(get("/view/locality/locality1234"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("locality", returnedLocality));
+    }
+
+    @Test
+    void updateLocalityGet() throws Exception {
+        // given
+        Locality returnedLocality = new Locality("locality1234", new Country("CountryCode"
+                , "CountryName", "ISO"));
+        when(localityService.findById("locality1234")).thenReturn(Optional.of(returnedLocality));
+
+        //when then
+        mockMvc.perform(get("/edit/locality/locality1234"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("locality", returnedLocality))
+                .andExpect(view().name("layouts/edit/locality"));
+    }
+
+    @Test
+    void updateLocalityPost() throws Exception {
+        // given
+        Locality existingLocality = new Locality("locality1234", new Country("CountryCode"
+                , "CountryName", "ISO"));
+        existingLocality.setAdm1("preadm1");
+        existingLocality.setAdm2("preadm2");
+        existingLocality.setLatitude(new BigDecimal(20.34));
+        when(localityService.findById("locality1234")).thenReturn(Optional.of(existingLocality));
+
+        //when then
+        mockMvc.perform(post("/edit/locality/locality1234")
+                        .param("country", "American Samoa")
+                        .param("latitude", "98.345"))
+                .andExpect(status().is3xxRedirection());
+
+        then(localityService).should().saveLocality(localityArgumentCaptor.capture());
+        // non-updated values should be equal to the original ones
+        assertEquals("locality1234", localityArgumentCaptor.getValue().getLocalityCode());
+        assertEquals("preadm1", localityArgumentCaptor.getValue().getAdm1());
+        assertEquals("preadm2", localityArgumentCaptor.getValue().getAdm2());
+
+
+
+        // updated values should be the new ones
+        assertEquals("American Samoa", localityArgumentCaptor.getValue().getCountry().toString());
+        assertEquals(new BigDecimal("98.345"), localityArgumentCaptor.getValue().getLatitude());
+
     }
 }
