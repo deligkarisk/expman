@@ -18,10 +18,10 @@
     <form method="post" th:action="@{'/edit/locality/' + ${locality.getLocalityCode()}}  " th:object="${locality}" id="editLocalityForm">
         <div class="row">
             <div class="table-responsive col-md-6">
-                <div class="form-group row">
+                 <div class="form-group row">
                     <label for="localityCode" class="col-md-3 col-form-label text-right"> Locality Code</label>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" th:field="*{localityCode}" id="localityCode" readonly required
+                        <input disabled="disabled" class="form-control" type="text" th:field="*{localityCode}" id="localityCode" readonly required
                                autofocus>
                     </div>
                 </div>
