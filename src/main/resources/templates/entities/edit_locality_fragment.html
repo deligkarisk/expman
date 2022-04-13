@@ -1,0 +1,17 @@
+<div class="row" th:fragment="edit_locality">
+    <div class="table-responsive col-md-6">
+        <div class="form-group row">
+            <label for="localityCode" class="col-md-3 col-form-label text-right"> Locality Code</label>
+            <div class="col-md-6">
+                <input disabled="disabled" class="form-control" type="text" th:field="*{localityCode}"
+                       id="localityCode" readonly required
+                       autofocus>
+            </div>
+        </div>
+
+        <div th:replace="~{entities/locality_fragments :: locality_left_column}"></div>
+    </div>
+    <div class="table-responsive col-md-6">
+        <div th:replace="~{entities/locality_fragments :: locality_right_column}"></div>
+    </div>
+</div>

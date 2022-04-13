@@ -16,170 +16,17 @@
 <div class="container">
     <h3 style="margin-bottom: 50px"> Submit new locality</h3>
     <form method="post" th:action="@{/submit/newlocality}" th:object="${newLocality}" id="submitLocalityForm">
-        <div class="row">
-        <div class="table-responsive col-md-6">
-            <div class="form-group row">
-                <label for="localityCode" class="col-md-3 col-form-label text-right"> Locality Code</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{localityCode}" id="localityCode" required
-                           autofocus>
-                </div>
-            </div>
-            <div class="form-group row"
-                 th:class="${#fields.hasErrors('country')} ? 'form-group row is-invalid': 'form-group row'">
-                <label for="country" class="col-md-3 col-form-label text-right"> Country</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{country}" id="country" th:errorclass="is-invalid" autofocus>
-                    <span th:class="invalid-feedback">Please enter a valid country.</span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="adm1" class="col-md-3 col-form-label text-right"> adm1</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{adm1}" id="adm1" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="adm2" class="col-md-3 col-form-label text-right"> adm2</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{adm2}" id="adm2" autofocus>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="islandGroup" class="col-md-3 col-form-label text-right"> Island group</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{islandGroup}" id="islandGroup" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="island" class="col-md-3 col-form-label text-right"> Island</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{island}" id="island" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="localityName" class="col-md-3 col-form-label text-right"> Locality name</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{localityName}" id="localityName" autofocus>
-                </div>
-            </div>
-            <div class="form-group row" th:class="${#fields.hasErrors('biogeographicRegion')}? 'form-group row is-invalid': 'form-group row'">
-                <label for="biogeographicRegion" class="col-md-3 col-form-label text-right"> Biogeographic
-                    region</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{biogeographicRegion}" id="biogeographicRegion"
-                           th:errorclass="is-invalid" autofocus>
-                    <span class="invalid-feedback">Please enter a valid biogeographic region.</span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="emsSite" class="col-md-3 col-form-label text-right"> ems site</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{emsSite}" id="emsSite" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="fjSite" class="col-md-3 col-form-label text-right"> fj site</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{fjSite}" id="fjSite" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="ecolComOrig" class="col-md-3 col-form-label text-right"> Ecol. community orig.</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{ecologicalCommunityOriginal}" id="ecolComOrig"
-                           autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="ecolComStandard" class="col-md-3 col-form-label text-right"> Ecol. community
-                    standard</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{ecologicalCommunityStandard}"
-                           id="ecolComStandard" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="disturbance" class="col-md-3 col-form-label text-right"> Disturbance</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{disturbance}" id="disturbance" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="accuracy" class="col-md-3 col-form-label text-right"> Accuracy</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{accuracy}" id="accuracy" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="otherSite" class="col-md-3 col-form-label text-right"> Other site</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{otherSite}" id="otherSite" autofocus>
-                </div>
+        <div class="row" th:replace="entities/new_locality_fragment :: new_locality"></div>
+        <div class="form-group row flex-row-reverse" style="padding-top: 1rem">
+            <div class="col-md-3">
+                <a th:href="@{'/explore/specimens'}" class="btn btn-secondary"><i
+                        class="fab fa-affiliatetheme"></i> Cancel</a>
+                <button name="submit" type="submit" class="btn btn-info"><i
+                        class="fas fa-spinner"></i> Submit
+                </button>
             </div>
         </div>
-        <div class="table-responsive col-md-6">
-
-
-            <div class="form-group row">
-                <label for="latitude" class="col-md-3 col-form-label text-right"> Latitude</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{latitude}" id="latitude" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="longitude" class="col-md-3 col-form-label text-right"> Longitude</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{longitude}" id="longitude" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="latlong_error" class="col-md-3 col-form-label text-right"> Latlong error</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{latlongError}" id="latlong_error" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="elevation" class="col-md-3 col-form-label text-right"> Elevation</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{elevation}" id="elevation" autofocus>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="elevation_error" class="col-md-3 col-form-label text-right"> Elevation error</label>
-                <div class="col-md-6">
-                    <input class="form-control" type="text" th:field="*{elevationError}" id="elevation_error" autofocus>
-                </div>
-            </div>
-
-            <div class="form-group row" style="padding-top: 1rem">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <button name="submit" type="submit" class="btn btn-info"><i
-                            class="fas fa-spinner"></i> Submit
-                    </button>
-                    <div class="col-md-3"></div>
-                </div>
-            </div>
-            <div class="form-group row" style="padding-top: 0rem">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <a th:href="@{'/explore/specimens'}" class="btn btn-secondary"><i
-                            class="fab fa-affiliatetheme"></i> Cancel</a>
-                </div>
-                <div class="col-md-3"></div>
-
-            </div>
-
-
-        </div>
-        </div>
-
     </form>
-
-
 </div>
-
 </body>
 </html>
