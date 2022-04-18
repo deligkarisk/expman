@@ -30,6 +30,9 @@ public class CollectionEventService {
         return collectionEventRepository.getMatchingEventCodes(matchingCode);
     }
 
+    public CollectionEvent saveCollectionEvent(CollectionEvent collectionEvent) {
+        return collectionEventRepository.save(collectionEvent);
+    }
 
 
 }

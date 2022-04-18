@@ -1,0 +1,16 @@
+<div class="row" th:fragment="new_collection_event">
+    <div class="table-responsive col-md-6">
+        <div class="form-group row">
+            <label for="collectionEvent" class="col-md-3 col-form-label text-right"> Collection event code</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" th:field="*{collectionEventCode}" id="collectionEvent" required
+                       autofocus>
+            </div>
+        </div>
+
+        <div th:replace="~{entities/collection_event_fragments :: collection_event_left_column}"></div>
+    </div>
+    <div class="table-responsive col-md-6">
+        <div th:replace="~{entities/collection_event_fragments :: collection_event_right_column}"></div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div th:fragment="collection_event_left_column">
+    <div class="form-group row"
+         th:class="${#fields.hasErrors('locality')} ? 'form-group row is-invalid': 'form-group row'">
+        <label for="locality" class="col-md-3 col-form-label text-right"> Locality code</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{locality}" id="locality" th:errorclass="is-invalid" autofocus>
+            <span th:class="invalid-feedback">Please enter a valid locality code.</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="collectedBy" class="col-md-3 col-form-label text-right"> Collected by</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{collectedBy}" id="collectedBy" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="method" class="col-md-3 col-form-label text-right"> Method</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{method}" id="method" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="samplingEffort" class="col-md-3 col-form-label text-right"> Sampling effort</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{samplingEffort}" id="samplingEffort" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="dateCollectedStart" class="col-md-3 col-form-label text-right"> Date collected start</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{dateCollectedStart}" id="dateCollectedStart" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="dateCollectedEnd" class="col-md-3 col-form-label text-right"> Date collected end</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{dateCollectedEnd}" id="dateCollectedEnd" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="dateFlag" class="col-md-3 col-form-label text-right"> Date flag</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{dateFlag}" id="dateFlag" autofocus>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="collection_event_right_column">
+    <div class="form-group row">
+        <label for="habitat" class="col-md-3 col-form-label text-right"> Habitat</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{habitat}" id="habitat" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="microhabitat" class="col-md-3 col-form-label text-right"> Microhabitat</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{microhabitat}" id="microhabitat" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="behavior" class="col-md-3 col-form-label text-right"> Behavior</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{behavior}" id="behavior" autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="disturbanceLevel" class="col-md-3 col-form-label text-right"> Disturbance level</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" th:field="*{disturbanceLevel}" id="disturbanceLevel" autofocus>
+        </div>
+    </div>
+</div>
