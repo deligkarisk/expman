@@ -62,7 +62,7 @@ class LocalityControllerTest {
 
         mockMvc.perform(get("/submit/newlocality"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("layouts/submit/new_locality"))
+                .andExpect(view().name("submit/new_locality"))
                 .andExpect(model().attribute("newLocality", hasProperty("localityCode", is(nullValue()))));
 
     }
@@ -96,7 +96,7 @@ class LocalityControllerTest {
                 .andExpect(model().attributeHasFieldErrors("newLocality", "localityCode"))
                 .andExpect(model().attributeHasFieldErrors("newLocality", "country"))
                 .andExpect(model().attributeHasFieldErrors("newLocality", "biogeographicRegion"))
-                .andExpect(view().name("layouts/submit/new_locality"));
+                .andExpect(view().name("submit/new_locality"));
     }
 
     @Test
@@ -123,7 +123,7 @@ class LocalityControllerTest {
         mockMvc.perform(get("/edit/locality/locality1234"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("locality", returnedLocality))
-                .andExpect(view().name("layouts/edit/locality"));
+                .andExpect(view().name("edit/locality"));
     }
 
     @Test

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--suppress ThymeleafVariablesResolveInspection -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="~{layouts/main_layout :: head('Expman')}"></head>
+<head th:replace="~{main_layout :: head('Expman')}"></head>
 
 <body>
 
@@ -11,8 +11,8 @@
 <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
-<nav th:replace="layouts/main_layout::navigation"></nav>
-<div th:replace="layouts/search_bars/ctscans_search_bar::ctscans_search_bar"></div>
+<nav th:replace="main_layout::navigation"></nav>
+<div th:replace="search_bars/ctscans_search_bar::ctscans_search_bar"></div>
 
 
 <div id="ctscans_list_container" class="container">

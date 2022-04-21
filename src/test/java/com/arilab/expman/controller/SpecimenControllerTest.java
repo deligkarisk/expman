@@ -69,7 +69,7 @@ public class SpecimenControllerTest {
     public void exploreSpecimensTest() throws Exception {
 
         mockMvc.perform(get("/explore/specimens")).andExpect(status().isOk())
-                .andExpect(view().name("layouts/explore/specimens"))
+                .andExpect(view().name("explore/specimens"))
                 .andExpect(model().attribute("specimens", instanceOf(List.class)))
                 .andExpect(model().attribute("specimens", hasSize(PAGE_SIZE)))
                 .andExpect(model().attribute("currentPage", instanceOf(int.class)))
@@ -77,7 +77,7 @@ public class SpecimenControllerTest {
                 .andExpect(model().attribute("totalSpecimens", instanceOf(long.class)));
 
         mockMvc.perform(get("/explore/specimens/page/1")).andExpect(status().isOk())
-                .andExpect(view().name("layouts/explore/specimens"))
+                .andExpect(view().name("explore/specimens"))
                 .andExpect(model().attribute("specimens", instanceOf(List.class)))
                 .andExpect(model().attribute("specimens", hasSize(PAGE_SIZE)))
                 .andExpect(model().attribute("currentPage", instanceOf(int.class)))
@@ -92,7 +92,7 @@ public class SpecimenControllerTest {
     public void editSpecimenTest() throws Exception {
 
         mockMvc.perform(get("/edit/specimen/" + REFERENCE_SPECIMEN_CODE)).andExpect(status().isOk())
-                .andExpect(view().name("layouts/edit/specimen"))
+                .andExpect(view().name("edit/specimen"))
                 .andExpect(model().attribute("specimen", instanceOf(Specimen.class)));
 
     }

@@ -36,7 +36,7 @@ public class LocalityController {
     public String submitNewLocality(Model model, RedirectAttributes redirectAttributes) {
         Locality newLocality = new Locality();
         model.addAttribute("newLocality", newLocality);
-        return "layouts/submit/new_locality";
+        return "submit/new_locality";
     }
 
 
@@ -46,7 +46,7 @@ public class LocalityController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
-            return "layouts/submit/new_locality";
+            return "submit/new_locality";
         }
 
         Locality savedLocality = localityService.saveLocality(locality);
@@ -57,14 +57,14 @@ public class LocalityController {
     public String viewLocality(Model model) {
 
         if (model.getAttribute("locality") == null) {
-            return ("layouts/does_not_exist");
+            return ("does_not_exist");
         }
-        return ("layouts/view/locality");
+        return ("view/locality");
     }
 
     @GetMapping("/edit/locality/{localityCode}")
     public String updateLocality() {
-        return ("layouts/edit/locality");
+        return ("edit/locality");
     }
 
     @PostMapping("/edit/locality/{localityCode}")
@@ -72,7 +72,7 @@ public class LocalityController {
             , Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
-            return ("layouts/edit/locality");
+            return ("edit/locality");
         }
 
         localityService.saveLocality(locality);

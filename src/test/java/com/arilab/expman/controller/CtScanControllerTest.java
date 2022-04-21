@@ -65,13 +65,13 @@ public class CtScanControllerTest {
 
         mockMvc.perform(get("/view/ctscan/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("layouts/view/ctscan"))
+                .andExpect(view().name("view/ctscan"))
                 .andExpect(model().attribute("ctscan", hasProperty("wet", is("wetField"))));
 
 
         mockMvc.perform(get("/view/ctscan/2"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("layouts/does_not_exist"));
+                .andExpect(view().name("does_not_exist"));
 
         verify(ctScanServiceMock, times(1)).findById(Long.valueOf(1));
         verify(ctScanServiceMock, times(1)).findById(Long.valueOf(2));
@@ -89,7 +89,7 @@ public class CtScanControllerTest {
 
 
         mockMvc.perform(get("/explore/ctscans")).andExpect(status().isOk())
-                .andExpect(view().name("layouts/explore/ctscans"))
+                .andExpect(view().name("explore/ctscans"))
                 .andExpect(model().attribute("ctscans", instanceOf(List.class)))
                 .andExpect(model().attribute("ctscans", hasSize(PAGE_SIZE)))
                 .andExpect(model().attribute("currentPage", instanceOf(int.class)))
@@ -97,7 +97,7 @@ public class CtScanControllerTest {
                 .andExpect(model().attribute("totalCtscans", instanceOf(long.class)));
 
         mockMvc.perform(get("/explore/ctscans/page/1")).andExpect(status().isOk())
-                .andExpect(view().name("layouts/explore/ctscans"))
+                .andExpect(view().name("explore/ctscans"))
                 .andExpect(model().attribute("ctscans", instanceOf(List.class)))
                 .andExpect(model().attribute("ctscans", hasSize(PAGE_SIZE)))
                 .andExpect(model().attribute("currentPage", instanceOf(int.class)))

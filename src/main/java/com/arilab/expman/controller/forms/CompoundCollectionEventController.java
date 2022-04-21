@@ -17,6 +17,6 @@ public class CompoundCollectionEventController {
 
         model.addAttribute("collection_event", new CollectionEvent());
         model.addAttribute("newLocality", new Locality());
-        return "layouts/submit/new_compound_collection_event";
+        return "submit/new_compound_collection_event";
     }
 }

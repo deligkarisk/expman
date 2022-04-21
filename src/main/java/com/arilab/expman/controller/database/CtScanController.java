@@ -43,17 +43,17 @@ public class CtScanController {
     @GetMapping("/view/ctscan/{ctScanId}")
     public String viewCtScan(Model model, @PathVariable(value = "ctScanId") Long ctScanId) {
         if (model.getAttribute("ctscan") == null) {
-            return ("layouts/does_not_exist");
+            return ("does_not_exist");
         }
-        return ("layouts/view/ctscan");
+        return ("view/ctscan");
     }
 
     @GetMapping("/edit/ctscan/{ctScanId}")
     public String editCtScan(Model model, @PathVariable("ctScanId") Long ctScanId) {
         if (model.getAttribute("ctscan") == null) {
-            return ("layouts/does_not_exist");
+            return ("does_not_exist");
         }
-        return ("layouts/edit/ctscan");
+        return ("edit/ctscan");
     }
 
     @PostMapping("/edit/ctscan/{ctScanId}")
@@ -61,7 +61,7 @@ public class CtScanController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
-            return ("layouts/edit/ctscan");
+            return ("edit/ctscan");
         }
 
         CtScan savedCtScan = ctScanService.saveCtScan(ctScan);
@@ -73,7 +73,7 @@ public class CtScanController {
     public String newCtScan(Model model) {
         CtScan ctScan = new CtScan();
         model.addAttribute("ctscan", ctScan);
-        return "layouts/edit/ctscan";
+        return "edit/ctscan";
     }
 
 
@@ -95,7 +95,7 @@ public class CtScanController {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalCtscans", totalCtscans);
 
-        return "layouts/explore/ctscans";
+        return "explore/ctscans";
     }
 
     @GetMapping("/search/ctscan/byspecimencode")
@@ -125,7 +125,7 @@ public class CtScanController {
 
     private String showCtScansSearchResults(RedirectAttributes redirectAttributes, List<CtScan> ctScans) {
         if (ctScans.isEmpty()) {
-            return("layouts/does_not_exist");
+            return("does_not_exist");
         }
 
         boolean dataLimitExceeded;
@@ -145,6 +145,6 @@ public class CtScanController {
 
     @GetMapping("/search_result/ctscans_result")
     public String showCtScans() {
-        return "layouts/search_result/ctscans_result";
+        return "search_result/ctscans_result";
     }
 }

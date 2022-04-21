@@ -78,25 +78,25 @@ public class SpecimenController {
         model.addAttribute("specimens", specimens);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalSpecimens", totalSpecimens);
-        return "layouts/explore/specimens";
+        return "explore/specimens";
     }
 
 
     @GetMapping("/view/specimen/{specimenCode}")
     public String viewSpecimen(Model model, @PathVariable("specimenCode") String specimenCode) {
         if (model.getAttribute("specimen") == null) {
-            return("/layouts/does_not_exist");
+            return("does_not_exist");
         }
 
-        return ("layouts/view/specimen");
+        return ("view/specimen");
     }
 
     @GetMapping("/edit/specimen/{specimenCode}")
     public String editSpecimen(Model model, @PathVariable("specimenCode") String specimenCode) {
         if (model.getAttribute("specimen") == null) {
-            return("/layouts/does_not_exist");
+            return("does_not_exist");
         }
-        return ("layouts/edit/specimen");
+        return ("edit/specimen");
 
     }
 
@@ -108,7 +108,7 @@ public class SpecimenController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("specimen", specimen);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
-            return "layouts/edit/specimen";
+            return "edit/specimen";
         } else {
             Specimen savedSpecimen = specimenService.saveSpecimen(specimen);
             System.out.println("OK");
@@ -148,7 +148,7 @@ public class SpecimenController {
 
     private String showSpecimenSearchResults(RedirectAttributes redirectAttributes, List<Specimen> specimenList) {
         if (specimenList.isEmpty()) {
-            return("layouts/does_not_exist");
+            return("does_not_exist");
         }
 
         boolean dataLimitExceeded;
@@ -169,7 +169,7 @@ public class SpecimenController {
     @GetMapping("/search_result/specimens_result")
     public String showSpecimensResults() {
 
-        return "layouts/search_result/specimens_result";
+        return "search_result/specimens_result";
 
     }
 

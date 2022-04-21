@@ -88,18 +88,18 @@
                 <a class="nav-link dropdown-toggle" href="#" id="submitDataBarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-link" aria-hidden="true"></i> Submit data </a>
                 <ul class="dropdown-menu" aria-labelledby="SubmitDropDownButton">
-                    <li> <a class="dropdown-item" th:href="@{/submit/newlocality}"> New Locality </a></li>
-                    <li> <a class="dropdown-item" th:href="@{/submit/newcollectionevent}"> New Collection Event </a></li>
-                    <li> <a class="dropdown-item" href="/templates/layouts/does_not_exist.html"> New Specimen</a> </li>
-                    <li> <a class="dropdown-item" href="/templates/layouts/does_not_exist.html"> New CT Scan</a></li>
+                    <li> <a class="dropdown-item" th:href="@{/templates/submit/newlocality}"> New Locality </a></li>
+                    <li> <a class="dropdown-item" th:href="@{/templates/submit/newcollectionevent}"> New Collection Event </a></li>
+                    <li> <a class="dropdown-item" href="/templates/does_not_exist.html"> New Specimen</a> </li>
+                    <li> <a class="dropdown-item" href="/templates/does_not_exist.html"> New CT Scan</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                 <a class="nav-link dropdown-toggle" href="#" id="browseDataBarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-link" aria-hidden="true"></i> Browse data </a>
                 <ul class="dropdown-menu" aria-labelledby="browseDropDownButton">
-                   <li><a class="dropdown-item" th:href="@{/explore/specimens}"> Specimens </a></li>
-                    <li><a class="dropdown-item" th:href="@{/explore/ctscans}"> CT Scans </a></li>
+                   <li><a class="dropdown-item" th:href="@{/templates/explore/specimens}"> Specimens </a></li>
+                    <li><a class="dropdown-item" th:href="@{/templates/explore/ctscans}"> CT Scans </a></li>
                 </ul>
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
