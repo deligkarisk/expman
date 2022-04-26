@@ -2,6 +2,7 @@ package com.arilab.expman.frontend;
 
 import com.arilab.expman.domain.database.CollectionEvent;
 import com.arilab.expman.domain.database.Locality;
+import com.arilab.expman.domain.database.supplementary.Country;
 import com.arilab.expman.service.database.CollectionEventService;
 import com.arilab.expman.service.database.LocalityService;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -19,9 +20,11 @@ import org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -65,7 +68,7 @@ public class newCompoundCollectionEventHTMLTest {
     HtmlInput accuracyField;
 
     HtmlInput collectionEventCodeField;
-    HtmlInput localityField;
+    HtmlInput localityInCollectionEventField;
     HtmlInput collectedByField;
     HtmlInput methodField;
     HtmlInput samplingErrorField;
@@ -80,8 +83,11 @@ public class newCompoundCollectionEventHTMLTest {
 
 
     @Test
-    public void correctSubmissionGoesThrough() throws IOException {
+    public void correctSubmissionGoesThroughWhenUsingExistingLocality() throws IOException {
         // given
+        Locality returnedLocality = new Locality("LocalityX001");
+        returnedLocality.setCountry(new Country("Grc", "Greece", "GRK"));
+        when(localityService.findById("LocalityX001")).thenReturn(Optional.of(returnedLocality));
 
 
         // when
@@ -91,7 +97,7 @@ public class newCompoundCollectionEventHTMLTest {
         mainForm = mainPage.getHtmlElementById("submitCompoundCollectionEventForm");
         htmlList = mainPage.getHtmlElementById("tab");
         collectionEventTab = mainPage.getHtmlElementById("collection_event_list_item");
-        localityCodeField = mainPage.getHtmlElementById("localityCode");
+        localityInCollectionEventField = mainPage.getHtmlElementById("locality");
         countryField = mainPage.getHtmlElementById("country");
         adm1Field = mainPage.getHtmlElementById("adm1");
         adm2Field = mainPage.getHtmlElementById("adm2");
@@ -99,7 +105,7 @@ public class newCompoundCollectionEventHTMLTest {
         latitudeField = mainPage.getHtmlElementById("latitude");
         accuracyField = mainPage.getHtmlElementById("accuracy");
         collectionEventCodeField = mainPage.getHtmlElementById("collectionEvent");
-        localityField = mainPage.getHtmlElementById("locality");
+        localityCodeField = mainPage.getHtmlElementById("localityCode");
         collectedByField = mainPage.getHtmlElementById("collectedBy");
         methodField = mainPage.getHtmlElementById("method");
         samplingErrorField = mainPage.getHtmlElementById("samplingEffort");
@@ -110,23 +116,14 @@ public class newCompoundCollectionEventHTMLTest {
         button = mainForm.getButtonByName("submit");
 
         collectionEventCodeField.setValueAttribute("collection_event_001");
-        localityField.setValueAttribute("New Locality");
-        localityCodeField.setValueAttribute("LocalityX001");
+        localityInCollectionEventField.setValueAttribute("LocalityX001");
 
         HtmlPage postSubmissionPage = button.click();
 
-        then(localityService).should().saveLocality(localityArgumentCaptor.capture());
         then(collectionEventService).should().saveCollectionEvent(collectionEventArgumentCaptor.capture());
         assertEquals("collection_event_001", collectionEventArgumentCaptor.getValue().getCollectionEventCode());
-        assertEquals("LocalityX001", localityArgumentCaptor.getValue().getLocalityCode());
-
+        assertEquals("LocalityX001", collectionEventArgumentCaptor.getValue().getLocality().getLocalityCode());
 
 
     }
-
-
-
-
-
-
 }

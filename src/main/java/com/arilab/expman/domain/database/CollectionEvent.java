@@ -1,6 +1,9 @@
 package com.arilab.expman.domain.database;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -26,7 +29,7 @@ public class CollectionEvent implements Serializable {
     private String collectionEventCode;
 
 
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "locality_code", referencedColumnName = "locality_code")
     private Locality locality;
 

@@ -1,10 +1,11 @@
 <div class="row" th:fragment="new_locality">
     <div class="table-responsive col-md-6">
         <div class="form-group row">
-            <label for="localityCode" class="col-md-3 col-form-label text-right"> Locality Code</label>
+            <label for="localityCode" class="col-md-3 col-form-label text-right"> Locality Code23</label>
             <div class="col-md-6">
-                <input class="form-control" type="text" th:field="*{localityCode}" id="localityCode" required
-                       autofocus>
+                <input class="form-control" type="text" th:field="*{localityCode}" id="localityCode"
+                       autofocus
+                       th:required="${localityCodeRequired} == null ? 'required' : (${localityCodeRequired} == 'true' ? 'required': null)">
             </div>
         </div>
 

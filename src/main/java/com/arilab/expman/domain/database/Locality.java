@@ -89,6 +89,10 @@ public class Locality implements Serializable {
     @Column(name = "jira_user")
     private String jiraUser;
 
+    public Locality(@NonNull String localityCode) {
+        this.localityCode = localityCode;
+    }
+
     @Override
     public String toString() {
         return localityCode;

@@ -19,7 +19,9 @@ public class StringToCollectionEvent implements Converter<String, CollectionEven
     public CollectionEvent convert(String collectionEventCode) {
 
 
-        if (collectionEventCode == null) {throw new IllegalArgumentException();}
+        if (collectionEventCode == null) {
+            throw new IllegalArgumentException("Collection event code should not be null in converter.");
+        }
         if (collectionEventCode.equals("")) { return null;}
 
         Optional<CollectionEvent> optionalCollectionEvent =

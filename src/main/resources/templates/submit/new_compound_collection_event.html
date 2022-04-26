@@ -13,7 +13,7 @@
 <div th:replace="main_layout::breaks_top"></div>
 
 <div class="container">
-    <form method="post" th:action="@{/submit/new_compound_collection_event}" id="submitCompoundCollectionEventForm">
+    <form method="post" th:action="@{/submit/newcollectionevent}" id="submitCompoundCollectionEventForm">
         <div class="row">
             <div class="col-md-8">
                 <ul class="nav nav-tabs" id="tab" role="tablist">
@@ -27,13 +27,13 @@
                     </li>
                 </ul>
 
-                <div class="tab-content" th:id="compound_tab_content" th:object="${newLocality}">
+                <div class="tab-content" th:id="compound_tab_content" th:object="${compound_collection_event.locality}">
                     <div class="tab-pane" role="tabpanel" th:id="locality_form">
                         <h3 style="margin-bottom: 50px"> New locality</h3>
                         <div class="row" th:replace="entities/new_locality_fragment :: new_locality"></div>
                     </div>
                     <div class="tab-pane show active" role="tabpanel" th:id="collection_event_form"
-                         th:object="${collection_event}">
+                         th:object="${compound_collection_event.collectionEvent}">
                         <h3 style="margin-bottom: 50px"> New collection event</h3>
                         <div class="row"
                              th:replace="entities/new_collection_event_fragment :: new_collection_event"></div>
