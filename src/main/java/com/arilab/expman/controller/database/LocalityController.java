@@ -5,6 +5,7 @@ import com.arilab.expman.service.database.LocalityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,12 +40,20 @@ public class LocalityController {
 
     @PostMapping("submit/newlocality")
     public String submitNewLocality(@ModelAttribute("newLocality") @Validated Locality locality,
-                                    BindingResult bindingResult, Model model) {
+                                    BindingResult bindingResult, Model model, Errors errors) {
+
+
+        if (localityService.findById(locality.getLocalityCode()).isPresent()) {
+            bindingResult.rejectValue("localityCode", "localitycode.alreadyexists");
+        }
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "submit/new_locality";
         }
+
+
+
 
         Locality savedLocality = localityService.saveLocality(locality);
         return("redirect:/view/locality/" + locality.getLocalityCode());

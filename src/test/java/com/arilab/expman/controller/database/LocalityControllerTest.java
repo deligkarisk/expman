@@ -57,6 +57,43 @@ class LocalityControllerTest {
                 .build();
     }
 
+
+
+    @Test
+    void shouldGetErrorsIfSubmitNewLocalityWhenLocalityCodeExists() throws Exception {
+        // given
+        Locality returnedLocality = new Locality("locality1234", new Country("CountryCode"
+                , "CountryName", "ISO"));
+        when(localityService.findById("locality1234")).thenReturn(Optional.of(returnedLocality));
+
+        // when
+        mockMvc.perform(post("/submit/newlocality")
+                        .param("localityCode", "locality1234")
+                        .param("country", "Austria"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("submit/new_locality"))
+                .andExpect(model().attributeHasFieldErrorCode("newLocality", "localityCode", "localitycode" +
+                        ".alreadyexists"));
+    }
+
+    @Test
+    void shouldBeOkIfSubmitNewLocalityWhenLocalityCodeIsNew() throws Exception {
+        // given
+        when(localityService.findById("locality1234")).thenReturn(Optional.empty());
+
+        // when
+        mockMvc.perform(post("/submit/newlocality")
+                        .param("localityCode", "locality1234")
+                        .param("country", "Austria"))
+                .andExpect(status().is3xxRedirection());
+
+        then(localityService).should().saveLocality(localityArgumentCaptor.capture());
+        assertEquals("locality1234", localityArgumentCaptor.getValue().getLocalityCode());
+    }
+
+
+
+
     @Test
     void submitNewLocalityGetRequest() throws Exception {
 
@@ -155,4 +192,6 @@ class LocalityControllerTest {
         assertEquals(new BigDecimal("98.345"), localityArgumentCaptor.getValue().getLatitude());
 
     }
+
+
 }

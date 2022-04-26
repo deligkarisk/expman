@@ -1,12 +1,15 @@
 <div class="row" th:fragment="new_locality">
     <div class="table-responsive col-md-6">
-        <div class="form-group row">
+        <div class="form-group row" th:class="${#fields.hasErrors('localityCode')} ? 'form-group row is-invalid': 'form-group row'">
             <label for="localityCode" class="col-md-3 col-form-label text-right"> Locality Code</label>
             <div class="col-md-6">
+                <div id="localityMsg"></div>
                 <input class="form-control" type="text" th:field="*{localityCode}" id="localityCode"
+                       th:errorclass="is-invalid"
                        autofocus
                        th:required="${localityCodeRequired} == null ? 'required' : (${localityCodeRequired} == 'true' ? 'required': null)">
-                <div id="localityMsg"></div>
+                <span th:if="${#fields.hasErrors('localityCode')}" th:errors="*{localityCode}">Error!</span>
+
             </div>
         </div>
 
