@@ -8,7 +8,7 @@
                        th:errorclass="is-invalid"
                        autofocus
                        th:required="${localityCodeRequired} == null ? 'required' : (${localityCodeRequired} == 'true' ? 'required': null)">
-                <span th:if="${#fields.hasErrors('localityCode')}" th:errors="*{localityCode}">Error!</span>
+                <span th:if="${#fields.hasErrors('localityCode')}" th:class="invalid-feedback" th:errors="*{localityCode}">Error!</span>
 
             </div>
         </div>

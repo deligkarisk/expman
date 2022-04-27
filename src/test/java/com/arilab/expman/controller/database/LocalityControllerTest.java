@@ -72,8 +72,7 @@ class LocalityControllerTest {
                         .param("country", "Austria"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("submit/new_locality"))
-                .andExpect(model().attributeHasFieldErrorCode("newLocality", "localityCode", "localitycode" +
-                        ".alreadyexists"));
+                .andExpect(model().attributeHasFieldErrorCode("newLocality", "localityCode", "LocalityCodeIsNewCheck"));
     }
 
     @Test

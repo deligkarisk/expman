@@ -1,6 +1,7 @@
 package com.arilab.expman.controller.database;
 
 import com.arilab.expman.domain.database.Locality;
+import com.arilab.expman.domain.database.validator.OnNewLocality;
 import com.arilab.expman.service.database.LocalityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,19 +40,20 @@ public class LocalityController {
 
 
     @PostMapping("submit/newlocality")
-    public String submitNewLocality(@ModelAttribute("newLocality") @Validated Locality locality,
+    public String submitNewLocality(@ModelAttribute("newLocality") @Validated({OnNewLocality.class}) Locality locality,
                                     BindingResult bindingResult, Model model, Errors errors) {
 
 
-        if (localityService.findById(locality.getLocalityCode()).isPresent()) {
+     /*   if (localityService.findById(locality.getLocalityCode()).isPresent()) {
             bindingResult.rejectValue("localityCode", "localitycode.alreadyexists");
         }
+        */
+
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "submit/new_locality";
         }
-
 
 
 

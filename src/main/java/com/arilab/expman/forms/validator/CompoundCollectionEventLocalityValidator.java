@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @Component
-public class CompoundCollectionEventFormValidator implements ConstraintValidator<CompoundCollectionEventForm,
+public class CompoundCollectionEventLocalityValidator implements ConstraintValidator<CompoundCollectionEventLocality,
         CompoundCollectionEvent> {
 
     @Override
@@ -22,7 +22,7 @@ public class CompoundCollectionEventFormValidator implements ConstraintValidator
     }
 
     @Override
-    public void initialize(CompoundCollectionEventForm constraintAnnotation) {
+    public void initialize(CompoundCollectionEventLocality constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 }

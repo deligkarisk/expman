@@ -2,11 +2,13 @@ package com.arilab.expman.forms;
 
 import com.arilab.expman.domain.database.CollectionEvent;
 import com.arilab.expman.domain.database.Locality;
-import com.arilab.expman.forms.validator.CompoundCollectionEventForm;
+import com.arilab.expman.domain.database.validator.LocalityCodeIsNewCheck;
+import com.arilab.expman.forms.validator.CompoundCollectionEventLocality;
 import lombok.Data;
 
 @Data
-@CompoundCollectionEventForm
+@CompoundCollectionEventLocality
+@LocalityCodeIsNewCheck
 public class CompoundCollectionEvent {
 
     private CollectionEvent collectionEvent;
