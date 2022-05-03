@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{main_layout :: head('Expman')}">
+</head>
+
+<body>
+<script type="text/javascript" th:src="@{/js/autocomplete/country_ac.js}"></script>
+<script type="text/javascript" th:src="@{/js/autocomplete/biogeographic_region_ac.js}"></script>
+<script type="text/javascript" th:src="@{/js/exists/locality_code_exists.js}"></script>
+
+
+<nav th:replace="main_layout::navigation"></nav>
+<div th:replace="main_layout::breaks_top"></div>
+
+
+
+<div class="container">
+    <div class="col-md-6">
+    <h3 style="margin-bottom: 50px"> Submit batch upload</h3>
+        <p> Download the template from here.</p>
+    <form method="post" enctype="multipart/form-data" th:action="@{/submit_excel}" >
+    <div class="custom-file">
+        <input type="file" name="file" class="custom-file-input" id="custom_file">
+        <label class="custom-file-label" for="custom_file">Choose file</label>
+    </div>
+        <br>
+        <br>
+        <input type="submit" value="Import">
+    </form>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

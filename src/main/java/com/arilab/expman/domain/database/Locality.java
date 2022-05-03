@@ -3,6 +3,7 @@ package com.arilab.expman.domain.database;
 import com.arilab.expman.domain.database.supplementary.BiogeographicRegion;
 import com.arilab.expman.domain.database.supplementary.Country;
 import com.arilab.expman.domain.database.validator.LocalityCodeIsNewCheck;
+import com.arilab.expman.domain.database.validator.OnBatchLocalityUpload;
 import com.arilab.expman.domain.database.validator.OnNewLocality;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class Locality implements Serializable {
     @NotEmpty
     @NonNull
     @Column(name = "locality_code")
-    @LocalityCodeIsNewCheck(groups = OnNewLocality.class)
+    @LocalityCodeIsNewCheck(groups = {OnNewLocality.class, OnBatchLocalityUpload.class})
     private String localityCode;
 
     @NotNull
