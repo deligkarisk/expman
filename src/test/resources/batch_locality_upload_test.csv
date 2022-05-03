@@ -1,0 +1,5 @@
+localityCode,adm1,adm2,islandGroup,island,localityName,biogeographicRegion
+locality001,Thess,Ch,,,Greece54,random
+locality002,Osaka,Osaka,,,Osaka_park,notrandom
+,Kobe,,,,Kobe_wadamisaki342,empty
+Weno 81,Chuuk is,,,,Weno81,notempty

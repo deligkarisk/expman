@@ -1,15 +1,12 @@
 package com.arilab.expman.controller.app;
 
-import com.arilab.expman.domain.database.Locality;
+import com.arilab.expman.csv.mapper.LocalityDtoMapper;
 import com.arilab.expman.domain.database.lists.LocalityList;
-import com.arilab.expman.domain.database.validator.OnBatchLocalityUpload;
-import com.arilab.expman.domain.database.validator.OnNewLocality;
+import com.arilab.expman.dto.collections.LocalityDtoList;
 import com.arilab.expman.dto.domain.LocalityDto;
-import com.arilab.expman.mapping.domain.LocalityDtoList;
+import com.arilab.expman.dto.service.DtoService;
+import com.arilab.expman.filesystem.FileUtils;
 import com.arilab.expman.service.database.LocalityService;
-import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
@@ -26,25 +23,34 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
 public class UploadController {
 
-    LocalityService localityService;
 
-    public UploadController(LocalityService localityService) {
+    LocalityService localityService;
+    LocalityDtoMapper localityDtoMapper;
+
+    public UploadController(LocalityService localityService, LocalityDtoMapper localityDtoMapper) {
+
         this.localityService = localityService;
+        this.localityDtoMapper = localityDtoMapper;
     }
 
     @Autowired
     ConversionService conversionService;
 
+    @Autowired
+    FileUtils fileUtils;
+
 
     @Autowired
     Validator validator;
+
+    @Autowired
+    DtoService dtoService;
 
     @GetMapping("submit_excel")
     public String excelSubmissionUpload() {
@@ -54,32 +60,19 @@ public class UploadController {
 
 
     @PostMapping("submit_excel")
-    public String excelSubmissionSubmit(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+    public String excelSubmissionSubmit(@RequestParam("multipartFile") MultipartFile multipartFile, Model model) throws IOException {
 
-        File newFile =  new File(System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") +
-                file.getOriginalFilename());
-
-        file.transferTo(newFile);
-
-        CsvMapper mapper = new CsvMapper();
-        CsvSchema schema = CsvSchema.emptySchema().withHeader();
-
-        MappingIterator<LocalityDto> localityMappingIterator = mapper
-                .readerFor(LocalityDto.class)
-                .with(schema)
-                .readValues(newFile);
-        List<LocalityDto> localityList = localityMappingIterator.readAll();
-
-        Set<ConstraintViolation<LocalityDto>> errors = validator.validate(localityList.get(0), OnBatchLocalityUpload.class);
+        File file = fileUtils.multiToSingleFileConversion(multipartFile);
+        LocalityDtoList submittedLocalities = localityDtoMapper.mapFileContents(file);
+        Map<LocalityDto, Set<ConstraintViolation<LocalityDto>>> errors =
+                dtoService.validateLocalityDtos(submittedLocalities);
 
         if (!errors.isEmpty()) {
-            return "upload_error";
+            return "locality_upload_error";
         }
 
-        LocalityDtoList localityDtoList = new LocalityDtoList();
-        localityDtoList.setLocalityList(localityList);
 
-        List<Locality> localityList1 = new ArrayList<>();
+     /*   List<Locality> localityList1 = new ArrayList<>();
         for (LocalityDto localityDto: localityDtoList.getLocalityList()) {
             try {
                 Locality locality = localityService.convertFromDto(localityDto);
@@ -87,14 +80,17 @@ public class UploadController {
             } catch(Exception ex) {
                 System.out.println("error");
             }
-        }
+
+              }*/
 
 
-        validator.validate(localityList1.get(0), OnNewLocality.class);
+        //   validator.validate(localityList1.get(0), OnNewLocality.class);
 
-        System.out.println("done");
+        //  System.out.println("done");
 
-        return "does_not_exist";
+        // return "does_not_exist";
+
+        return "locality_upload_ok";
 
     }
 
